@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://hw2njr4cic5e"]
+
+[ext_resource type="PackedScene" uid="uid://r07km72x7up8" path="res://characters/base/character.tscn" id="1_kpos5"]
+[ext_resource type="Texture2D" uid="uid://dvkpgdd6bpoac" path="res://characters/old/animations/walk/Overworld - Mario 3 - 3.png" id="2_kpos5"]
+[ext_resource type="AnimationLibrary" uid="uid://dofaldk0ynolr" path="res://characters/mario/animations/animation_library.tres" id="3_1li8h"]
+
+[node name="Character" instance=ExtResource("1_kpos5")]
+
+[node name="AnimationPlayer" parent="Animator" index="0"]
+libraries = {
+&"": ExtResource("3_1li8h")
+}
+
+[node name="Sprite" parent="Animator/Offsetter" index="0"]
+position = Vector2(0, -8)
+texture = ExtResource("2_kpos5")

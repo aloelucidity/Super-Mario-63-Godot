@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnck75ayufawp"]
+
+[ext_resource type="PackedScene" uid="uid://bg1e48d7g33mj" path="res://characters/old/base_character.tscn" id="1_ydse3"]
+[ext_resource type="Script" uid="uid://cvb0vs0g6bq2" path="res://camera.gd" id="2_ghmrr"]
+
+[node name="Collidertest" type="Node2D"]
+
+[node name="Platforms" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-60, 34, 105, 35, 302, 55, 373, 106, 491, 109, 524, 54, 524, -41, 546, -38, 546, -15, 593, -22, 593, -101, 647, -101, 650, -46, 717, -44, 739, -116, 855, -141, 941, -138, 971, -194, 965, -274, 888, -318, 753, -339, 640, -332, 514, -308, 420, -301, 302, -299, 268, -425, 482, -484, 834, -509, 1103, -453, 1193, -276, 1171, 107, 969, 191, 775, 96, 602, 135, 452, 229, 170, 232, 61, 179, 39, 111, -105, 107, -208, 177, -250, 55, -254, -72, -225, -170, -155, -155, -155, -78, -115, -75, -114, -18)
+
+[node name="Character" parent="." instance=ExtResource("1_ydse3")]
+
+[node name="Collision" parent="Character" index="0" node_paths=PackedStringArray("platforms")]
+platforms = NodePath("../../Platforms")
+
+[node name="DiveAirPhysics" parent="Character/States" index="4"]
+rise_speed = 0.1
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("camera_follow")]
+zoom = Vector2(2, 2)
+script = ExtResource("2_ghmrr")
+camera_follow = NodePath("../Character")
+
+[editable path="Character"]

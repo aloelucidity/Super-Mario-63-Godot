@@ -1,0 +1,2 @@
+class_name LevelInfo
+extends SerializedResource

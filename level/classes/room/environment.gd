@@ -1,0 +1,2 @@
+class_name RoomEnvironment
+extends SerializedResource

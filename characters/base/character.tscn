@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://r07km72x7up8"]
+
+[ext_resource type="Script" uid="uid://bjym21jdm6b1o" path="res://characters/base/classes/character.gd" id="1_w113p"]
+[ext_resource type="Script" uid="uid://dodc7pappdgl2" path="res://characters/base/classes/character_animator.gd" id="2_xahgc"]
+
+[node name="Character" type="Node2D"]
+script = ExtResource("1_w113p")
+
+[node name="Animator" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_xahgc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animator"]
+root_node = NodePath("../..")
+
+[node name="Offsetter" type="Node2D" parent="Animator"]
+
+[node name="Sprite" type="Sprite2D" parent="Animator/Offsetter"]
+unique_name_in_owner = true
