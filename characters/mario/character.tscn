@@ -1,10 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://hw2njr4cic5e"]
+[gd_scene load_steps=10 format=3 uid="uid://hw2njr4cic5e"]
 
 [ext_resource type="PackedScene" uid="uid://r07km72x7up8" path="res://characters/base/character.tscn" id="1_kpos5"]
 [ext_resource type="Texture2D" uid="uid://dvkpgdd6bpoac" path="res://characters/old/animations/walk/Overworld - Mario 3 - 3.png" id="2_kpos5"]
 [ext_resource type="AnimationLibrary" uid="uid://dofaldk0ynolr" path="res://characters/mario/animations/animation_library.tres" id="3_1li8h"]
+[ext_resource type="Script" uid="uid://bobthsffwufj0" path="res://characters/base/states/physics/air.gd" id="4_dw1q7"]
+[ext_resource type="Script" uid="uid://djxg21q4acmle" path="res://characters/base/states/physics/ground.gd" id="5_lnmd8"]
+[ext_resource type="Script" uid="uid://d1x5go8stev8r" path="res://characters/base/states/physics/somersault.gd" id="6_vtspf"]
+[ext_resource type="Script" uid="uid://nr3max7c57dw" path="res://characters/base/states/physics/rollout.gd" id="7_tcm2k"]
+[ext_resource type="Script" uid="uid://bxlrep6cyovcy" path="res://characters/base/states/physics/dive_air.gd" id="8_sy58n"]
+[ext_resource type="Script" uid="uid://cj7ec5mm7al72" path="res://characters/base/states/physics/dive_ground.gd" id="9_sie2w"]
 
 [node name="Character" instance=ExtResource("1_kpos5")]
+size = Vector2i(10, 35)
+bounce = 0.5
+on_ground = true
+
+[node name="ColorRect2" type="ColorRect" parent="." index="0"]
+anchors_preset = -1
+offset_left = -8.0
+offset_top = -32.0
+offset_right = 8.0
 
 [node name="AnimationPlayer" parent="Animator" index="0"]
 libraries = {
@@ -12,5 +27,56 @@ libraries = {
 }
 
 [node name="Sprite" parent="Animator/Offsetter" index="0"]
+visible = false
 position = Vector2(0, -8)
 texture = ExtResource("2_kpos5")
+
+[node name="Air" type="Node" parent="PhysicsStates" index="0"]
+script = ExtResource("4_dw1q7")
+ground_name = "Ground"
+do_air_animation = true
+air_move_speed = 5.0
+max_air_move_speed = 20.0
+
+[node name="Ground" type="Node" parent="PhysicsStates" index="1"]
+script = ExtResource("5_lnmd8")
+air_name = "Air"
+do_ground_rotation = true
+move_speed = 1.1999999999970896
+friction_subtract = 0.3000000000029104
+friction_multiply = 1.1500000000087311
+animation = "walk"
+
+[node name="Somersault" type="Node" parent="PhysicsStates" index="2"]
+script = ExtResource("6_vtspf")
+air_name = "Air"
+ground_name = "Ground"
+animation = "somersault"
+
+[node name="Rollout" type="Node" parent="PhysicsStates" index="3"]
+script = ExtResource("7_tcm2k")
+air_name = "Air"
+ground_name = "Ground"
+
+[node name="DiveAir" type="Node" parent="PhysicsStates" index="4"]
+script = ExtResource("8_sy58n")
+ground_resolve_mult = 0.9970000000030268
+
+[node name="DiveGround" type="Node" parent="PhysicsStates" index="5"]
+script = ExtResource("9_sie2w")
+friction_subtract = 0.10000000000582077
+friction_multiply = 1.0250000000087311
+air_move_speed = 5.0
+max_air_move_speed = 20.0
+speed_divider = 8.0
+set_facing = false
+rise_speed = 0.0
+ground_resolve_mult = 0.9970000000030268
+
+[node name="ColorRect" type="ColorRect" parent="." index="4"]
+visible = false
+anchors_preset = -1
+offset_left = -8.0
+offset_top = -24.0
+offset_right = 8.0
+offset_bottom = 8.0

@@ -3,7 +3,7 @@ class_name CharacterCollision
 extends Node
 
 
-@onready var character: Character = get_parent()
+@onready var character: CharacterOld = get_parent()
 
 @export var wide: float # distance from center
 @export var tall: float # height from bottom
@@ -198,7 +198,7 @@ func is_squished() -> bool:
 
 
 func is_diving() -> bool:
-	return character.physics is DiveAirPhysics or character.physics is DiveGroundPhysics
+	return character.physics is DiveAirPhysicsOld or character.physics is DiveGroundPhysicsOld
 
 
 func can_bonk() -> bool:

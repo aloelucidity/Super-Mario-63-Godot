@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ConversionMap" load_steps=2 format=3 uid="uid://b7q61e1y2x6mo"]
+
+[ext_resource type="Script" uid="uid://l7f5ytq1rpry" path="res://helpers/conversion_map.gd" id="1_bkaxq"]
+
+[resource]
+script = ExtResource("1_bkaxq")
+converted_properties = Array[String](["mirrored", "rotation"])
+converted_types = Array[int]([1, 2])
+is_foreground = true
+metadata/_custom_type_script = "uid://l7f5ytq1rpry"

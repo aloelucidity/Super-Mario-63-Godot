@@ -1,0 +1,528 @@
+[gd_scene load_steps=35 format=3 uid="uid://bg1e48d7g33mj"]
+
+[ext_resource type="Script" uid="uid://4dr5bhnd1ksq" path="res://characters/old/scripts/character.gd" id="1_t3h3v"]
+[ext_resource type="Script" uid="uid://cvfjqabwyxfrw" path="res://characters/old/scripts/flash_collision.gd" id="2_wjcg8"]
+[ext_resource type="Script" uid="uid://b806kaegvy8qt" path="res://characters/old/physics_states/air.gd" id="3_0rorc"]
+[ext_resource type="Script" uid="uid://dc8f8xsc2h0lm" path="res://characters/old/physics_states/ground.gd" id="4_3dar0"]
+[ext_resource type="Script" uid="uid://4g1f63lj7huf" path="res://characters/old/action_states/dive.gd" id="4_5x12v"]
+[ext_resource type="Script" uid="uid://bdmuqkd2i1kvo" path="res://characters/old/action_states/jump.gd" id="5_evutw"]
+[ext_resource type="Script" uid="uid://d3a6pak1brcja" path="res://characters/old/counters/jump_counters.gd" id="6_on1au"]
+[ext_resource type="Script" uid="uid://du00hc83ek1w" path="res://characters/old/action_states/triple_jump.gd" id="6_snl6u"]
+[ext_resource type="Script" uid="uid://b2t1483euw6mo" path="res://characters/old/physics_states/dive_air.gd" id="8_8viy2"]
+[ext_resource type="Script" uid="uid://cyqbiwe1fjmqj" path="res://characters/old/physics_states/air_flip.gd" id="8_tfwsc"]
+[ext_resource type="Script" uid="uid://blbtwxbo670n2" path="res://characters/old/physics_states/dive_flip.gd" id="9_57xkt"]
+[ext_resource type="Script" uid="uid://4k52h8u07w" path="res://characters/old/physics_states/dive_ground.gd" id="9_rahl8"]
+[ext_resource type="Script" uid="uid://d3ltyl0jykkbe" path="res://characters/old/action_states/diveflip.gd" id="10_8p2k8"]
+[ext_resource type="Script" uid="uid://dbo6a41l7d3r2" path="res://characters/old/action_states/backflip.gd" id="11_dqg6g"]
+[ext_resource type="Texture2D" uid="uid://cvnwi0uuc5nv" path="res://characters/old/animations/walk/Overworld - Mario 3 - 2.png" id="13_057kq"]
+[ext_resource type="Script" uid="uid://bx3aaheswvhfu" path="res://characters/old/scripts/animators/animation_manager.gd" id="13_lfglu"]
+[ext_resource type="Texture2D" uid="uid://dvkpgdd6bpoac" path="res://characters/old/animations/walk/Overworld - Mario 3 - 3.png" id="14_6fg2f"]
+[ext_resource type="Texture2D" uid="uid://covboq7ayjj7l" path="res://characters/old/animations/walk/Overworld - Mario 3 - 4.png" id="15_appkh"]
+[ext_resource type="Texture2D" uid="uid://bauuejw5r4wqt" path="res://characters/old/animations/walk/Overworld - Mario 3 - 5.png" id="16_0qr06"]
+[ext_resource type="Texture2D" uid="uid://8k5w50gxx0ey" path="res://characters/old/animations/walk/Overworld - Mario 3 - 6.png" id="17_dfurw"]
+[ext_resource type="Texture2D" uid="uid://bogpesfk3xn0h" path="res://characters/old/animations/walk/Overworld - Mario 3 - 7.png" id="18_qbr6u"]
+[ext_resource type="Texture2D" uid="uid://dfkqnhkfbgv4r" path="res://characters/old/animations/walk/Overworld - Mario 3 - 8.png" id="19_st86c"]
+[ext_resource type="Texture2D" uid="uid://bmkr5cdqtjjch" path="res://characters/old/animations/walk/Overworld - Mario 3 - 9.png" id="20_ii75o"]
+[ext_resource type="Texture2D" uid="uid://dnxag7ksiu0n8" path="res://characters/old/animations/misc/Mario (none) Spinning - 1.png" id="20_pcef1"]
+[ext_resource type="Texture2D" uid="uid://vipygvk2f5b3" path="res://characters/old/animations/air/Mario Air (none) - 1.png" id="21_8r2dh"]
+[ext_resource type="Texture2D" uid="uid://bga43jtmhea2v" path="res://characters/old/animations/air/Mario Air (none) - 2.png" id="22_ipxdu"]
+[ext_resource type="Script" uid="uid://dpobgy3fofnfd" path="res://characters/old/scripts/animators/walk_animator.gd" id="24_dl5ei"]
+[ext_resource type="Script" uid="uid://dg8dee0ju7ubx" path="res://characters/old/scripts/animators/sprite_rotation.gd" id="24_phwqu"]
+
+[sub_resource type="Animation" id="Animation_v1raw"]
+resource_name = "Air 1"
+length = 0.0312531
+step = 0.03125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-3.15, -6.15)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("21_8r2dh")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Sprite:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ein3k"]
+resource_name = "Air 2"
+length = 0.0312531
+step = 0.03125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1.5, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("22_ipxdu")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Sprite:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_pcabb"]
+resource_name = "Frontflip"
+length = 0.937503
+step = 0.03125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6875, 0.71875, 0.875),
+"transitions": PackedFloat32Array(0, 0, 1, 1),
+"update": 0,
+"values": [Vector2(-1.6, 0.35), Vector2(-1.6, 0.35), Vector2(-2.5, 0.35), Vector2(-2.5, 0.35)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.71875),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("20_pcef1"), ExtResource("21_8r2dh")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6875, 0.71875, 0.875),
+"transitions": PackedFloat32Array(0.7845842, 0, 1, 1),
+"update": 0,
+"values": [0.0, 12.828170002158322, -0.17453292519943295, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Sprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%Sprite:centered")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Animator/Offsetter/Sprite:flip_h")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.71875),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_v6adi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("14_6fg2f")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Sprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%Sprite:centered")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Sprite:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%Sprite:centered")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%Sprite:flip_h")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_uvtc2"]
+resource_name = "Walk"
+length = 2.5
+loop_mode = 1
+step = 0.03125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3125, 0.625, 0.9375, 1.25, 1.5625, 1.875, 2.1875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -7.5), Vector2(0, -8), Vector2(0, -7.5), Vector2(0, -7), Vector2(0, -7.5), Vector2(0, -8), Vector2(0, -7.5), Vector2(0, -7)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3125, 0.625, 0.9375, 1.25, 1.5625, 1.875, 2.1875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("13_057kq"), ExtResource("14_6fg2f"), ExtResource("15_appkh"), ExtResource("16_0qr06"), ExtResource("17_dfurw"), ExtResource("18_qbr6u"), ExtResource("19_st86c"), ExtResource("20_ii75o")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Sprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%Sprite:centered")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Sprite:flip_h")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_16my4"]
+_data = {
+&"Air 1": SubResource("Animation_v1raw"),
+&"Air 2": SubResource("Animation_ein3k"),
+&"Frontflip": SubResource("Animation_pcabb"),
+&"RESET": SubResource("Animation_v6adi"),
+&"Walk": SubResource("Animation_uvtc2")
+}
+
+[node name="Character" type="Node2D" node_paths=PackedStringArray("physics", "physics_container", "counters_container", "collision", "animations")]
+position = Vector2(-0.35, 12.65)
+script = ExtResource("1_t3h3v")
+physics = NodePath("States/AirPhysics")
+physics_container = NodePath("States")
+counters_container = NodePath("Counters")
+collision = NodePath("Collision")
+animations = NodePath("AnimationManager")
+
+[node name="Collision" type="Node" parent="."]
+script = ExtResource("2_wjcg8")
+wide = 10.0
+tall = 35.0
+bounce = 0.5
+
+[node name="States" type="Node" parent="."]
+
+[node name="AirPhysics" type="Node" parent="States" node_paths=PackedStringArray("collision")]
+script = ExtResource("3_0rorc")
+ground_name = "GroundPhysics"
+do_air_animation = true
+air_move_speed = 5.0
+max_air_move_speed = 20.0
+animation = "Air 1"
+collision = NodePath("../../Collision")
+
+[node name="DiveAction" type="Node" parent="States/AirPhysics" node_paths=PackedStringArray("jump_counter", "dive_air_physics")]
+script = ExtResource("4_5x12v")
+dive_speed = 35.0
+wide_override = 8.0
+tall_override = 25.0
+jump_counter = NodePath("../../../Counters/JumpCounters")
+dive_air_physics = NodePath("../../DiveAirPhysics")
+
+[node name="GroundPhysics" type="Node" parent="States" node_paths=PackedStringArray("collision", "animator")]
+script = ExtResource("4_3dar0")
+air_name = "AirPhysics"
+move_speed = 1.2
+friction_subtract = 0.3
+friction_multiply = 1.1500000000087311
+animation = "Walk"
+collision = NodePath("../../Collision")
+animator = NodePath("../../AnimationManager/WalkAnimator")
+
+[node name="JumpAction" type="Node" parent="States/GroundPhysics" node_paths=PackedStringArray("jump_counter")]
+script = ExtResource("5_evutw")
+jump_speed = 10.0
+jump_counter = NodePath("../../../Counters/JumpCounters")
+
+[node name="DoubleJumpAction" type="Node" parent="States/GroundPhysics" node_paths=PackedStringArray("jump_counter")]
+script = ExtResource("5_evutw")
+jump_speed = 12.5
+sequence_index = 1
+jump_counter = NodePath("../../../Counters/JumpCounters")
+
+[node name="TripleJumpAction" type="Node" parent="States/GroundPhysics" node_paths=PackedStringArray("collision", "frontflip_physics", "jump_counter")]
+script = ExtResource("6_snl6u")
+flip_frames = 28
+jump_speed = 15.0
+sequence_index = 2
+animation = "Frontflip"
+collision = NodePath("../../../Collision")
+frontflip_physics = NodePath("../../FlipPhysics")
+jump_counter = NodePath("../../../Counters/JumpCounters")
+
+[node name="FlipPhysics" type="Node" parent="States" node_paths=PackedStringArray("action_states")]
+script = ExtResource("8_tfwsc")
+action_states = [null, null]
+air_name = "AirPhysics"
+
+[node name="DiveAction" type="Node" parent="States/FlipPhysics" node_paths=PackedStringArray("jump_counter", "dive_air_physics")]
+script = ExtResource("4_5x12v")
+dive_speed = 35.0
+priority = 1
+wide_override = 8.0
+tall_override = 25.0
+animation = "Dive"
+jump_counter = NodePath("../../../Counters/JumpCounters")
+dive_air_physics = NodePath("../../DiveAirPhysics")
+
+[node name="DiveflipPhysics" type="Node" parent="States" node_paths=PackedStringArray("collision")]
+script = ExtResource("9_57xkt")
+air_name = "AirPhysics"
+ground_name = "GroundPhysics"
+set_facing = false
+rise_speed = 0.0
+collision = NodePath("../../Collision")
+
+[node name="DiveAirPhysics" type="Node" parent="States"]
+script = ExtResource("8_8viy2")
+
+[node name="DiveGroundPhysics" type="Node" parent="States" node_paths=PackedStringArray("collision")]
+script = ExtResource("9_rahl8")
+air_name = "DiveAirPhysics"
+friction_subtract = 0.1
+friction_multiply = 1.025
+air_move_speed = 5.0
+max_air_move_speed = 20.0
+speed_divider = 8.0
+set_facing = false
+rise_speed = 0.0
+collision = NodePath("../../Collision")
+
+[node name="BackflipAction" type="Node" parent="States/DiveGroundPhysics" node_paths=PackedStringArray("flip_physics")]
+script = ExtResource("11_dqg6g")
+flip_speed = 30.0
+jump_speed = 12.0
+flip_frames = 20
+dive_lock_frames = 14
+priority = 2
+animation = "Backflip"
+flip_physics = NodePath("../../FlipPhysics")
+
+[node name="DiveflipAction" type="Node" parent="States/DiveGroundPhysics" node_paths=PackedStringArray("flip_physics")]
+script = ExtResource("10_8p2k8")
+flip_speed = 15.0
+jump_speed = 10.0
+flip_frames = 7
+priority = 2
+animation = "Diveflip"
+flip_physics = NodePath("../../DiveflipPhysics")
+
+[node name="Counters" type="Node" parent="."]
+
+[node name="JumpCounters" type="Node" parent="Counters" node_paths=PackedStringArray("collision")]
+script = ExtResource("6_on1au")
+max_jumps = 3
+collision = NodePath("../../Collision")
+
+[node name="AnimationManager" type="Node2D" parent="."]
+position = Vector2(0.35, -12.65)
+script = ExtResource("13_lfglu")
+
+[node name="Sprite" type="Sprite2D" parent="AnimationManager"]
+unique_name_in_owner = true
+physics_interpolation_mode = 2
+position = Vector2(0, -8)
+texture = ExtResource("14_6fg2f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationManager"]
+libraries = {
+&"": SubResource("AnimationLibrary_16my4")
+}
+
+[node name="SpriteRotation" type="Node" parent="AnimationManager" node_paths=PackedStringArray("animator", "collision")]
+script = ExtResource("24_phwqu")
+animator = NodePath("..")
+collision = NodePath("../../Collision")
+
+[node name="WalkAnimator" type="Node" parent="AnimationManager" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("24_dl5ei")
+animation_player = NodePath("../AnimationPlayer")

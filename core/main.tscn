@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5xo5de5h8blr"]
+
+[ext_resource type="PackedScene" uid="uid://23sftkrnru3j" path="res://level/compatibility/legacy_leveL_loader.tscn" id="1_xiose"]
+
+[node name="Main" type="Node"]
+
+[node name="LegacyLevelLoader" parent="." instance=ExtResource("1_xiose")]

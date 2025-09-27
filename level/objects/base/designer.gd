@@ -1,0 +1,2 @@
+class_name DesignerObject
+extends Node2D

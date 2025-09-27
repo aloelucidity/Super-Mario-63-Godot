@@ -1,5 +1,5 @@
-class_name DiveGroundPhysics
-extends GroundPhysics
+class_name DiveGroundPhysicsOld
+extends GroundPhysicsOld
 
 
 func _update() -> void:

@@ -1,2 +1,2 @@
-class_name DiveAirPhysics
-extends AirPhysics
+class_name DiveAirPhysicsOld
+extends AirPhysicsOld

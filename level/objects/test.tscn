@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://b50ataach2hab"]
+
+[sub_resource type="GDScript" id="GDScript_kf5bs"]
+resource_name = "test"
+script/source = "extends Node2D
+
+
+func _ready() -> void:
+	for i in range(146):
+		is_front(i)
+
+
+func is_front(anum2: int) -> bool:
+	if ((anum2>=28 && anum2<=36) || (anum2>=102 && anum2<=105) || anum2 == 108 || (anum2>=110 && anum2<=118) || anum2 == 121 || anum2 == 122 || anum2 == 124 || anum2 == 125 || anum2 == 128 || (anum2>=129 && anum2<=137) || anum2 == 144 || anum2 == 145):
+		print(anum2)
+		return true
+	else:
+		return false
+"
+
+[node name="Test" type="Node2D"]
+script = SubResource("GDScript_kf5bs")

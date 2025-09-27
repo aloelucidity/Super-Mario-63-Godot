@@ -1,4 +1,4 @@
-extends AirPhysics
+extends AirPhysicsOld
 
 
 @export var action_states: Array[CharacterState]

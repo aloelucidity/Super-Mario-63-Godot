@@ -2,16 +2,29 @@ class_name Character
 extends Node2D
 
 
-var velocity: Vector2
-var facing_dir: int = 1
+### Basics
 var input: Dictionary
+var velocity: Vector2
+var gravity: float
+var facing_dir: int = 1
+
 
 ### Attributes
+@export var gravity_factor: float = 1 ## for levels with lower/higher gravity
+## wide/tall but in one variable. 
+## X is from middle to edge, Y is from bottom to top
+@export var size: Vector2i 
+@export var bounce: float ## special variable to control how much you bounce against walls
+@export var on_ground: bool
 @export var on_ice: bool
+@export var on_puddle: bool
+
 
 ### Nodes
+@onready var collider: ColliderBase = %Collider
 @onready var animator: CharacterAnimator = %Animator
 @onready var physics_states: Node = %PhysicsStates
+
 
 ### States
 var physics: PhysicsState
@@ -53,20 +66,22 @@ func update_states(type: String, container: Node) -> void:
 		if transition_to == cur_state.name:
 			cur_state._update()
 		elif is_instance_valid(container) and container.has_node(transition_to):
-			@warning_ignore("unsafe_call_argument")
 			set_state(type, container.get_node(transition_to))
 		else:
 			set_state(type, null)
 	
 	## handle startups
 	if is_instance_valid(container):
-		@warning_ignore("unsafe_call_argument")
 		var startup_state: CharacterState = check_startups(self[type], container)
 		if is_instance_valid(startup_state):
 			set_state(type, startup_state)
 
 
 ### Logic
+func _enter_tree() -> void:
+	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+
 func _physics_process(_delta: float) -> void:
 	input = get_input()
 	
@@ -80,8 +95,18 @@ func _physics_process(_delta: float) -> void:
 	
 	update_states("action", container)
 	
+	collider.update()
 	animator.update()
-	position += velocity.rotated(rotation)
+
+
+### Physics
+func get_gravity_sum() -> float:
+	var total_factor: float = gravity * gravity_factor
+	if is_instance_valid(physics):
+		total_factor *= physics.gravity_factor
+	if is_instance_valid(action):
+		total_factor *= action.gravity_factor
+	return total_factor
 
 
 ### Input
@@ -92,11 +117,14 @@ var inputs_list: Array = [
 	"right",
 	"jump",
 	"dive",
-	"stomp",
-	"interact"
+	"ground_pound",
+	"interact",
+	"door_interact",
+	"use_fludd",
+	"switch_nozzles"
 ]
-func get_input() -> Dictionary:
-	var new_input: Dictionary = {}
+func get_input() -> Dictionary[String, Array]:
+	var new_input: Dictionary[String, Array] = {}
 	
 	for action_name: String in inputs_list:
 		var pressed: bool = Input.is_action_pressed(action_name)

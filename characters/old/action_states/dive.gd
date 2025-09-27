@@ -2,7 +2,7 @@ extends CharacterState
 
 
 @export var jump_counter: CharacterCounter
-@export var dive_air_physics: DiveAirPhysics
+@export var dive_air_physics: DiveAirPhysicsOld
 @export var dive_speed: float
 
 

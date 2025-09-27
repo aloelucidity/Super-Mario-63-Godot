@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="TileLayerOverrides" load_steps=2 format=3 uid="uid://dpn2ej5jfxuba"]
+
+[ext_resource type="Script" uid="uid://birhv2xwkdufp" path="res://level/compatibility/tiles/layer_overrides.gd" id="1_fvwgb"]
+
+[resource]
+script = ExtResource("1_fvwgb")
+overrides = Dictionary[int, Vector2i]({
+219: Vector2i(219, 0),
+606: Vector2i(606, 0),
+607: Vector2i(607, 0),
+608: Vector2i(608, 0),
+609: Vector2i(609, 0),
+610: Vector2i(610, 0),
+611: Vector2i(611, 0),
+612: Vector2i(612, 0),
+627: Vector2i(627, 0),
+628: Vector2i(628, 0),
+634: Vector2i(634, 0),
+635: Vector2i(635, 0),
+639: Vector2i(639, 0),
+640: Vector2i(640, 0),
+641: Vector2i(641, 0),
+642: Vector2i(642, 0),
+643: Vector2i(643, 0),
+644: Vector2i(644, 0),
+661: Vector2i(661, 0),
+662: Vector2i(662, 0),
+663: Vector2i(663, 0),
+664: Vector2i(664, 0),
+665: Vector2i(665, 0),
+666: Vector2i(666, 0),
+667: Vector2i(667, 0),
+668: Vector2i(668, 0),
+669: Vector2i(669, 0),
+670: Vector2i(670, 0),
+671: Vector2i(671, 0),
+687: Vector2i(687, 0),
+688: Vector2i(688, 0),
+689: Vector2i(689, 0),
+700: Vector2i(700, 0),
+730: Vector2i(730, 0),
+731: Vector2i(731, 0),
+735: Vector2i(735, 0),
+738: Vector2i(738, 0)
+})
+metadata/_custom_type_script = "uid://birhv2xwkdufp"

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DecorInfo" load_steps=3 format=3 uid="uid://bmksxo048vomk"]
+
+[ext_resource type="Script" uid="uid://bd3r68w510xpk" path="res://level/objects/decoration/decor_info.gd" id="1_fuit3"]
+[ext_resource type="Texture2D" uid="uid://dr713yibc82em" path="res://level/objects/decoration/twisted_tree_body/texture.png" id="2_1t0xb"]
+
+[resource]
+script = ExtResource("1_fuit3")
+texture = ExtResource("2_1t0xb")
+metadata/_custom_type_script = "uid://bd3r68w510xpk"

@@ -1,5 +1,5 @@
-class_name AirPhysics
-extends MovementPhysics
+class_name AirPhysicsOld
+extends MovementPhysicsOld
 
 
 @export var collision: CharacterCollision

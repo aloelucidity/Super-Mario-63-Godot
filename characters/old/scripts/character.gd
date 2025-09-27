@@ -65,7 +65,6 @@ func check_startups(cur_state: CharacterState, container: Node) -> CharacterStat
 func update_states(type: String, container: Node) -> void:
 	## handle startups
 	if is_instance_valid(container):
-		@warning_ignore("unsafe_call_argument")
 		var startup_state: CharacterState = check_startups(self[type], container)
 		if is_instance_valid(startup_state):
 			set_state(type, startup_state)
@@ -77,7 +76,6 @@ func update_states(type: String, container: Node) -> void:
 		if transition_to == cur_state.name:
 			cur_state._update()
 		elif is_instance_valid(container) and container.has_node(transition_to):
-			@warning_ignore("unsafe_call_argument")
 			set_state(type, container.get_node(transition_to))
 		else:
 			set_state(type, null)

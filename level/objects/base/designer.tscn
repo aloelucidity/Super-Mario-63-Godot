@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://clounayapaysa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fpioo"]
+size = Vector2(16, 16)
+
+[node name="Object" type="Node2D"]
+
+[node name="ObjectBounds" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectBounds"]
+shape = SubResource("RectangleShape2D_fpioo")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+rect = Rect2(-64, -64, 128, 128)
+
+[node name="Preview" type="Sprite2D" parent="."]

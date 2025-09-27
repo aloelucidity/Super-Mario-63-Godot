@@ -14,12 +14,12 @@ func _startup_check() -> bool:
 func _transition_check() -> String:
 	if stop_timer <= 0:
 		return ""
-	if character.physics is GroundPhysics and character.velocity.y > -3:
+	if character.physics is GroundPhysicsOld and character.velocity.y > -3:
 		return ""
 	return name
 
 
-@export var flip_physics: AirPhysics
+@export var flip_physics: AirPhysicsOld
 @export var flip_speed: float
 @export var jump_speed: float
 @export var flip_frames: int

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://23sftkrnru3j"]
+
+[ext_resource type="Script" uid="uid://clvknyhqg08ng" path="res://level/compatibility/legacy_level_converter.gd" id="1_84ram"]
+
+[node name="LegacyLevelLoader" type="Node2D"]
+script = ExtResource("1_84ram")

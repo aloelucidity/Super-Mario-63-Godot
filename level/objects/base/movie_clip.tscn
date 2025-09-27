@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cixl2png6mm13"]
+
+[ext_resource type="Script" uid="uid://dmxertux562r7" path="res://level/objects/base/movie_clip.gd" id="1_8k5ps"]
+
+[node name="MovieClip" type="AnimationPlayer"]
+script = ExtResource("1_8k5ps")

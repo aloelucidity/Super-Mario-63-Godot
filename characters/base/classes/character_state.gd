@@ -2,13 +2,16 @@
 class_name CharacterState
 extends Node
 
+## Note that the way physics states relate to action states, is different than you may expect.
+## Don't think of it as, say, "You can only be in the Jump action while using Ground physics"
+## It's more like, "The Jump action can only start itself while using Ground physics"
+## Any action can be paired with any physics. It's better for flexibility, that way.
 
-# note that states won't override others with the same priority
 @export_group("State Info")
-@export var priority: int = 0
+@export var priority: int = 0 ## note that states won't override others with the same priority
 @export var gravity_factor: float = 1
-@export var override_collision: bool
-@export var custom_collision: Vector2
+@export var override_size: bool
+@export var custom_size: Vector2
 
 @export_group("Animation Info")
 @export var animation: String

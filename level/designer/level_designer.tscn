@@ -1,0 +1,222 @@
+[gd_scene load_steps=13 format=3 uid="uid://dgeknqfw05753"]
+
+[ext_resource type="Theme" uid="uid://c43res7j1gdiy" path="res://level/designer/theme.tres" id="1_re6w7"]
+[ext_resource type="Script" uid="uid://fdb1yyk73qag" path="res://level/designer/hud_scaling.gd" id="2_wn40x"]
+[ext_resource type="FontFile" uid="uid://dpv1cj4lly8c3" path="res://fonts/arialbd.ttf" id="3_44p1m"]
+
+[sub_resource type="Gradient" id="Gradient_im7u1"]
+colors = PackedColorArray(0.5686275, 0.7411765, 1, 1, 0, 0.16862746, 0.8352941, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8of72"]
+gradient = SubResource("Gradient_im7u1")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(1, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_pi4x1"]
+colors = PackedColorArray(0.8117647, 0.7529412, 0.61960787, 1, 0.93333334, 0.91764706, 0.8666667, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dq25w"]
+gradient = SubResource("Gradient_pi4x1")
+fill = 1
+fill_from = Vector2(-0.5, -0.5)
+fill_to = Vector2(1, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_dq25w"]
+offsets = PackedFloat32Array(0, 0.924, 1)
+colors = PackedColorArray(0.4, 0.4, 0.4, 0.5019608, 0.4, 0.4, 0.4, 0.5019608, 0.4, 0.4, 0.4, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_im7u1"]
+gradient = SubResource("Gradient_dq25w")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xa36d"]
+gradient = SubResource("Gradient_pi4x1")
+fill = 1
+fill_from = Vector2(0.5, 0.8)
+fill_to = Vector2(0.5, 0.1)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_8of72"]
+colors = PackedColorArray(0.7294118, 0.67058825, 0.49019608, 1, 0.8, 0.75686276, 0.61960787, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hjjh4"]
+gradient = SubResource("Gradient_8of72")
+fill = 1
+fill_from = Vector2(0.7, 1)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[node name="LevelDesigner" type="Control"]
+texture_filter = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_re6w7")
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_8of72")
+
+[node name="HUD" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = -1
+theme_override_constants/margin_top = -1
+theme_override_constants/margin_right = -1
+theme_override_constants/margin_bottom = -1
+script = ExtResource("2_wn40x")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/HBoxContainer"]
+layout_mode = 2
+
+[node name="Toolbar" type="PanelContainer" parent="HUD/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Background" type="TextureRect" parent="HUD/HBoxContainer/VBoxContainer/Toolbar"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_dq25w")
+expand_mode = 1
+
+[node name="ShadowContainer" type="Control" parent="HUD/HBoxContainer/VBoxContainer/Toolbar"]
+show_behind_parent = true
+layout_mode = 2
+
+[node name="Shadow" type="NinePatchRect" parent="HUD/HBoxContainer/VBoxContainer/Toolbar/ShadowContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_im7u1")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/HBoxContainer/VBoxContainer/Toolbar"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/HBoxContainer/VBoxContainer/Toolbar/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Button" type="Button" parent="HUD/HBoxContainer/VBoxContainer/Toolbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "File"
+flat = true
+
+[node name="Button2" type="Button" parent="HUD/HBoxContainer/VBoxContainer/Toolbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "View"
+flat = true
+
+[node name="Button3" type="Button" parent="HUD/HBoxContainer/VBoxContainer/Toolbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Tiles"
+flat = true
+
+[node name="Button4" type="Button" parent="HUD/HBoxContainer/VBoxContainer/Toolbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Items"
+flat = true
+
+[node name="Button5" type="Button" parent="HUD/HBoxContainer/VBoxContainer/Toolbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Help"
+flat = true
+
+[node name="Padding" type="Control" parent="HUD/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ElementList" type="VBoxContainer" parent="HUD/HBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/HBoxContainer/ElementList"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Background" type="TextureRect" parent="HUD/HBoxContainer/ElementList/PanelContainer"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_xa36d")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/HBoxContainer/ElementList/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/HBoxContainer/ElementList/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = -1
+theme_override_constants/margin_top = -1
+theme_override_constants/margin_right = -1
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/HBoxContainer/ElementList/PanelContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Background" type="TextureRect" parent="HUD/HBoxContainer/ElementList/PanelContainer/VBoxContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_hjjh4")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/HBoxContainer/ElementList/PanelContainer/VBoxContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="HUD/HBoxContainer/ElementList/PanelContainer/VBoxContainer/MarginContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("3_44p1m")
+theme_override_font_sizes/font_size = 14
+text = " Place Items"
+vertical_alignment = 2
+
+[node name="Button" type="Button" parent="HUD/HBoxContainer/ElementList/PanelContainer/VBoxContainer/MarginContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(9, 0)
+layout_mode = 2
+
+[node name="Groups" type="HBoxContainer" parent="HUD/HBoxContainer/ElementList/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Elements" type="ScrollContainer" parent="HUD/HBoxContainer/ElementList/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="HUD/HBoxContainer/ElementList/PanelContainer/VBoxContainer/Elements"]
+layout_mode = 2
+columns = 2
+
+[node name="ElementInfo" type="CenterContainer" parent="HUD/HBoxContainer/ElementList/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="HUD/HBoxContainer/ElementList/PanelContainer/VBoxContainer"]
+layout_mode = 2

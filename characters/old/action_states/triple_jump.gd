@@ -1,4 +1,4 @@
-extends JumpAction
+extends JumpActionOld
 
 
 @export var collision: CharacterCollision

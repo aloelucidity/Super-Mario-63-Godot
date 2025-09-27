@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://r07km72x7up8"]
+[gd_scene load_steps=4 format=3 uid="uid://r07km72x7up8"]
 
 [ext_resource type="Script" uid="uid://bjym21jdm6b1o" path="res://characters/base/classes/character.gd" id="1_w113p"]
 [ext_resource type="Script" uid="uid://dodc7pappdgl2" path="res://characters/base/classes/character_animator.gd" id="2_xahgc"]
+[ext_resource type="Script" uid="uid://kkthtadefx2r" path="res://characters/base/classes/collider_legacy.gd" id="3_2chjw"]
 
 [node name="Character" type="Node2D"]
 script = ExtResource("1_w113p")
@@ -16,4 +17,12 @@ root_node = NodePath("../..")
 [node name="Offsetter" type="Node2D" parent="Animator"]
 
 [node name="Sprite" type="Sprite2D" parent="Animator/Offsetter"]
+unique_name_in_owner = true
+
+[node name="Collider" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -8)
+script = ExtResource("3_2chjw")
+
+[node name="PhysicsStates" type="Node" parent="."]
 unique_name_in_owner = true
