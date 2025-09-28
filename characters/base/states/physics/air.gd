@@ -21,6 +21,12 @@ func _transition_check() -> String:
 	return name
 
 
+## runs once when this state begins being active
+func _on_enter() -> void:
+	if do_air_animation:
+		animation = "fall" if character.velocity.y > 2 else "jump"
+
+
 ## runs every frame while active
 func _update() -> void:
 	## Gravity

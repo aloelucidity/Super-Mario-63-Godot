@@ -5,7 +5,7 @@ extends ColliderBase
 var floor_snap: bool = false
 
 
-func update() -> void:
+func _update() -> void:
 	char_pos = character.global_position
 	char_vel = character.velocity
 	
@@ -17,9 +17,9 @@ func update() -> void:
 	var repeats: int = get_repeat_amount(char_vel)
 	var i: int = 1
 	while i <= repeats:
-		floor_collision()
-		wall_collision()
-		ceiling_collision()
+		_floor_collision()
+		_wall_collision()
+		_ceiling_collision()
 		
 		char_pos.x += char_vel.x / repeats
 		char_pos.y += char_vel.y / repeats
@@ -29,7 +29,7 @@ func update() -> void:
 	character.velocity = char_vel
 
 
-func floor_collision() -> void:
+func _floor_collision() -> void:
 	## GROUND DETECTION
 	if hit_test(CollisionType.Default, char_pos) or hit_test(CollisionType.Background, char_pos):
 		character.on_ground = true
@@ -68,9 +68,9 @@ func floor_collision() -> void:
 			character.on_ground = true
 
 
-func wall_collision() -> void:
+func _wall_collision() -> void:
 	## WALL DETECTION AND RESOLUTION
-	var half_height: float = char_pos.y - character.size.y
+	var half_height: float = char_pos.y - float(character.size.y)/2
 	var check_right: Vector2 = Vector2(char_pos.x + character.size.x - 1, half_height)
 	var check_left: Vector2 = Vector2(char_pos.x - character.size.x + 1, half_height)
 	
@@ -109,14 +109,14 @@ func wall_collision() -> void:
 			char_vel.x = max(char_vel.x + 1, -char_vel.x * character.bounce)
 
 
-func ceiling_collision() -> void:
+func _ceiling_collision() -> void:
 	## CEILING DETECTION AND RESOLUTION
 	var head_height: float = char_pos.y - character.size.y + 1
 	if hit_test(CollisionType.Default, Vector2(char_pos.x, head_height)):
 		#fall_squish()
 		char_vel.y = max(char_vel.y, -3)
 	
-	if char_vel.y < -1:
+	if true:# not character.squish or char_vel.y < -1:
 		## supposed to take squish into account but ill do that Later (tm)
 		var scaled_head_height: float = char_pos.y - character.size.y
 		head_height = char_pos.y - character.size.y

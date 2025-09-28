@@ -1,0 +1,237 @@
+[gd_scene load_steps=24 format=3 uid="uid://dis0e3y2r7a3a"]
+
+[ext_resource type="PackedScene" uid="uid://cixl2png6mm13" path="res://level/objects/base/movie_clip.tscn" id="1_64ohs"]
+[ext_resource type="Script" uid="uid://5ahhonmhthhu" path="res://characters/mario/movie_clip.gd" id="2_4vkiu"]
+[ext_resource type="Texture2D" uid="uid://d1sjcm8co14pr" path="res://characters/mario/animations/walk/walk0.png" id="2_rh53n"]
+[ext_resource type="Texture2D" uid="uid://d3231jpgbbe35" path="res://characters/mario/animations/walk/walk1.png" id="3_nviwq"]
+[ext_resource type="Texture2D" uid="uid://demidu5181b23" path="res://characters/mario/animations/walk/walk2.png" id="4_rbkyx"]
+[ext_resource type="Texture2D" uid="uid://byedu5gc2t477" path="res://characters/mario/animations/walk/walk3.png" id="5_4vkiu"]
+[ext_resource type="Texture2D" uid="uid://gjplx4taayb" path="res://characters/mario/animations/walk/walk4.png" id="6_p600k"]
+[ext_resource type="Texture2D" uid="uid://byt3i3w40eg3b" path="res://characters/mario/animations/walk/walk5.png" id="7_lyrnu"]
+[ext_resource type="Texture2D" uid="uid://cccp5i3dk6adk" path="res://characters/mario/animations/walk/walk6.png" id="8_vdtnv"]
+[ext_resource type="Texture2D" uid="uid://b7fb5oodsvk2l" path="res://characters/mario/animations/walk/walk7.png" id="9_2x1jy"]
+[ext_resource type="Texture2D" uid="uid://bbmx5agkfjndg" path="res://characters/mario/animations/walk/walk8.png" id="10_jh813"]
+[ext_resource type="Texture2D" uid="uid://cvfgl33m75i7p" path="res://characters/mario/animations/air/fall.png" id="11_rbkyx"]
+[ext_resource type="Texture2D" uid="uid://0331prfwb6ro" path="res://characters/mario/animations/air/jump.png" id="12_4vkiu"]
+[ext_resource type="Texture2D" uid="uid://dnvtjekrbhiu7" path="res://characters/mario/animations/misc/somersault.png" id="14_lyrnu"]
+[ext_resource type="Texture2D" uid="uid://dnxag7ksiu0n8" path="res://characters/old/animations/misc/Mario (none) Spinning - 1.png" id="15_vdtnv"]
+[ext_resource type="Texture2D" uid="uid://kmobsy1tbufn" path="res://characters/mario/animations/misc/dive.png" id="16_vdtnv"]
+
+[sub_resource type="Animation" id="Animation_0frbe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Offsetter/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_nviwq")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Offsetter/Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Offsetter/Sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_rh53n"]
+resource_name = "fall"
+step = 0.03125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Offsetter/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("11_rbkyx")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Offsetter/Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.75, 1.35)]
+}
+
+[sub_resource type="Animation" id="Animation_nviwq"]
+resource_name = "jump"
+step = 0.03125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Offsetter/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("12_4vkiu")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Offsetter/Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2x1jy"]
+resource_name = "somersault"
+step = 0.03125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Offsetter/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.78125, 0.78135),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("14_lyrnu"), ExtResource("15_vdtnv"), ExtResource("11_rbkyx")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Offsetter/Sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.78125, 0.9375),
+"transitions": PackedFloat32Array(0.65, 1, 1),
+"update": 0,
+"values": [-12.566370614359172, -0.2617993877991494, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_2vady"]
+resource_name = "walk"
+length = 2.500003
+loop_mode = 1
+step = 0.03125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Offsetter/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3125, 0.625, 0.9375, 1.25, 1.5625, 1.875, 2.1875, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_rh53n"), ExtResource("3_nviwq"), ExtResource("4_rbkyx"), ExtResource("5_4vkiu"), ExtResource("6_p600k"), ExtResource("7_lyrnu"), ExtResource("8_vdtnv"), ExtResource("9_2x1jy"), ExtResource("10_jh813")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Offsetter/Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3125, 0.625, 0.9375, 1.25, 1.5625, 1.875, 2.1875, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0.5), Vector2(0, 0), Vector2(0, 0.5), Vector2(0, 1), Vector2(0, 0.5), Vector2(0, 0), Vector2(0, 0.5), Vector2(0, 1), Vector2(0, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_jh813"]
+resource_name = "dive"
+length = 0.34375313
+step = 0.03125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Offsetter/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.062044874, 0.0625, 0.34375313),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("12_4vkiu"), ExtResource("12_4vkiu"), ExtResource("16_vdtnv"), ExtResource("16_vdtnv")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Offsetter/Sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06210328, 0.0625, 0.09375),
+"transitions": PackedFloat32Array(1, 0, 1, 1),
+"update": 0,
+"values": [0.5235988, 1.7016960206944713, -0.2617994, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Offsetter/Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0625, 0.09375),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-0.5, -4), Vector2(-1.25, 1), Vector2(-0.5, 4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rh53n"]
+_data = {
+&"RESET": SubResource("Animation_0frbe"),
+&"dive": SubResource("Animation_jh813"),
+&"fall": SubResource("Animation_rh53n"),
+&"jump": SubResource("Animation_nviwq"),
+&"somersault": SubResource("Animation_2x1jy"),
+&"walk": SubResource("Animation_2vady")
+}
+
+[node name="MovieClip" instance=ExtResource("1_64ohs")]
+script = ExtResource("2_4vkiu")
+walk_speed_override = true
+
+[node name="AnimationPlayer" parent="." index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_rh53n")
+}
+
+[node name="Offsetter" type="Node2D" parent="." index="1"]
+position = Vector2(-0.35, -16.15)
+
+[node name="Sprite" type="Sprite2D" parent="Offsetter" index="0"]
+texture = ExtResource("3_nviwq")

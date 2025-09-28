@@ -1,6 +1,7 @@
 class_name ColliderBase
 extends Node2D
 
+
 enum CollisionType {Default = 1, Background = 2}
 @onready var character: Character = get_owner()
 
@@ -8,19 +9,19 @@ var char_pos: Vector2
 var char_vel: Vector2
 
 
-func update() -> void:
+func _update() -> void:
 	pass
 
 
-func floor_collision() -> void:
+func _floor_collision() -> void:
 	return
 
 
-func wall_collision() -> void:
+func _wall_collision() -> void:
 	return
 
 
-func ceiling_collision() -> void:
+func _ceiling_collision() -> void:
 	return
 
 

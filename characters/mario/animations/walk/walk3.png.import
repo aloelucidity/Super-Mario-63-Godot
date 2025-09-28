@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0331prfwb6ro"
-path="res://.godot/imported/Mario Air (none) - 2.png-b18460c468606d542fe0c89178771817.ctex"
+uid="uid://byedu5gc2t477"
+path="res://.godot/imported/walk3.png-3c8378ad81b5ed4ed72a11f274dfb21f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/mario/animations/air/Mario Air (none) - 2.png"
-dest_files=["res://.godot/imported/Mario Air (none) - 2.png-b18460c468606d542fe0c89178771817.ctex"]
+source_file="res://characters/mario/animations/walk/walk3.png"
+dest_files=["res://.godot/imported/walk3.png-3c8378ad81b5ed4ed72a11f274dfb21f.ctex"]
 
 [params]
 

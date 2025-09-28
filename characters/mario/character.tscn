@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://hw2njr4cic5e"]
+[gd_scene load_steps=11 format=3 uid="uid://hw2njr4cic5e"]
 
 [ext_resource type="PackedScene" uid="uid://r07km72x7up8" path="res://characters/base/character.tscn" id="1_kpos5"]
-[ext_resource type="Texture2D" uid="uid://dvkpgdd6bpoac" path="res://characters/old/animations/walk/Overworld - Mario 3 - 3.png" id="2_kpos5"]
-[ext_resource type="AnimationLibrary" uid="uid://dofaldk0ynolr" path="res://characters/mario/animations/animation_library.tres" id="3_1li8h"]
+[ext_resource type="PackedScene" uid="uid://dis0e3y2r7a3a" path="res://characters/mario/movie_clip.tscn" id="2_7frya"]
 [ext_resource type="Script" uid="uid://bobthsffwufj0" path="res://characters/base/states/physics/air.gd" id="4_dw1q7"]
 [ext_resource type="Script" uid="uid://djxg21q4acmle" path="res://characters/base/states/physics/ground.gd" id="5_lnmd8"]
+[ext_resource type="Script" uid="uid://c7a8bmoye1aui" path="res://characters/base/states/action/jump.gd" id="5_sy58n"]
+[ext_resource type="Script" uid="uid://2p0invmopbc" path="res://characters/base/states/action/triple_jump.gd" id="6_sie2w"]
 [ext_resource type="Script" uid="uid://d1x5go8stev8r" path="res://characters/base/states/physics/somersault.gd" id="6_vtspf"]
 [ext_resource type="Script" uid="uid://nr3max7c57dw" path="res://characters/base/states/physics/rollout.gd" id="7_tcm2k"]
 [ext_resource type="Script" uid="uid://bxlrep6cyovcy" path="res://characters/base/states/physics/dive_air.gd" id="8_sy58n"]
@@ -15,21 +16,7 @@ size = Vector2i(10, 35)
 bounce = 0.5
 on_ground = true
 
-[node name="ColorRect2" type="ColorRect" parent="." index="0"]
-anchors_preset = -1
-offset_left = -8.0
-offset_top = -32.0
-offset_right = 8.0
-
-[node name="AnimationPlayer" parent="Animator" index="0"]
-libraries = {
-&"": ExtResource("3_1li8h")
-}
-
-[node name="Sprite" parent="Animator/Offsetter" index="0"]
-visible = false
-position = Vector2(0, -8)
-texture = ExtResource("2_kpos5")
+[node name="MovieClip" parent="Animator" index="0" instance=ExtResource("2_7frya")]
 
 [node name="Air" type="Node" parent="PhysicsStates" index="0"]
 script = ExtResource("4_dw1q7")
@@ -47,10 +34,31 @@ friction_subtract = 0.3000000000029104
 friction_multiply = 1.1500000000087311
 animation = "walk"
 
-[node name="Somersault" type="Node" parent="PhysicsStates" index="2"]
+[node name="JumpAction" type="Node" parent="PhysicsStates/Ground" index="0" node_paths=PackedStringArray("triple_jump_action")]
+script = ExtResource("5_sy58n")
+jump_speeds = Array[float]([10.0, 12.5])
+triple_jump_threshold = 3.0
+triple_jump_action = NodePath("../TripleJumpAction")
+max_jumps = 3
+metadata/_custom_type_script = "uid://c7a8bmoye1aui"
+
+[node name="TripleJumpAction" type="Node" parent="PhysicsStates/Ground" index="1" node_paths=PackedStringArray("somersault_physics")]
+script = ExtResource("6_sie2w")
+somersault_physics = NodePath("../../Somersault")
+launch_speed = 15.0
+jump_speed = 15.0
+flip_frames = 28
+metadata/_custom_type_script = "uid://2p0invmopbc"
+
+[node name="Somersault" type="Node" parent="PhysicsStates" index="2" node_paths=PackedStringArray("action_states")]
 script = ExtResource("6_vtspf")
+action_states = [NodePath("../Ground/TripleJumpAction")]
 air_name = "Air"
 ground_name = "Ground"
+air_move_speed = 5.0
+max_air_move_speed = 20.0
+speed_divider = 1.5
+set_facing = false
 animation = "somersault"
 
 [node name="Rollout" type="Node" parent="PhysicsStates" index="3"]
@@ -72,11 +80,3 @@ speed_divider = 8.0
 set_facing = false
 rise_speed = 0.0
 ground_resolve_mult = 0.9970000000030268
-
-[node name="ColorRect" type="ColorRect" parent="." index="4"]
-visible = false
-anchors_preset = -1
-offset_left = -8.0
-offset_top = -24.0
-offset_right = 8.0
-offset_bottom = 8.0

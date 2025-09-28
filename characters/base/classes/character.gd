@@ -58,6 +58,14 @@ func check_startups(cur_state: CharacterState, container: Node) -> CharacterStat
 	return null
 
 
+func handle_general_updates() -> void:
+	if is_instance_valid(physics_states):
+		for phys: PhysicsState in physics_states.get_children():
+			phys._general_update()
+			for act: ActionState in phys.get_children():
+				act._general_update()
+
+
 func update_states(type: String, container: Node) -> void:
 	## handle updates, transitions
 	var cur_state: CharacterState = self[type]
@@ -85,6 +93,7 @@ func _enter_tree() -> void:
 func _physics_process(_delta: float) -> void:
 	input = get_input()
 	
+	handle_general_updates()
 	update_states("physics", physics_states)
 	
 	var container: PhysicsState = physics
@@ -95,8 +104,8 @@ func _physics_process(_delta: float) -> void:
 	
 	update_states("action", container)
 	
-	collider.update()
-	animator.update()
+	collider._update()
+	animator._update()
 
 
 ### Physics

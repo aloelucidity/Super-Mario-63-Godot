@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnvtjekrbhiu7"
-path="res://.godot/imported/Mario (none) Spinning - 1.png-fe10f00a752779422704c78959f3f499.ctex"
+uid="uid://d1sjcm8co14pr"
+path="res://.godot/imported/walk0.png-f8b0f2a36280927d4632a47f5f2922b6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/mario/animations/misc/Mario (none) Spinning - 1.png"
-dest_files=["res://.godot/imported/Mario (none) Spinning - 1.png-fe10f00a752779422704c78959f3f499.ctex"]
+source_file="res://characters/mario/animations/walk/walk0.png"
+dest_files=["res://.godot/imported/walk0.png-f8b0f2a36280927d4632a47f5f2922b6.ctex"]
 
 [params]
 

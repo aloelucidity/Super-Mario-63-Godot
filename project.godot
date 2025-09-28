@@ -75,6 +75,10 @@ folder_colors={
 "res://level/": "teal"
 }
 
+[gui]
+
+common/snap_controls_to_pixels=false
+
 [input]
 
 up={

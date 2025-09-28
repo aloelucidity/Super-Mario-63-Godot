@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byt3i3w40eg3b"
-path="res://.godot/imported/Overworld - Mario 3 - 7.png-248424c50d37f91b245fccbde894334b.ctex"
+uid="uid://cvfgl33m75i7p"
+path="res://.godot/imported/fall.png-5ffa2bc7c05f1011024f2df5f9b07cdf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/mario/animations/walk/Overworld - Mario 3 - 7.png"
-dest_files=["res://.godot/imported/Overworld - Mario 3 - 7.png-248424c50d37f91b245fccbde894334b.ctex"]
+source_file="res://characters/mario/animations/air/fall.png"
+dest_files=["res://.godot/imported/fall.png-5ffa2bc7c05f1011024f2df5f9b07cdf.ctex"]
 
 [params]
 

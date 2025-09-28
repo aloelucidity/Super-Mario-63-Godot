@@ -2,5 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dmxertux562r7" path="res://level/objects/base/movie_clip.gd" id="1_8k5ps"]
 
-[node name="MovieClip" type="AnimationPlayer"]
+[node name="MovieClip" type="Node2D"]
 script = ExtResource("1_8k5ps")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
