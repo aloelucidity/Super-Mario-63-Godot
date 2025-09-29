@@ -105,6 +105,7 @@ friction_multiply = 1.15
 metadata/_custom_type_script = "uid://yvgiku3jqtf0"
 
 [node name="Debug" type="VBoxContainer" parent="." index="4"]
+visible = false
 anchors_preset = -1
 offset_top = -58.0
 offset_right = 1.0
@@ -119,4 +120,4 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 10
 script = ExtResource("14_wd8sn")
 object_to_watch = NodePath("../../PhysicsStates/Ground/LandAction")
-property_to_watch = "land_time"
+property_to_watch = "stop_target"

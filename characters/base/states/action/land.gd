@@ -32,13 +32,8 @@ func _transition_check() -> String:
 ## runs once when this state begins being active
 func _on_enter() -> void:
 	character.set_state("physics", land_physics)
-	stop_counter = 0
+	stop_counter = 1
 	stop_target = land_time
-
-
-## runs once when this state stops being active
-func _on_exit() -> void:
-	stop_counter = 0
 
 
 ## runs every frame while active
