@@ -2,7 +2,7 @@ class_name SomersaultPhysics
 extends AirPhysics
 
 
-@export var action_states: Array[CharacterState]
+@export var action_states: Array[ActionState]
 @export var air_name: String
 
 

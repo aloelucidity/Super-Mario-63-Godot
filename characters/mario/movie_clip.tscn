@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dis0e3y2r7a3a"]
+[gd_scene load_steps=26 format=3 uid="uid://dis0e3y2r7a3a"]
 
 [ext_resource type="PackedScene" uid="uid://cixl2png6mm13" path="res://level/objects/base/movie_clip.tscn" id="1_64ohs"]
 [ext_resource type="Script" uid="uid://5ahhonmhthhu" path="res://characters/mario/movie_clip.gd" id="2_4vkiu"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://dnvtjekrbhiu7" path="res://characters/mario/animations/misc/somersault.png" id="14_lyrnu"]
 [ext_resource type="Texture2D" uid="uid://dnxag7ksiu0n8" path="res://characters/old/animations/misc/Mario (none) Spinning - 1.png" id="15_vdtnv"]
 [ext_resource type="Texture2D" uid="uid://kmobsy1tbufn" path="res://characters/mario/animations/misc/dive.png" id="16_vdtnv"]
+[ext_resource type="Texture2D" uid="uid://ja13glnf38dp" path="res://characters/mario/animations/misc/land.png" id="17_2x1jy"]
 
 [sub_resource type="Animation" id="Animation_0frbe"]
 length = 0.001
@@ -211,12 +212,28 @@ tracks/2/keys = {
 "values": [Vector2(-0.5, -4), Vector2(-1.25, 1), Vector2(-0.5, 4)]
 }
 
+[sub_resource type="Animation" id="Animation_ckkhp"]
+resource_name = "land"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Offsetter/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_2x1jy")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rh53n"]
 _data = {
 &"RESET": SubResource("Animation_0frbe"),
 &"dive": SubResource("Animation_jh813"),
 &"fall": SubResource("Animation_rh53n"),
 &"jump": SubResource("Animation_nviwq"),
+&"land": SubResource("Animation_ckkhp"),
 &"somersault": SubResource("Animation_2x1jy"),
 &"walk": SubResource("Animation_2vady")
 }
