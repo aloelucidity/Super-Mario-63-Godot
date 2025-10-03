@@ -1,5 +1,144 @@
-[gd_scene load_steps=2 format=3 uid="uid://cq65rwkgc8715"]
+[gd_scene load_steps=28 format=3 uid="uid://cq65rwkgc8715"]
 
 [ext_resource type="PackedScene" uid="uid://cixl2png6mm13" path="res://level/objects/base/movie_clip.tscn" id="1_kfkvp"]
+[ext_resource type="Texture2D" uid="uid://dw0wrprngsyny" path="res://level/objects/collectibles/coin/sprites/coin0.png" id="2_c30qj"]
+[ext_resource type="Texture2D" uid="uid://djafu7s31erxg" path="res://level/objects/collectibles/coin/sprites/coin1.png" id="3_fvutd"]
+[ext_resource type="Texture2D" uid="uid://cswwjy41eukwd" path="res://level/objects/collectibles/coin/sprites/coin2.png" id="4_n67tj"]
+[ext_resource type="Texture2D" uid="uid://bxgccvremdbq5" path="res://level/objects/collectibles/coin/sprites/coin3.png" id="5_vimul"]
+[ext_resource type="Texture2D" uid="uid://g5vk8llp082w" path="res://level/objects/collectibles/coin/sprites/particles/1.svg" id="6_xwmdr"]
+[ext_resource type="Texture2D" uid="uid://d3ct5vk054u7a" path="res://level/objects/collectibles/coin/sprites/particles/2.svg" id="7_sav6y"]
+[ext_resource type="Texture2D" uid="uid://bc147beyu2shk" path="res://level/objects/collectibles/coin/sprites/particles/3.svg" id="8_lsyna"]
+[ext_resource type="Texture2D" uid="uid://b1baq2ag0ca3t" path="res://level/objects/collectibles/coin/sprites/particles/4.svg" id="9_okxol"]
+[ext_resource type="Texture2D" uid="uid://cdy3b2od7log7" path="res://level/objects/collectibles/coin/sprites/particles/5.svg" id="10_4e2qy"]
+[ext_resource type="Texture2D" uid="uid://q2buhdlcvxeb" path="res://level/objects/collectibles/coin/sprites/particles/6.svg" id="11_r8ifi"]
+[ext_resource type="Texture2D" uid="uid://dbrrt1csxans3" path="res://level/objects/collectibles/coin/sprites/particles/7.svg" id="12_kgvfl"]
+[ext_resource type="Texture2D" uid="uid://dujastu8r21v2" path="res://level/objects/collectibles/coin/sprites/particles/8.svg" id="13_x3gaf"]
+[ext_resource type="Texture2D" uid="uid://1wb08l858gei" path="res://level/objects/collectibles/coin/sprites/particles/9.svg" id="14_jsd0y"]
+[ext_resource type="Texture2D" uid="uid://brwurrc74vqt7" path="res://level/objects/collectibles/coin/sprites/particles/10.svg" id="15_e05pl"]
+[ext_resource type="Texture2D" uid="uid://c3tq1nudgehgy" path="res://level/objects/collectibles/coin/sprites/particles/11.svg" id="16_rfro2"]
+[ext_resource type="Texture2D" uid="uid://bq5k8ipx7w6sr" path="res://level/objects/collectibles/coin/sprites/particles/12.svg" id="17_ddgr6"]
+[ext_resource type="Texture2D" uid="uid://cdg8224ca56eo" path="res://level/objects/collectibles/coin/sprites/particles/13.svg" id="18_tugjp"]
+[ext_resource type="Texture2D" uid="uid://dweduuqplusiv" path="res://level/objects/collectibles/coin/sprites/particles/14.svg" id="19_epobd"]
+[ext_resource type="Texture2D" uid="uid://clqav4nd3fabm" path="res://level/objects/collectibles/coin/sprites/particles/15.svg" id="20_07kse"]
+[ext_resource type="Texture2D" uid="uid://bqllb5gsppa1j" path="res://level/objects/collectibles/coin/sprites/particles/16.svg" id="21_p3gdv"]
+[ext_resource type="Texture2D" uid="uid://bmqs7jphthm1c" path="res://level/objects/collectibles/coin/sprites/particles/17.svg" id="22_j7re3"]
+[ext_resource type="Texture2D" uid="uid://dmu1ffpuoiymy" path="res://level/objects/collectibles/coin/sprites/particles/18.svg" id="23_x5c6t"]
+
+[sub_resource type="Animation" id="Animation_n3hsq"]
+resource_name = "spin"
+length = 0.26667002
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.20000002),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_c30qj"), ExtResource("3_fvutd"), ExtResource("4_n67tj"), ExtResource("5_vimul")]
+}
+
+[sub_resource type="Animation" id="Animation_x368g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_c30qj")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Particles:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_xwmdr")]
+}
+
+[sub_resource type="Animation" id="Animation_fvutd"]
+resource_name = "collect"
+length = 0.5625031
+step = 0.03125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0625),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("2_c30qj"), ExtResource("3_fvutd")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.125, 0.21875),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Particles:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.03125, 0.0625, 0.125, 0.15625, 0.1875, 0.21875, 0.25, 0.28125, 0.3125, 0.34375, 0.375, 0.40625, 0.4375, 0.46875, 0.5, 0.53125, 0.5625),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("6_xwmdr"), ExtResource("7_sav6y"), ExtResource("8_lsyna"), ExtResource("9_okxol"), ExtResource("10_4e2qy"), ExtResource("11_r8ifi"), ExtResource("12_kgvfl"), ExtResource("13_x3gaf"), ExtResource("14_jsd0y"), ExtResource("15_e05pl"), ExtResource("16_rfro2"), ExtResource("17_ddgr6"), ExtResource("18_tugjp"), ExtResource("19_epobd"), ExtResource("20_07kse"), ExtResource("21_p3gdv"), ExtResource("22_j7re3"), ExtResource("23_x5c6t")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4sl7d"]
+_data = {
+&"RESET": SubResource("Animation_x368g"),
+&"collect": SubResource("Animation_fvutd"),
+&"spin": SubResource("Animation_n3hsq")
+}
 
 [node name="MovieClip" instance=ExtResource("1_kfkvp")]
+
+[node name="AnimationPlayer" parent="." index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_4sl7d")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_c30qj")
+
+[node name="Particles" type="Sprite2D" parent="." index="2"]
+texture_filter = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_xwmdr")

@@ -6,7 +6,11 @@ extends Node2D
 var input: Dictionary
 var velocity: Vector2
 var gravity: float
-var facing_dir: int = 1
+var facing_dir: int = 1 : 
+	set(new_value):
+		if facing_dir != new_value:
+			emit_signal("direction_changed", new_value)
+		facing_dir = new_value
 
 
 ### Attributes
@@ -35,6 +39,10 @@ var action: ActionState
 # can still do ground actions even if you're slightly late
 var container_override: PhysicsState
 var override_frames: int
+
+
+### Signals
+signal direction_changed(new_direction: int)
 
 
 func set_state(type: String, state: CharacterState) -> void:

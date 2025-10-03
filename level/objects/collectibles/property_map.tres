@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_ic67o")
-blacklisted_base_properties = Array[String](["tangible"])
+blacklisted_base_properties = Array[StringName]([&"tangible"])
 metadata/_custom_type_script = "uid://chfo55wu1pn72"
