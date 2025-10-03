@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cg5kx4rilfosp"]
+
+[ext_resource type="PackedScene" uid="uid://cq65rwkgc8715" path="res://level/objects/collectibles/coin/movie_clip.tscn" id="1_32iil"]
+[ext_resource type="SpriteFrames" uid="uid://c74dl4wbemxvg" path="res://level/objects/collectibles/blue_coin/coin_frames.tres" id="2_wbcmy"]
+[ext_resource type="SpriteFrames" uid="uid://mrgj0rsw5ug2" path="res://level/objects/collectibles/blue_coin/particle_frames.tres" id="3_vedpe"]
+
+[node name="MovieClip" instance=ExtResource("1_32iil")]
+
+[node name="Sprite2D" parent="." index="1"]
+sprite_frames = ExtResource("2_wbcmy")
+
+[node name="Particles" parent="." index="2"]
+sprite_frames = ExtResource("3_vedpe")

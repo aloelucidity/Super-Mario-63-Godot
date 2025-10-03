@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://b84nngory5at4"]
+
+[ext_resource type="PackedScene" uid="uid://dum1moe8x6ewp" path="res://level/objects/base/gameplay.tscn" id="1_dujry"]
+[ext_resource type="Script" uid="uid://cat555ldb0mob" path="res://level/objects/collectibles/coin/gameplay.gd" id="2_boa7q"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0ltm8"]
+radius = 6.0
+height = 16.0
+
+[node name="Object" instance=ExtResource("1_dujry")]
+script = ExtResource("2_boa7q")
+
+[node name="Hitbox" type="Area2D" parent="." index="0"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_0ltm8")
+
+[node name="DeleteTimer" type="Timer" parent="." index="1"]
+process_callback = 0
+
+[connection signal="area_entered" from="Hitbox" to="." method="collected"]
+[connection signal="timeout" from="DeleteTimer" to="." method="queue_free"]

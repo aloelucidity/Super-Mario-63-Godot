@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbmtj42dyp81k"]
+
+[ext_resource type="PackedScene" uid="uid://b84nngory5at4" path="res://level/objects/collectibles/coin/gameplay_base.tscn" id="1_xgm60"]
+[ext_resource type="PackedScene" uid="uid://cg5kx4rilfosp" path="res://level/objects/collectibles/blue_coin/movie_clip.tscn" id="2_2if8u"]
+
+[node name="Object" instance=ExtResource("1_xgm60")]
+
+[node name="MovieClip" parent="." index="0" instance=ExtResource("2_2if8u")]
