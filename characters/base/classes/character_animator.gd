@@ -7,10 +7,6 @@ extends Node2D
 @onready var rotation_collider: RotationCollider = %RotationCollider
 
 
-func _physics_process(_delta: float) -> void:
-	reset_physics_interpolation()
-
-
 func _update() -> void:
 	var new_anim: String
 	
@@ -54,6 +50,8 @@ func _update() -> void:
 			movie_clip.play("RESET")
 	elif movie_clip.get_current_animation() != new_anim:
 		movie_clip.play("RESET")
-		movie_clip.advance()
+		movie_clip.advance(0)
 		movie_clip.play(new_anim)
+		movie_clip.advance(0)
+	
 	movie_clip._update()

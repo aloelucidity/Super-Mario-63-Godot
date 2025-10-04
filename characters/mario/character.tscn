@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://hw2njr4cic5e"]
+[gd_scene load_steps=20 format=3 uid="uid://hw2njr4cic5e"]
 
 [ext_resource type="PackedScene" uid="uid://r07km72x7up8" path="res://characters/base/character.tscn" id="1_kpos5"]
 [ext_resource type="PackedScene" uid="uid://dis0e3y2r7a3a" path="res://characters/mario/movie_clip.tscn" id="2_7frya"]
@@ -6,19 +6,27 @@
 [ext_resource type="Script" uid="uid://cxdn081kc3xvq" path="res://characters/base/states/action/fall_damage.gd" id="4_kdqtu"]
 [ext_resource type="Script" uid="uid://djxg21q4acmle" path="res://characters/base/states/physics/ground.gd" id="5_lnmd8"]
 [ext_resource type="Script" uid="uid://c7a8bmoye1aui" path="res://characters/base/states/action/jump.gd" id="5_sy58n"]
+[ext_resource type="Script" uid="uid://bc67srtimsan0" path="res://characters/base/states/action/ground_pound_start.gd" id="5_w5se4"]
+[ext_resource type="Script" uid="uid://bjhpo383t7r0p" path="res://characters/base/states/action/ground_pound_fall.gd" id="6_3d2hb"]
 [ext_resource type="Script" uid="uid://2p0invmopbc" path="res://characters/base/states/action/triple_jump.gd" id="6_sie2w"]
 [ext_resource type="Script" uid="uid://d1x5go8stev8r" path="res://characters/base/states/physics/somersault.gd" id="6_vtspf"]
+[ext_resource type="Script" uid="uid://rln7mtwalsl3" path="res://characters/base/states/action/ground_pound_land.gd" id="7_86hbj"]
 [ext_resource type="Script" uid="uid://nr3max7c57dw" path="res://characters/base/states/physics/rollout.gd" id="7_tcm2k"]
 [ext_resource type="Script" uid="uid://b1wxqplipbqqf" path="res://characters/base/states/action/land.gd" id="8_8m3kx"]
 [ext_resource type="Script" uid="uid://bxlrep6cyovcy" path="res://characters/base/states/physics/dive_air.gd" id="8_sy58n"]
 [ext_resource type="Script" uid="uid://cj7ec5mm7al72" path="res://characters/base/states/physics/dive_ground.gd" id="9_sie2w"]
 [ext_resource type="Script" uid="uid://yvgiku3jqtf0" path="res://characters/base/states/physics/land.gd" id="13_xadud"]
+[ext_resource type="Script" uid="uid://bsvg35d0nlsro" path="res://characters/base/states/physics/ground_pound_freeze.gd" id="14_shhwh"]
 [ext_resource type="Script" uid="uid://by0bfc2agxghc" path="res://characters/base/debug/property_watcher.gd" id="14_wd8sn"]
+[ext_resource type="Script" uid="uid://bsjya2eg3bgsg" path="res://characters/base/states/physics/ground_pound.gd" id="15_bek3b"]
 
 [node name="Character" instance=ExtResource("1_kpos5")]
 size = Vector2i(10, 35)
 bounce = 0.5
 on_ground = true
+
+[node name="Animator" parent="." index="0"]
+physics_interpolation_mode = 2
 
 [node name="MovieClip" parent="Animator" index="0" instance=ExtResource("2_7frya")]
 
@@ -32,6 +40,15 @@ max_air_move_speed = 20.0
 [node name="FallDamageAction" type="Node" parent="PhysicsStates/Air" index="0"]
 script = ExtResource("4_kdqtu")
 metadata/_custom_type_script = "uid://cxdn081kc3xvq"
+
+[node name="GroundPoundStartAction" type="Node" parent="PhysicsStates/Air" index="1" node_paths=PackedStringArray("start_physics")]
+script = ExtResource("5_w5se4")
+start_physics = NodePath("../../GroundPoundStart")
+start_duration = 12
+priority = 1
+gravity_factor = 0.0
+animation = "ground_pound_start"
+metadata/_custom_type_script = "uid://bc67srtimsan0"
 
 [node name="Ground" type="Node" parent="PhysicsStates" index="1"]
 script = ExtResource("5_lnmd8")
@@ -76,6 +93,15 @@ speed_divider = 1.5
 set_facing = false
 animation = "somersault"
 
+[node name="GroundPoundStartAction" type="Node" parent="PhysicsStates/Somersault" index="0" node_paths=PackedStringArray("start_physics")]
+script = ExtResource("5_w5se4")
+start_physics = NodePath("../../GroundPoundStart")
+start_duration = 12
+priority = 1
+gravity_factor = 0.0
+animation = "ground_pound_start"
+metadata/_custom_type_script = "uid://bc67srtimsan0"
+
 [node name="Rollout" type="Node" parent="PhysicsStates" index="3"]
 script = ExtResource("7_tcm2k")
 air_name = "Air"
@@ -103,6 +129,39 @@ target_physics_name = "Ground"
 friction_subtract = 0.3
 friction_multiply = 1.15
 metadata/_custom_type_script = "uid://yvgiku3jqtf0"
+
+[node name="GroundPoundStart" type="Node" parent="PhysicsStates" index="7" node_paths=PackedStringArray("action_states")]
+script = ExtResource("14_shhwh")
+action_states = [NodePath("../Air/GroundPoundStartAction"), NodePath("../Somersault/GroundPoundStartAction")]
+target_physics_name = "GroundPoundFall"
+gravity_factor = 0.0
+
+[node name="GroundPoundFallAction" type="Node" parent="PhysicsStates/GroundPoundStart" index="0"]
+script = ExtResource("6_3d2hb")
+fall_power = 8.0
+animation = "ground_pound_fall"
+metadata/_custom_type_script = "uid://bjhpo383t7r0p"
+
+[node name="GroundPoundFall" type="Node" parent="PhysicsStates" index="8" node_paths=PackedStringArray("action_states")]
+script = ExtResource("15_bek3b")
+action_states = [NodePath("../GroundPoundStart/GroundPoundFallAction")]
+target_physics_name = "GroundPoundEnd"
+air_move_speed = 5.0
+max_air_move_speed = 20.0
+max_speed_divider = 1.0
+set_facing = false
+
+[node name="GroundPoundLandAction" type="Node" parent="PhysicsStates/GroundPoundFall" index="0"]
+script = ExtResource("7_86hbj")
+speed_multiplier = 0.8
+land_duration = 15
+animation = "ground_pound_end"
+metadata/_custom_type_script = "uid://rln7mtwalsl3"
+
+[node name="GroundPoundEnd" type="Node" parent="PhysicsStates" index="9" node_paths=PackedStringArray("action_states")]
+script = ExtResource("14_shhwh")
+action_states = [NodePath("../GroundPoundFall/GroundPoundLandAction")]
+target_physics_name = "Ground"
 
 [node name="Debug" type="VBoxContainer" parent="." index="4"]
 visible = false

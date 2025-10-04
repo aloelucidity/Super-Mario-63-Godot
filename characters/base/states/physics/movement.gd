@@ -32,15 +32,16 @@ func do_friction() -> void:
 @export var air_move_speed: float
 @export var max_air_move_speed: float
 @export var speed_divider: float = 1 # used by some states to slow movement instead of changing move speed vars
+@export var max_speed_divider: float = 3 # same as above
 
 
 func do_air_movement(left: bool, right: bool) -> void:
 	if right:
-		character.velocity.x -= min((character.velocity.x - air_move_speed) / (max_air_move_speed / 3), 0) / speed_divider
+		character.velocity.x -= min((character.velocity.x - air_move_speed) / (max_air_move_speed / max_speed_divider), 0) / speed_divider
 		if set_facing: character.facing_dir = 1
 	
 	if left:
-		character.velocity.x -= max((character.velocity.x + air_move_speed) / (max_air_move_speed / 3), 0) / speed_divider
+		character.velocity.x -= max((character.velocity.x + air_move_speed) / (max_air_move_speed / max_speed_divider), 0) / speed_divider
 		if set_facing: character.facing_dir = -1
 
 
