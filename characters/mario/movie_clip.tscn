@@ -1,7 +1,6 @@
-[gd_scene load_steps=61 format=3 uid="uid://dis0e3y2r7a3a"]
+[gd_scene load_steps=60 format=3 uid="uid://dis0e3y2r7a3a"]
 
 [ext_resource type="PackedScene" uid="uid://cixl2png6mm13" path="res://level/objects/base/movie_clip.tscn" id="1_64ohs"]
-[ext_resource type="Script" uid="uid://5ahhonmhthhu" path="res://characters/mario/movie_clip.gd" id="2_4vkiu"]
 [ext_resource type="Texture2D" uid="uid://d1sjcm8co14pr" path="res://characters/mario/animations/walk/walk0.png" id="2_rh53n"]
 [ext_resource type="Texture2D" uid="uid://d3231jpgbbe35" path="res://characters/mario/animations/walk/walk1.png" id="3_nviwq"]
 [ext_resource type="Texture2D" uid="uid://demidu5181b23" path="res://characters/mario/animations/walk/walk2.png" id="4_rbkyx"]
@@ -386,6 +385,35 @@ tracks/3/keys = {
 "values": [0.0, 0.0, 0.2617994, 0.2617994, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_0bwrd"]
+resource_name = "ground_pound_fall"
+length = 0.7500031
+step = 0.03125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Offsetter/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("20_gera8")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Offsetter/Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 0,
+"values": [Vector2(4, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_gera8"]
 resource_name = "ground_pound_start"
 length = 0.7500031
@@ -422,7 +450,7 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0.03125, 0.25),
-"transitions": PackedFloat32Array(0.75, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [-6.283185307179586, 0.0]
 }
@@ -790,35 +818,6 @@ tracks/1/keys = {
 "values": [Vector2(0, 0.5), Vector2(0, 0), Vector2(0, 0.5), Vector2(0, 1), Vector2(0, 0.5), Vector2(0, 0), Vector2(0, 0.5), Vector2(0, 1), Vector2(0, 0.5)]
 }
 
-[sub_resource type="Animation" id="Animation_0bwrd"]
-resource_name = "ground_pound_fall"
-length = 0.7500031
-step = 0.03125
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Offsetter/Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("20_gera8")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Offsetter/Sprite:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(0),
-"update": 0,
-"values": [Vector2(4, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rh53n"]
 _data = {
 &"RESET": SubResource("Animation_0frbe"),
@@ -846,8 +845,6 @@ _data = {
 
 [node name="MovieClip" instance=ExtResource("1_64ohs")]
 physics_interpolation_mode = 2
-script = ExtResource("2_4vkiu")
-walk_speed_override = true
 
 [node name="AnimationPlayer" parent="." index="0"]
 libraries = {

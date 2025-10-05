@@ -1,4 +1,4 @@
-class_name GroundPoundFreezePhysics
+class_name PausePhysics
 extends PhysicsState
 
 @export var action_states: Array[ActionState]

@@ -3,6 +3,16 @@ extends Node2D
 
 
 var animation_player: AnimationPlayer
+var speed_scale: float :
+	set(value):
+		animation_player.speed_scale = value
+	get:
+		return animation_player.speed_scale 
+var frame: int :
+	set(value):
+		animation_player.seek(MathFuncs.frame_to_seconds(value))
+	get:
+		return MathFuncs.seconds_to_frame(animation_player.current_animation_position)
 
 
 func _enter_tree() -> void:

@@ -20,6 +20,7 @@ extends Node
 @export_range(-89.9, 89.9, 0.1, "radians_as_degrees") var sprite_skew: float
 @export var sprite_scale := Vector2.ONE
 @export var disable_auto_rotation: bool
+@export var animator: Animator
 
 
 var character: Character

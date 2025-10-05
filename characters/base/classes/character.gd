@@ -20,8 +20,11 @@ var facing_dir: int = 1 :
 @export var size: Vector2i 
 @export var bounce: float ## special variable to control how much you bounce against walls
 @export var on_ground: bool
+@export var wall_dir: int
 @export var on_ice: bool
 @export var on_puddle: bool
+@export var land_vel: Vector2
+@export var wall_vel: Vector2
 
 
 ### Nodes
@@ -59,10 +62,17 @@ func set_state(type: String, state: CharacterState) -> void:
 func check_startups(cur_state: CharacterState, container: Node) -> CharacterState:
 	var cur_priority: int = -1
 	if is_instance_valid(cur_state): cur_priority = cur_state.priority
-	for check_state: CharacterState in container.get_children():
-		if check_state.priority > cur_priority:
-			if check_state._startup_check():
-				return check_state
+	for check_state: Node in container.get_children():
+		var char_state: CharacterState
+		if check_state is CharacterState:
+			char_state = check_state
+		elif check_state is StateLink:
+			var link: StateLink = check_state
+			char_state = link.link_to
+		
+		if char_state.priority > cur_priority:
+			if char_state._startup_check():
+				return char_state
 	return null
 
 
@@ -70,8 +80,15 @@ func handle_general_updates() -> void:
 	if is_instance_valid(physics_states):
 		for phys: PhysicsState in physics_states.get_children():
 			phys._general_update()
-			for act: ActionState in phys.get_children():
-				act._general_update()
+			
+			for act: Node in phys.get_children():
+				var action_state: ActionState
+				if act is ActionState:
+					action_state = act
+				elif act is StateLink:
+					var link: StateLink = act
+					action_state = link.link_to
+				action_state._general_update()
 
 
 func update_states(type: String, container: Node) -> void:
@@ -82,7 +99,15 @@ func update_states(type: String, container: Node) -> void:
 		if transition_to == cur_state.name:
 			cur_state._update()
 		elif is_instance_valid(container) and container.has_node(transition_to):
-			set_state(type, container.get_node(transition_to))
+			var found_node: Node = container.get_node(transition_to)
+			var new_state: CharacterState
+			if found_node is CharacterState:
+				new_state = found_node
+			elif found_node is StateLink:
+				var link: StateLink = found_node
+				new_state = link.link_to
+			
+			set_state(type, new_state)
 		else:
 			set_state(type, null)
 	

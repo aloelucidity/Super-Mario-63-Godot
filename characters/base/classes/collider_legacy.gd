@@ -33,6 +33,7 @@ func _floor_collision() -> void:
 	## GROUND DETECTION
 	if hit_test(CollisionType.Default, char_pos) or hit_test(CollisionType.Background, char_pos):
 		character.on_ground = true
+		character.land_vel = char_vel
 		char_vel.y = min(0, char_vel.y)
 	else:
 		character.on_ground = false
@@ -86,11 +87,11 @@ func _wall_collision() -> void:
 	## WALL BONKING
 	check_right = Vector2(char_pos.x + character.size.x, half_height)
 	check_left = Vector2(char_pos.x - character.size.x, half_height)
+	character.wall_dir = 0
 	
 	if hit_test(CollisionType.Default, check_right):
-		#if can_bonk():
-		#	#hit_wall()
-		#else:
+		character.wall_dir = 1
+		character.wall_vel = char_vel
 		if character.input["right"][0]:
 			char_vel.x = min(char_vel.x, -char_vel.x * character.bounce)
 			char_vel.x = MathFuncs.ground_friction(char_vel.x, 3, 1)
@@ -98,10 +99,8 @@ func _wall_collision() -> void:
 			char_vel.x = min(char_vel.x - 1, -char_vel.x * character.bounce)
 	
 	if hit_test(CollisionType.Default, check_left):
-		#if can_bonk():
-			#hit_wall()
-		#	pass
-		#else:
+		character.wall_dir = -1
+		character.wall_vel = char_vel
 		if character.input["left"][0]:
 			char_vel.x = min(char_vel.x, -char_vel.x * character.bounce)
 			char_vel.x = MathFuncs.ground_friction(char_vel.x, 3, 1)

@@ -6,6 +6,7 @@ extends ActionState
 @export var triple_jump_threshold: float
 @export var triple_jump_action: ActionState
 @export var max_jumps: int
+@export var check_grounded: bool
 
 var jump_sequence: int
 var reset_frames: int
@@ -15,7 +16,8 @@ var pressed_buffer: int
 ## runs this check every frame while inactive and 
 ## in the character's current pool of states
 func _startup_check() -> bool:
-	return character.input["up"][0] and pressed_buffer > 0 and character.velocity.y >= -3
+	var ground_check: bool = not check_grounded or character.on_ground
+	return character.input["up"][0] and pressed_buffer > 0 and character.velocity.y >= -3 and ground_check
 
 
 ## runs this check every frame while active
@@ -48,6 +50,7 @@ func _on_enter() -> void:
 	jump_sequence += 1
 
 
+## always runs no matter what, before any of the other functions
 func _general_update() -> void:
 	var up_just_pressed: bool = character.input["up"][1]
 	if up_just_pressed:
