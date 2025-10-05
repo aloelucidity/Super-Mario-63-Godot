@@ -34,6 +34,7 @@ unique_name_in_owner = true
 
 [node name="Step" type="AudioStreamPlayer" parent="Audio"]
 stream = SubResource("AudioStreamPolyphonic_nvf7k")
+bus = &"Footsteps"
 script = ExtResource("5_xg31s")
 default_step = ExtResource("6_nvf7k")
 

@@ -74,6 +74,7 @@ stream = ExtResource("7_65abn")
 bus = &"Voices"
 
 [node name="Debug" type="VBoxContainer" parent="." index="4"]
+texture_filter = 2
 offset_top = -58.0
 offset_right = 1.0
 offset_bottom = -35.0
@@ -119,12 +120,13 @@ friction_multiply = 1.1500000000087311
 animation = "walk"
 animator = NodePath("../../Animator/MovieClip/WalkAnimator")
 
-[node name="JumpAction" type="Node" parent="PhysicsStates/Ground" index="0" node_paths=PackedStringArray("jump_sounds", "triple_jump_action")]
+[node name="JumpAction" type="Node" parent="PhysicsStates/Ground" index="0" node_paths=PackedStringArray("jump_sounds", "triple_jump_action", "air_physics")]
 script = ExtResource("5_sy58n")
 jump_speeds = Array[float]([10.0, 12.5])
 jump_sounds = [NodePath("../../../Audio/Jump"), NodePath("../../../Audio/DoubleJump")]
 triple_jump_threshold = 3.0
 triple_jump_action = NodePath("../TripleJumpAction")
+air_physics = NodePath("../../Air")
 max_jumps = 3
 check_grounded = true
 metadata/_custom_type_script = "uid://c7a8bmoye1aui"

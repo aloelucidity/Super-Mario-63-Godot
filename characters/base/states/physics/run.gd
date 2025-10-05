@@ -18,7 +18,7 @@ func _startup_check() -> bool:
 ## the string returned is the name of the state to change to
 ## return self.name for no change!
 func _transition_check() -> String:
-	if not character.on_ground and (coyote_timer <= 0 or is_instance_valid(character.action)):
+	if not character.on_ground and coyote_timer <= 0:
 		return air_name
 	var move_dir: int = 0
 	if character.input["left"][0]: move_dir -= 1

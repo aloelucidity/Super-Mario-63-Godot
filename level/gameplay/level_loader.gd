@@ -13,11 +13,21 @@ var is_demo: bool
 ## Variables
 var cur_room: String = "Room 1"
 
+## Globals
+var coin_cooldown: int = 0
+
 
 ## Misc functions
 func _init(_level: Level, _is_demo: bool = false) -> void:
 	level = _level
 	is_demo = _is_demo
+	name = "%LevelLoader"
+
+
+## Timers
+func _physics_process(_delta: float) -> void:
+	if coin_cooldown > 0:
+		coin_cooldown -= 1
 
 
 ## Loading
@@ -48,6 +58,7 @@ func load_room(room: Room) -> void:
 			if FileAccess.file_exists(OBJECT_SCENE_PATH % object_path):
 				var loaded_scene: PackedScene = load(OBJECT_SCENE_PATH % object_path)
 				object_scene = loaded_scene.instantiate()
+				object_scene.level_loader = self
 				object_scene._load_properties(object_data)
 				object_scene._setup_object()
 				objects_container.add_child(object_scene)

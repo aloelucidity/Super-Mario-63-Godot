@@ -30,5 +30,3 @@ func _update() -> void:
 	if compare_frame != last_compare and compare_frame % 4 == 1:
 		footstep_player.play_step()
 	last_compare = compare_frame
-	
-	#movie_clip.frame +=  * character.facing_dir

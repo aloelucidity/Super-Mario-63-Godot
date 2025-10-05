@@ -2,6 +2,7 @@ class_name GameplayObject
 extends Node2D
 
 
+var level_loader: LevelLoader
 var object_data: ObjectData
 var tangible: bool
 var functional: bool

@@ -6,6 +6,7 @@ extends ActionState
 @export var jump_sounds: Array[AudioStreamPlayer]
 @export var triple_jump_threshold: float
 @export var triple_jump_action: ActionState
+@export var air_physics: PhysicsState
 @export var max_jumps: int
 @export var check_grounded: bool
 
@@ -40,6 +41,7 @@ func _on_enter() -> void:
 		reset_frames = 0
 	## single and double jump
 	elif jump_sequence < max_jumps - 1:
+		character.set_state("physics", air_physics)
 		character.velocity.y = min(-jump_speeds[jump_sequence], character.velocity.y)
 		jump_sounds[jump_sequence].play()
 	
