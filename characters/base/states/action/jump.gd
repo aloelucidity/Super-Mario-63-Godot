@@ -3,6 +3,7 @@ extends ActionState
 
 
 @export var jump_speeds: Array[float]
+@export var jump_sounds: Array[AudioStreamPlayer]
 @export var triple_jump_threshold: float
 @export var triple_jump_action: ActionState
 @export var max_jumps: int
@@ -37,17 +38,16 @@ func _on_enter() -> void:
 	if jump_sequence >= max_jumps - 1 and abs(character.velocity.x) > triple_jump_threshold:
 		character.set_state("action", triple_jump_action)
 		reset_frames = 0
-		jump_sequence = -1
 	## single and double jump
-	elif jump_sequence < jump_speeds.size():
+	elif jump_sequence < max_jumps - 1:
 		character.velocity.y = min(-jump_speeds[jump_sequence], character.velocity.y)
+		jump_sounds[jump_sequence].play()
 	
+	jump_sequence += 1
+	reset_frames = 9
 	if jump_sequence >= max_jumps:
 		jump_sequence = 0
 		reset_frames = 0
-	else:
-		reset_frames = 9
-	jump_sequence += 1
 
 
 ## always runs no matter what, before any of the other functions

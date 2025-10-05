@@ -2,6 +2,7 @@ class_name TripleJumpAction
 extends ActionState
 
 
+@export var jump_sound: AudioStreamPlayer
 @export var somersault_physics: PhysicsState
 @export var launch_speed: float
 @export var jump_speed: float
@@ -22,6 +23,7 @@ func _transition_check() -> String:
 
 ## runs once when this state begins being active
 func _on_enter() -> void:
+	jump_sound.play()
 	character.on_ground = false
 	character.velocity.x -= (character.velocity.x - (launch_speed * character.facing_dir)) / 5
 	character.velocity.y = min(-jump_speed, character.velocity.y)

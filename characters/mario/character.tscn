@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://hw2njr4cic5e"]
+[gd_scene load_steps=32 format=3 uid="uid://hw2njr4cic5e"]
 
 [ext_resource type="PackedScene" uid="uid://r07km72x7up8" path="res://characters/base/character.tscn" id="1_kpos5"]
 [ext_resource type="PackedScene" uid="uid://dis0e3y2r7a3a" path="res://characters/mario/movie_clip.tscn" id="2_7frya"]
@@ -6,17 +6,22 @@
 [ext_resource type="Script" uid="uid://bobthsffwufj0" path="res://characters/base/states/physics/air.gd" id="4_dw1q7"]
 [ext_resource type="Script" uid="uid://cxdn081kc3xvq" path="res://characters/base/states/action/fall_damage.gd" id="4_kdqtu"]
 [ext_resource type="Script" uid="uid://b0fq4ga55nm6x" path="res://characters/base/animators/run.gd" id="4_mp6jb"]
+[ext_resource type="AudioStream" uid="uid://bksk5c6e7xp6i" path="res://characters/mario/sounds/jump0.mp3" id="5_ia4gy"]
 [ext_resource type="Script" uid="uid://djxg21q4acmle" path="res://characters/base/states/physics/ground.gd" id="5_lnmd8"]
 [ext_resource type="Script" uid="uid://c7a8bmoye1aui" path="res://characters/base/states/action/jump.gd" id="5_sy58n"]
 [ext_resource type="Script" uid="uid://bc67srtimsan0" path="res://characters/base/states/action/ground_pound_start.gd" id="5_w5se4"]
 [ext_resource type="Script" uid="uid://bjhpo383t7r0p" path="res://characters/base/states/action/ground_pound_fall.gd" id="6_3d2hb"]
+[ext_resource type="AudioStream" uid="uid://b2i5y40mxas7c" path="res://characters/mario/sounds/jump1.mp3" id="6_p82em"]
 [ext_resource type="Script" uid="uid://2p0invmopbc" path="res://characters/base/states/action/triple_jump.gd" id="6_sie2w"]
 [ext_resource type="Script" uid="uid://d1x5go8stev8r" path="res://characters/base/states/physics/somersault.gd" id="6_vtspf"]
+[ext_resource type="AudioStream" uid="uid://bncjmvuih7ese" path="res://characters/mario/sounds/double_jump.mp3" id="7_1bk12"]
+[ext_resource type="AudioStream" uid="uid://cdtyny40sbnq2" path="res://characters/mario/sounds/dive.mp3" id="7_65abn"]
 [ext_resource type="Script" uid="uid://rln7mtwalsl3" path="res://characters/base/states/action/ground_pound_land.gd" id="7_86hbj"]
 [ext_resource type="Script" uid="uid://nr3max7c57dw" path="res://characters/base/states/physics/rollout.gd" id="7_tcm2k"]
 [ext_resource type="Script" uid="uid://b1wxqplipbqqf" path="res://characters/base/states/action/land.gd" id="8_8m3kx"]
 [ext_resource type="Script" uid="uid://dwknux1y8uk1f" path="res://characters/base/states/action/bonk.gd" id="8_du5pi"]
 [ext_resource type="Script" uid="uid://bxlrep6cyovcy" path="res://characters/base/states/physics/dive_air.gd" id="8_sy58n"]
+[ext_resource type="AudioStream" uid="uid://jiwv5uvlqb1y" path="res://characters/mario/sounds/triple_jump.mp3" id="8_wpyed"]
 [ext_resource type="Script" uid="uid://cj7ec5mm7al72" path="res://characters/base/states/physics/dive_ground.gd" id="9_sie2w"]
 [ext_resource type="Script" uid="uid://ddorebuj6vyp7" path="res://characters/base/states/action/run_windup.gd" id="10_yg7sm"]
 [ext_resource type="Script" uid="uid://64e26a6bvbu7" path="res://characters/base/classes/state_link.gd" id="12_gwiit"]
@@ -25,6 +30,12 @@
 [ext_resource type="Script" uid="uid://by0bfc2agxghc" path="res://characters/base/debug/property_watcher.gd" id="14_wd8sn"]
 [ext_resource type="Script" uid="uid://bsjya2eg3bgsg" path="res://characters/base/states/physics/ground_pound.gd" id="15_bek3b"]
 [ext_resource type="Script" uid="uid://baiis28bv2enj" path="res://characters/base/states/physics/run.gd" id="20_mgwxa"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1bk12"]
+playback_mode = 1
+streams_count = 2
+stream_0/stream = ExtResource("5_ia4gy")
+stream_1/stream = ExtResource("6_p82em")
 
 [node name="Character" instance=ExtResource("1_kpos5")]
 size = Vector2i(10, 35)
@@ -43,6 +54,38 @@ metadata/_custom_type_script = "uid://cdn18waugnpa2"
 [node name="RunAnimator" type="Node" parent="Animator/MovieClip" index="3"]
 script = ExtResource("4_mp6jb")
 metadata/_custom_type_script = "uid://b0fq4ga55nm6x"
+
+[node name="Jump" type="AudioStreamPlayer" parent="Audio" index="0"]
+stream = SubResource("AudioStreamRandomizer_1bk12")
+bus = &"Voices"
+
+[node name="DoubleJump" type="AudioStreamPlayer" parent="Audio" index="1"]
+stream = ExtResource("7_1bk12")
+bus = &"Voices"
+
+[node name="TripleJump" type="AudioStreamPlayer" parent="Audio" index="2"]
+stream = ExtResource("8_wpyed")
+bus = &"Voices"
+
+[node name="Dive" type="AudioStreamPlayer" parent="Audio" index="3"]
+stream = ExtResource("7_65abn")
+bus = &"Voices"
+
+[node name="Debug" type="VBoxContainer" parent="." index="4"]
+offset_top = -58.0
+offset_right = 1.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="Debug" index="0" node_paths=PackedStringArray("object_to_watch")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+script = ExtResource("14_wd8sn")
+object_to_watch = NodePath("../..")
+property_to_watch = "velocity"
 
 [node name="Air" type="Node" parent="PhysicsStates" index="0"]
 script = ExtResource("4_dw1q7")
@@ -74,17 +117,19 @@ friction_multiply = 1.1500000000087311
 animation = "walk"
 animator = NodePath("../../Animator/MovieClip/WalkAnimator")
 
-[node name="JumpAction" type="Node" parent="PhysicsStates/Ground" index="0" node_paths=PackedStringArray("triple_jump_action")]
+[node name="JumpAction" type="Node" parent="PhysicsStates/Ground" index="0" node_paths=PackedStringArray("jump_sounds", "triple_jump_action")]
 script = ExtResource("5_sy58n")
 jump_speeds = Array[float]([10.0, 12.5])
+jump_sounds = [NodePath("../../../Audio/Jump"), NodePath("../../../Audio/DoubleJump")]
 triple_jump_threshold = 3.0
 triple_jump_action = NodePath("../TripleJumpAction")
 max_jumps = 3
 check_grounded = true
 metadata/_custom_type_script = "uid://c7a8bmoye1aui"
 
-[node name="TripleJumpAction" type="Node" parent="PhysicsStates/Ground" index="1" node_paths=PackedStringArray("somersault_physics")]
+[node name="TripleJumpAction" type="Node" parent="PhysicsStates/Ground" index="1" node_paths=PackedStringArray("jump_sound", "somersault_physics")]
 script = ExtResource("6_sie2w")
+jump_sound = NodePath("../../../Audio/TripleJump")
 somersault_physics = NodePath("../../Somersault")
 launch_speed = 15.0
 jump_speed = 15.0
@@ -222,22 +267,6 @@ action_states = [NodePath("../Run/RunBonkAction")]
 target_physics_name = "Ground"
 metadata/_custom_type_script = "uid://bsvg35d0nlsro"
 
-[node name="Debug" type="VBoxContainer" parent="." index="4"]
-offset_top = -58.0
-offset_right = 1.0
-offset_bottom = -35.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 4
-size_flags_vertical = 8
-
-[node name="Label" type="Label" parent="Debug" index="0" node_paths=PackedStringArray("object_to_watch")]
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-script = ExtResource("14_wd8sn")
-object_to_watch = NodePath("../..")
-property_to_watch = "velocity"
-
-[node name="Collector" parent="." index="5"]
+[node name="Collector" parent="." index="6"]
 collision_layer = 8
 collision_mask = 0
