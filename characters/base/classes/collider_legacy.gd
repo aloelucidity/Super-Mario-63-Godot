@@ -14,6 +14,9 @@ func _update() -> void:
 	else:
 		floor_snap = false
 
+	character.wall_dir = 0
+	character.wall_vel = Vector2.ZERO
+
 	var repeats: int = get_repeat_amount(char_vel)
 	var i: int = 1
 	while i <= repeats:
@@ -87,11 +90,11 @@ func _wall_collision() -> void:
 	## WALL BONKING
 	check_right = Vector2(char_pos.x + character.size.x, half_height)
 	check_left = Vector2(char_pos.x - character.size.x, half_height)
-	character.wall_dir = 0
 	
 	if hit_test(CollisionType.Default, check_right):
 		character.wall_dir = 1
-		character.wall_vel = char_vel
+		if abs(char_vel.x) > abs(character.wall_vel.x):
+			character.wall_vel = char_vel
 		if character.input["right"][0]:
 			char_vel.x = min(char_vel.x, -char_vel.x * character.bounce)
 			char_vel.x = MathFuncs.ground_friction(char_vel.x, 3, 1)
@@ -100,7 +103,8 @@ func _wall_collision() -> void:
 	
 	if hit_test(CollisionType.Default, check_left):
 		character.wall_dir = -1
-		character.wall_vel = char_vel
+		if abs(char_vel.x) > abs(character.wall_vel.x):
+			character.wall_vel = char_vel
 		if character.input["left"][0]:
 			char_vel.x = min(char_vel.x, -char_vel.x * character.bounce)
 			char_vel.x = MathFuncs.ground_friction(char_vel.x, 3, 1)
