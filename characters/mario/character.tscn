@@ -113,6 +113,16 @@ gravity_factor = 0.0
 animation = "ground_pound_start"
 metadata/_custom_type_script = "uid://bc67srtimsan0"
 
+[node name="DefaultBonkAction" type="Node" parent="PhysicsStates/Air" index="2" node_paths=PackedStringArray("bonk_physics", "bonk_move_physics")]
+script = ExtResource("8_du5pi")
+bonk_physics = NodePath("../../BonkPause")
+bonk_move_physics = NodePath("../../BonkMove")
+bonk_threshold = 11.0
+pause_frames = 10
+priority = 1
+animation = "bonk_start"
+metadata/_custom_type_script = "uid://dwknux1y8uk1f"
+
 [node name="Ground" type="Node" parent="PhysicsStates" index="1" node_paths=PackedStringArray("animator")]
 script = ExtResource("5_lnmd8")
 air_name = "Air"
@@ -158,6 +168,11 @@ input_grace_frames = 9
 windup_duration = 6
 animation = "run_windup"
 metadata/_custom_type_script = "uid://ddorebuj6vyp7"
+
+[node name="DefaultBonkLink" type="Node" parent="PhysicsStates/Ground" index="4" node_paths=PackedStringArray("link_to")]
+script = ExtResource("12_gwiit")
+link_to = NodePath("../../Air/DefaultBonkAction")
+metadata/_custom_type_script = "uid://64e26a6bvbu7"
 
 [node name="Somersault" type="Node" parent="PhysicsStates" index="2" node_paths=PackedStringArray("action_states")]
 script = ExtResource("6_vtspf")
@@ -272,7 +287,7 @@ metadata/_custom_type_script = "uid://dwknux1y8uk1f"
 
 [node name="BonkPause" type="Node" parent="PhysicsStates" index="12" node_paths=PackedStringArray("action_states")]
 script = ExtResource("14_shhwh")
-action_states = [NodePath("../Run/RunBonkAction")]
+action_states = [NodePath("../Run/RunBonkAction"), NodePath("../Air/DefaultBonkAction")]
 target_physics_name = "Ground"
 metadata/_custom_type_script = "uid://bsvg35d0nlsro"
 
