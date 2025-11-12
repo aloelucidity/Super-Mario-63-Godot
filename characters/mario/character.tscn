@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://hw2njr4cic5e"]
+[gd_scene load_steps=35 format=3 uid="uid://hw2njr4cic5e"]
 
 [ext_resource type="PackedScene" uid="uid://r07km72x7up8" path="res://characters/base/character.tscn" id="1_kpos5"]
 [ext_resource type="PackedScene" uid="uid://dis0e3y2r7a3a" path="res://characters/mario/movie_clip.tscn" id="2_7frya"]
@@ -32,6 +32,7 @@
 [ext_resource type="Script" uid="uid://baiis28bv2enj" path="res://characters/base/states/physics/run.gd" id="20_mgwxa"]
 [ext_resource type="Script" uid="uid://b8hay3lerjlp3" path="res://characters/base/states/physics/bonk_move.gd" id="31_1bk12"]
 [ext_resource type="Script" uid="uid://cou8oudegccx1" path="res://characters/base/states/physics/bonk_lay.gd" id="32_wpyed"]
+[ext_resource type="Script" uid="uid://dwn1lie5jkw1c" path="res://characters/base/states/action/getup.gd" id="33_ywpfx"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1bk12"]
 playback_mode = 1
@@ -281,13 +282,21 @@ bonk_velocity = Vector2(5, -3)
 air_name = "Air"
 ground_name = "BonkLay"
 animation = "bonk_start"
-enable_snap = false
 metadata/_custom_type_script = "uid://nr3max7c57dw"
 
 [node name="BonkLay" type="Node" parent="PhysicsStates" index="14"]
 script = ExtResource("32_wpyed")
+stun_time = 10
 animation = "bonk_lay"
 metadata/_custom_type_script = "uid://cou8oudegccx1"
+
+[node name="GetupAction" type="Node" parent="PhysicsStates/BonkLay" index="0" node_paths=PackedStringArray("bonk_lay_physics", "ground_physics")]
+script = ExtResource("33_ywpfx")
+bonk_lay_physics = NodePath("..")
+ground_physics = NodePath("../../Ground")
+getup_duration = 9
+animation = "bonk_end"
+metadata/_custom_type_script = "uid://dwn1lie5jkw1c"
 
 [node name="Collector" parent="." index="6"]
 collision_layer = 8
