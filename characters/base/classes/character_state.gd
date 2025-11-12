@@ -22,6 +22,9 @@ extends Node
 @export var disable_auto_rotation: bool
 @export var animator: Animator
 
+@export_group("Collision")
+@export var enable_snap: bool = true ## floor snapping
+
 
 var character: Character
 func _enter_tree() -> void:

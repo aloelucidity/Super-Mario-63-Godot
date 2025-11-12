@@ -10,7 +10,13 @@ func _update() -> void:
 	char_vel = character.velocity
 	
 	if char_vel.y > -3:
-		floor_snap = true
+		var physics_snap: bool
+		var action_snap: bool
+		if is_instance_valid(character.physics):
+			physics_snap = character.physics.enable_snap
+		if is_instance_valid(character.action):
+			action_snap = character.action.enable_snap
+		floor_snap = physics_snap and action_snap
 	else:
 		floor_snap = false
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://hw2njr4cic5e"]
+[gd_scene load_steps=34 format=3 uid="uid://hw2njr4cic5e"]
 
 [ext_resource type="PackedScene" uid="uid://r07km72x7up8" path="res://characters/base/character.tscn" id="1_kpos5"]
 [ext_resource type="PackedScene" uid="uid://dis0e3y2r7a3a" path="res://characters/mario/movie_clip.tscn" id="2_7frya"]
@@ -30,6 +30,8 @@
 [ext_resource type="Script" uid="uid://by0bfc2agxghc" path="res://characters/base/debug/property_watcher.gd" id="14_wd8sn"]
 [ext_resource type="Script" uid="uid://bsjya2eg3bgsg" path="res://characters/base/states/physics/ground_pound.gd" id="15_bek3b"]
 [ext_resource type="Script" uid="uid://baiis28bv2enj" path="res://characters/base/states/physics/run.gd" id="20_mgwxa"]
+[ext_resource type="Script" uid="uid://b8hay3lerjlp3" path="res://characters/base/states/physics/bonk_move.gd" id="31_1bk12"]
+[ext_resource type="Script" uid="uid://cou8oudegccx1" path="res://characters/base/states/physics/bonk_lay.gd" id="32_wpyed"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1bk12"]
 playback_mode = 1
@@ -257,19 +259,35 @@ script = ExtResource("12_gwiit")
 link_to = NodePath("../../Ground/JumpAction")
 metadata/_custom_type_script = "uid://64e26a6bvbu7"
 
-[node name="RunBonkAction" type="Node" parent="PhysicsStates/Run" index="1" node_paths=PackedStringArray("bonk_physics")]
+[node name="RunBonkAction" type="Node" parent="PhysicsStates/Run" index="1" node_paths=PackedStringArray("bonk_physics", "bonk_move_physics")]
 script = ExtResource("8_du5pi")
-bonk_physics = NodePath("../../Bonk")
+bonk_physics = NodePath("../../BonkPause")
+bonk_move_physics = NodePath("../../BonkMove")
 bonk_threshold = 5.0
+pause_frames = 10
 priority = 1
 animation = "bonk_start"
 metadata/_custom_type_script = "uid://dwknux1y8uk1f"
 
-[node name="Bonk" type="Node" parent="PhysicsStates" index="12" node_paths=PackedStringArray("action_states")]
+[node name="BonkPause" type="Node" parent="PhysicsStates" index="12" node_paths=PackedStringArray("action_states")]
 script = ExtResource("14_shhwh")
 action_states = [NodePath("../Run/RunBonkAction")]
 target_physics_name = "Ground"
 metadata/_custom_type_script = "uid://bsvg35d0nlsro"
+
+[node name="BonkMove" type="Node" parent="PhysicsStates" index="13"]
+script = ExtResource("31_1bk12")
+bonk_velocity = Vector2(5, -3)
+air_name = "Air"
+ground_name = "BonkLay"
+animation = "bonk_start"
+enable_snap = false
+metadata/_custom_type_script = "uid://nr3max7c57dw"
+
+[node name="BonkLay" type="Node" parent="PhysicsStates" index="14"]
+script = ExtResource("32_wpyed")
+animation = "bonk_lay"
+metadata/_custom_type_script = "uid://cou8oudegccx1"
 
 [node name="Collector" parent="." index="6"]
 collision_layer = 8

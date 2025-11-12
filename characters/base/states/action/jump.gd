@@ -13,6 +13,7 @@ extends ActionState
 var jump_sequence: int
 var reset_frames: int
 var pressed_buffer: int
+var snap_buffer: int
 
 
 ## runs this check every frame while inactive and 
@@ -34,6 +35,8 @@ func _transition_check() -> String:
 ## runs once when this state begins being active
 func _on_enter() -> void:
 	character.on_ground = false
+	enable_snap = false
+	snap_buffer = 1
 	
 	## triple jump
 	if jump_sequence >= max_jumps - 1 and abs(character.velocity.x) > triple_jump_threshold:
@@ -50,6 +53,15 @@ func _on_enter() -> void:
 	if jump_sequence >= max_jumps:
 		jump_sequence = 0
 		reset_frames = 0
+
+
+## runs every frame while active
+func _update() -> void:
+	## the original code disables ground snapping only on the frame that the jump key is pressed
+	if snap_buffer > 0:
+		snap_buffer -= 1
+	else:
+		enable_snap = false
 
 
 ## always runs no matter what, before any of the other functions

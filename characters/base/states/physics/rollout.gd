@@ -10,7 +10,7 @@ extends AirPhysics
 ## the string returned is the name of the state to change to
 ## return self.name for no change!
 func _transition_check() -> String:
-	if not character.action in action_states:
+	if not action_states.is_empty() and not character.action in action_states:
 		return air_name
 	return super()
 
