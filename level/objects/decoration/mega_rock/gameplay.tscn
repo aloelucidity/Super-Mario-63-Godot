@@ -6,3 +6,6 @@
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="1"]
 collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" index="0"]
+polygon = PackedVector2Array(-8.75, -32.25, 22.5, -17.25, 22.5, -2.5, 39.75, 27.25, -39, 32.5, -39, 32.5, -39, 28.75, -16.188, -17.25)
