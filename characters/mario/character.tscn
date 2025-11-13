@@ -168,8 +168,9 @@ animation = "spin"
 animator = NodePath("../../../Animator/MovieClip/SpinAnimator")
 metadata/_custom_type_script = "uid://ccuivp5tvyyxj"
 
-[node name="DiveAction" type="Node" parent="PhysicsStates/Air" index="4" node_paths=PackedStringArray("dive_air_physics", "dive_sound")]
+[node name="DiveAction" type="Node" parent="PhysicsStates/Air" index="4" node_paths=PackedStringArray("jump_action", "dive_air_physics", "dive_sound")]
 script = ExtResource("17_vsr5q")
+jump_action = NodePath("../../Ground/JumpAction")
 dive_air_physics = NodePath("../../DiveAir")
 dive_speed = 35.0
 dive_sound = NodePath("../../../Audio/Dive")

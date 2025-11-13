@@ -2,6 +2,7 @@ class_name DiveAction
 extends ActionState
 
 
+@export var jump_action: JumpAction ## for resetting jumps
 @export var dive_air_physics: DiveAirPhysics
 @export var dive_speed: float
 @export var dive_sound: AudioStreamPlayer
@@ -26,3 +27,6 @@ func _on_enter() -> void:
 	character.velocity.y += 3
 	character.set_state("physics", dive_air_physics)
 	dive_sound.play()
+	
+	if is_instance_valid(jump_action):
+		jump_action.jump_sequence = 0
