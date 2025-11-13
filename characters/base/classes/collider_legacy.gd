@@ -11,8 +11,8 @@ func _update() -> void:
 	
 	floor_snap = false
 	if char_vel.y > -3:
-		var physics_snap: bool
-		var action_snap: bool
+		var physics_snap: bool = true
+		var action_snap: bool = true
 		if is_instance_valid(character.physics):
 			physics_snap = character.physics.enable_snap
 		if is_instance_valid(character.action):
@@ -74,6 +74,8 @@ func _floor_collision() -> void:
 				## ok the original value for diving is ever so slightly different
 				## in this part but i cant be bothered to go that far sorry
 				char_vel.x *= character.physics.ground_resolve_mult
+			# in the original this just sets the animation, but i think its cleaner
+			# to do it this way here
 			character.on_ground = true
 
 

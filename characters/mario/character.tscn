@@ -76,7 +76,6 @@ metadata/_custom_type_script = "uid://bsl3xmdulanv8"
 
 [node name="GroundRotator" type="Node2D" parent="Rotators" index="0"]
 script = ExtResource("6_cjobx")
-metadata/_custom_type_script = "uid://dscwlpf6xu0xv"
 
 [node name="AirRotator" type="Node2D" parent="Rotators" index="1"]
 script = ExtResource("7_47itt")
