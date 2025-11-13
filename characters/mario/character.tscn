@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://hw2njr4cic5e"]
+[gd_scene load_steps=46 format=3 uid="uid://hw2njr4cic5e"]
 
 [ext_resource type="PackedScene" uid="uid://r07km72x7up8" path="res://characters/base/character.tscn" id="1_kpos5"]
 [ext_resource type="PackedScene" uid="uid://dis0e3y2r7a3a" path="res://characters/mario/movie_clip.tscn" id="2_7frya"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://bxlrep6cyovcy" path="res://characters/base/states/physics/dive_air.gd" id="8_sy58n"]
 [ext_resource type="AudioStream" uid="uid://d1gq0p12y8qm0" path="res://characters/mario/sounds/triple_jump.mp3" id="8_wpyed"]
 [ext_resource type="Script" uid="uid://byitrk7cim4gv" path="res://characters/base/rotators/dive_air_rotator.gd" id="9_mglhs"]
+[ext_resource type="Script" uid="uid://beieapgbjp6fy" path="res://characters/base/rotators/dive_ground_rotator.gd" id="9_qoxg7"]
 [ext_resource type="Script" uid="uid://cj7ec5mm7al72" path="res://characters/base/states/physics/dive_ground.gd" id="9_sie2w"]
 [ext_resource type="Script" uid="uid://ddorebuj6vyp7" path="res://characters/base/states/action/run_windup.gd" id="10_yg7sm"]
 [ext_resource type="Script" uid="uid://64e26a6bvbu7" path="res://characters/base/classes/state_link.gd" id="12_gwiit"]
@@ -85,6 +86,9 @@ metadata/_custom_type_script = "uid://d3suliikpryki"
 [node name="DiveAirRotator" type="Node2D" parent="Rotators" index="2"]
 script = ExtResource("9_mglhs")
 metadata/_custom_type_script = "uid://d3suliikpryki"
+
+[node name="DiveGroundRotator" type="Node2D" parent="Rotators" index="3"]
+script = ExtResource("9_qoxg7")
 
 [node name="Jump" type="AudioStreamPlayer" parent="Audio" index="0"]
 stream = SubResource("AudioStreamRandomizer_1bk12")
@@ -202,6 +206,7 @@ somersault_physics = NodePath("../../Somersault")
 launch_speed = 15.0
 jump_speed = 15.0
 flip_frames = 28
+allow_priority_override = true
 metadata/_custom_type_script = "uid://2p0invmopbc"
 
 [node name="LandAction" type="Node" parent="PhysicsStates/Ground" index="2" node_paths=PackedStringArray("fall_damage_action", "land_physics")]
@@ -249,12 +254,22 @@ script = ExtResource("12_gwiit")
 link_to = NodePath("../../Air/GroundPoundStartAction")
 metadata/_custom_type_script = "uid://64e26a6bvbu7"
 
+[node name="DiveLink" type="Node" parent="PhysicsStates/Somersault" index="1" node_paths=PackedStringArray("link_to")]
+script = ExtResource("12_gwiit")
+link_to = NodePath("../../Air/DiveAction")
+metadata/_custom_type_script = "uid://64e26a6bvbu7"
+
 [node name="Rollout" type="Node" parent="PhysicsStates" index="3" node_paths=PackedStringArray("action_states", "rotator")]
 script = ExtResource("7_tcm2k")
 action_states = [NodePath("../DiveGround/RolloutAction")]
 air_name = "Air"
 ground_name = "Ground"
 rotator = NodePath("../../Rotators/AirRotator")
+
+[node name="DefaultBonkLink" type="Node" parent="PhysicsStates/Rollout" index="0" node_paths=PackedStringArray("link_to")]
+script = ExtResource("12_gwiit")
+link_to = NodePath("../../Air/DefaultBonkAction")
+metadata/_custom_type_script = "uid://64e26a6bvbu7"
 
 [node name="DiveAir" type="Node" parent="PhysicsStates" index="4" node_paths=PackedStringArray("rotator")]
 script = ExtResource("8_sy58n")
@@ -263,7 +278,7 @@ ground_resolve_mult = 0.9970000000030268
 animation = "dive"
 rotator = NodePath("../../Rotators/DiveAirRotator")
 
-[node name="DiveGround" type="Node" parent="PhysicsStates" index="5"]
+[node name="DiveGround" type="Node" parent="PhysicsStates" index="5" node_paths=PackedStringArray("rotator")]
 script = ExtResource("9_sie2w")
 air_name = "DiveAir"
 friction_subtract = 0.10000000000582077
@@ -275,6 +290,7 @@ set_facing = false
 rise_speed = 0.0
 ground_resolve_mult = 0.9970000000030268
 animation = "dive"
+rotator = NodePath("../../Rotators/DiveGroundRotator")
 
 [node name="RolloutAction" type="Node" parent="PhysicsStates/DiveGround" index="0" node_paths=PackedStringArray("rollout_physics", "dive_sound", "rotator")]
 script = ExtResource("33_qoxg7")

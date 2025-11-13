@@ -58,10 +58,9 @@ func _update() -> void:
 
 ## always runs no matter what, before any of the other functions
 func _general_update() -> void:
-	if reset_timer > 0:
-		reset_timer -= 1
-		if reset_timer <= 0:
-			reset_input_vars()
+	reset_timer -= 1
+	if reset_timer <= 0:
+		reset_input_vars()
 	
 	# casting bool to int turns true to 1 and false to 0 :)
 	var direction: int = 0
@@ -70,7 +69,7 @@ func _general_update() -> void:
 	if direction != 0:
 		if last_input_dir != direction:
 			
-			if left_right_counter < 1 or reset_timer > 0:
+			if left_right_counter <= 0 or reset_timer > 0:
 				left_right_counter += 1
 				# honestly,, i have no clue why these two
 				# are different >w<;;
