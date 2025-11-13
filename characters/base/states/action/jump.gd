@@ -20,7 +20,7 @@ var snap_buffer: int
 ## in the character's current pool of states
 func _startup_check() -> bool:
 	var ground_check: bool = not check_grounded or character.on_ground
-	return character.input["up"][0] and pressed_buffer > 0 and character.velocity.y >= -3 and ground_check
+	return character.input["jump"][0] and pressed_buffer > 0 and character.velocity.y >= -3 and ground_check
 
 
 ## runs this check every frame while active
@@ -66,8 +66,8 @@ func _update() -> void:
 
 ## always runs no matter what, before any of the other functions
 func _general_update() -> void:
-	var up_just_pressed: bool = character.input["up"][1]
-	if up_just_pressed:
+	var jump_just_pressed: bool = character.input["jump"][1]
+	if jump_just_pressed:
 		pressed_buffer = 7
 	else:
 		pressed_buffer -= 1

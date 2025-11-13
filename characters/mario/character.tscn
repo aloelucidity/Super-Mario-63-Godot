@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://hw2njr4cic5e"]
+[gd_scene load_steps=39 format=3 uid="uid://hw2njr4cic5e"]
 
 [ext_resource type="PackedScene" uid="uid://r07km72x7up8" path="res://characters/base/character.tscn" id="1_kpos5"]
 [ext_resource type="PackedScene" uid="uid://dis0e3y2r7a3a" path="res://characters/mario/movie_clip.tscn" id="2_7frya"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://b0fq4ga55nm6x" path="res://characters/base/animators/run.gd" id="4_mp6jb"]
 [ext_resource type="AudioStream" uid="uid://bc7quo4upbndl" path="res://characters/mario/sounds/jump0.mp3" id="5_ia4gy"]
 [ext_resource type="Script" uid="uid://djxg21q4acmle" path="res://characters/base/states/physics/ground.gd" id="5_lnmd8"]
+[ext_resource type="Script" uid="uid://bsl3xmdulanv8" path="res://characters/base/animators/spin.gd" id="5_ry3if"]
 [ext_resource type="Script" uid="uid://c7a8bmoye1aui" path="res://characters/base/states/action/jump.gd" id="5_sy58n"]
 [ext_resource type="Script" uid="uid://bc67srtimsan0" path="res://characters/base/states/action/ground_pound_start.gd" id="5_w5se4"]
 [ext_resource type="Script" uid="uid://bjhpo383t7r0p" path="res://characters/base/states/action/ground_pound_fall.gd" id="6_3d2hb"]
@@ -29,8 +30,11 @@
 [ext_resource type="Script" uid="uid://bsvg35d0nlsro" path="res://characters/base/states/physics/pause.gd" id="14_shhwh"]
 [ext_resource type="Script" uid="uid://by0bfc2agxghc" path="res://characters/base/debug/property_watcher.gd" id="14_wd8sn"]
 [ext_resource type="Script" uid="uid://bsjya2eg3bgsg" path="res://characters/base/states/physics/ground_pound.gd" id="15_bek3b"]
+[ext_resource type="Script" uid="uid://ccuivp5tvyyxj" path="res://characters/base/states/action/spin.gd" id="15_n0gxl"]
 [ext_resource type="Script" uid="uid://baiis28bv2enj" path="res://characters/base/states/physics/run.gd" id="20_mgwxa"]
+[ext_resource type="Script" uid="uid://dlqubwftvple" path="res://characters/base/states/physics/spin_air.gd" id="30_kadj1"]
 [ext_resource type="Script" uid="uid://b8hay3lerjlp3" path="res://characters/base/states/physics/bonk_move.gd" id="31_1bk12"]
+[ext_resource type="Script" uid="uid://cm4pyu3dq18bs" path="res://characters/base/states/physics/spin_ground.gd" id="31_n0gxl"]
 [ext_resource type="Script" uid="uid://cou8oudegccx1" path="res://characters/base/states/physics/bonk_lay.gd" id="32_wpyed"]
 [ext_resource type="Script" uid="uid://dwn1lie5jkw1c" path="res://characters/base/states/action/getup.gd" id="33_ywpfx"]
 
@@ -59,6 +63,11 @@ metadata/_custom_type_script = "uid://cdn18waugnpa2"
 script = ExtResource("4_mp6jb")
 footstep_player = NodePath("../../../Audio/Step")
 metadata/_custom_type_script = "uid://b0fq4ga55nm6x"
+
+[node name="SpinAnimator" type="Node" parent="Animator/MovieClip" index="4" node_paths=PackedStringArray("spin_action")]
+script = ExtResource("5_ry3if")
+spin_action = NodePath("../../../PhysicsStates/Air/SpinAction")
+metadata/_custom_type_script = "uid://bsl3xmdulanv8"
 
 [node name="Jump" type="AudioStreamPlayer" parent="Audio" index="0"]
 stream = SubResource("AudioStreamRandomizer_1bk12")
@@ -123,6 +132,15 @@ priority = 1
 animation = "bonk_start"
 metadata/_custom_type_script = "uid://dwknux1y8uk1f"
 
+[node name="SpinAction" type="Node" parent="PhysicsStates/Air" index="3" node_paths=PackedStringArray("target_air", "target_ground", "animator")]
+script = ExtResource("15_n0gxl")
+target_air = NodePath("../../SpinAir")
+target_ground = NodePath("../../SpinGround")
+priority = -1
+animation = "spin"
+animator = NodePath("../../../Animator/MovieClip/SpinAnimator")
+metadata/_custom_type_script = "uid://ccuivp5tvyyxj"
+
 [node name="Ground" type="Node" parent="PhysicsStates" index="1" node_paths=PackedStringArray("animator")]
 script = ExtResource("5_lnmd8")
 air_name = "Air"
@@ -160,10 +178,11 @@ land_physics = NodePath("../../Land")
 animation = "land"
 metadata/_custom_type_script = "uid://b1wxqplipbqqf"
 
-[node name="RunWindupAction" type="Node" parent="PhysicsStates/Ground" index="3" node_paths=PackedStringArray("run_physics", "windup_physics")]
+[node name="RunWindupAction" type="Node" parent="PhysicsStates/Ground" index="3" node_paths=PackedStringArray("run_physics", "windup_physics", "spin_action")]
 script = ExtResource("10_yg7sm")
 run_physics = NodePath("../../Run")
 windup_physics = NodePath("../../RunWindup")
+spin_action = NodePath("../../Air/SpinAction")
 input_grace_frames = 9
 windup_duration = 6
 animation = "run_windup"
@@ -172,6 +191,11 @@ metadata/_custom_type_script = "uid://ddorebuj6vyp7"
 [node name="DefaultBonkLink" type="Node" parent="PhysicsStates/Ground" index="4" node_paths=PackedStringArray("link_to")]
 script = ExtResource("12_gwiit")
 link_to = NodePath("../../Air/DefaultBonkAction")
+metadata/_custom_type_script = "uid://64e26a6bvbu7"
+
+[node name="SpinLink" type="Node" parent="PhysicsStates/Ground" index="5" node_paths=PackedStringArray("link_to")]
+script = ExtResource("12_gwiit")
+link_to = NodePath("../../Air/SpinAction")
 metadata/_custom_type_script = "uid://64e26a6bvbu7"
 
 [node name="Somersault" type="Node" parent="PhysicsStates" index="2" node_paths=PackedStringArray("action_states")]
@@ -251,13 +275,50 @@ script = ExtResource("14_shhwh")
 action_states = [NodePath("../GroundPoundFall/GroundPoundLandAction")]
 target_physics_name = "Ground"
 
-[node name="RunWindup" type="Node" parent="PhysicsStates" index="10" node_paths=PackedStringArray("action_states")]
+[node name="SpinAir" type="Node" parent="PhysicsStates" index="10" node_paths=PackedStringArray("spin_action")]
+script = ExtResource("30_kadj1")
+spin_action = NodePath("../Air/SpinAction")
+exit_name = "Air"
+exit_threshold = 3.0
+ground_name = "SpinGround"
+air_move_speed = 5.0
+max_air_move_speed = 20.0
+speed_divider = 1.5
+animation = "spin"
+metadata/_custom_type_script = "uid://dlqubwftvple"
+
+[node name="SpinGround" type="Node" parent="PhysicsStates" index="11" node_paths=PackedStringArray("spin_action")]
+script = ExtResource("31_n0gxl")
+spin_action = NodePath("../Air/SpinAction")
+air_name = "SpinAir"
+exit_name = "Ground"
+exit_threshold = 5.0
+move_speed = 1.2
+friction_subtract = 0.3
+friction_multiply = 1.15
+air_move_speed = 5.0
+max_air_move_speed = 20.0
+speed_divider = 1.5
+animation = "spin"
+metadata/_custom_type_script = "uid://cm4pyu3dq18bs"
+
+[node name="JumpLink" type="Node" parent="PhysicsStates/SpinGround" index="0" node_paths=PackedStringArray("link_to")]
+script = ExtResource("12_gwiit")
+link_to = NodePath("../../Ground/JumpAction")
+metadata/_custom_type_script = "uid://64e26a6bvbu7"
+
+[node name="RunWindupLink" type="Node" parent="PhysicsStates/SpinGround" index="1" node_paths=PackedStringArray("link_to")]
+script = ExtResource("12_gwiit")
+link_to = NodePath("../../Ground/RunWindupAction")
+metadata/_custom_type_script = "uid://64e26a6bvbu7"
+
+[node name="RunWindup" type="Node" parent="PhysicsStates" index="12" node_paths=PackedStringArray("action_states")]
 script = ExtResource("14_shhwh")
 action_states = [NodePath("../Ground/RunWindupAction")]
 target_physics_name = "Run"
 metadata/_custom_type_script = "uid://bsvg35d0nlsro"
 
-[node name="Run" type="Node" parent="PhysicsStates" index="11" node_paths=PackedStringArray("animator")]
+[node name="Run" type="Node" parent="PhysicsStates" index="13" node_paths=PackedStringArray("animator")]
 script = ExtResource("20_mgwxa")
 ground_name = "Ground"
 coyote_frames = 11
@@ -285,13 +346,13 @@ priority = 1
 animation = "bonk_start"
 metadata/_custom_type_script = "uid://dwknux1y8uk1f"
 
-[node name="BonkPause" type="Node" parent="PhysicsStates" index="12" node_paths=PackedStringArray("action_states")]
+[node name="BonkPause" type="Node" parent="PhysicsStates" index="14" node_paths=PackedStringArray("action_states")]
 script = ExtResource("14_shhwh")
 action_states = [NodePath("../Run/RunBonkAction"), NodePath("../Air/DefaultBonkAction")]
 target_physics_name = "Ground"
 metadata/_custom_type_script = "uid://bsvg35d0nlsro"
 
-[node name="BonkMove" type="Node" parent="PhysicsStates" index="13"]
+[node name="BonkMove" type="Node" parent="PhysicsStates" index="15"]
 script = ExtResource("31_1bk12")
 bonk_velocity = Vector2(5, -3)
 air_name = "Air"
@@ -299,7 +360,7 @@ ground_name = "BonkLay"
 animation = "bonk_start"
 metadata/_custom_type_script = "uid://nr3max7c57dw"
 
-[node name="BonkLay" type="Node" parent="PhysicsStates" index="14"]
+[node name="BonkLay" type="Node" parent="PhysicsStates" index="16"]
 script = ExtResource("32_wpyed")
 stun_time = 10
 animation = "bonk_lay"

@@ -60,7 +60,7 @@ func set_state(type: String, state: CharacterState) -> void:
 
 
 func check_startups(cur_state: CharacterState, container: Node) -> CharacterState:
-	var cur_priority: int = -1
+	var cur_priority: int = int(-INF)
 	if is_instance_valid(cur_state): cur_priority = cur_state.priority
 	for check_state: Node in container.get_children():
 		var char_state: CharacterState
@@ -159,6 +159,7 @@ var inputs_list: Array = [
 	"right",
 	"jump",
 	"dive",
+	"spin",
 	"ground_pound",
 	"interact",
 	"door_interact",

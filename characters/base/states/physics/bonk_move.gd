@@ -1,3 +1,4 @@
+class_name BonkMovePhysics
 extends RolloutPhysics
 
 

@@ -45,7 +45,7 @@ func _general_update() -> void:
 		if character.land_vel.y < 16:
 			## bitshift right by 3 is the same as dividing by 8
 			land_time = round(fall_damage_action.fall_count >> 3) - 2  
-			if character.input["up"][0]:
+			if character.input["jump"][0]:
 				land_time -= 3
 				if (character.input["right"][0] or character.input["left"][0]) and land_time >= 1:
 					land_time -= 2
@@ -58,7 +58,7 @@ func _general_update() -> void:
 				land_time = min(land_time, 3)
 				should_land = true
 			
-			if character.land_vel.y > 3 and land_time < 1 and not should_land and character.input["up"][0]:
+			if character.land_vel.y > 3 and land_time < 1 and not should_land and character.input["jump"][0]:
 				land_time = 1
 				should_land = true
 		
