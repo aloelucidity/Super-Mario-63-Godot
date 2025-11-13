@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_bkaxq")
 converted_properties = Array[String](["mirrored", "rotation"])
-converted_types = Array[int]([1, 2])
+converted_types = Array[int]([2, 2])
 metadata/_custom_type_script = "uid://l7f5ytq1rpry"

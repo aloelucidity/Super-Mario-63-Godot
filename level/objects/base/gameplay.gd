@@ -14,8 +14,6 @@ func _load_properties(_object_data: ObjectData) -> void:
 	rotation = object_data.properties.get("rotation", 0.0)
 	skew = object_data.properties.get("skew", 0.0)
 	scale = object_data.properties.get("scale", Vector2.ONE)
-	if scale != Vector2.ONE:
-		print(scale)
 	visible = object_data.properties.get("visible", true)
 	tangible = object_data.properties.get("tangible", true)
 	functional = object_data.properties.get("functional", true)

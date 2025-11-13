@@ -127,7 +127,7 @@ func decode_legacy_objects(ld_item_array: Array[PackedStringArray]) -> Array[Dic
 			
 			if property_name == "mirrored":
 				property_name = "scale"
-				property_value = Vector2(-1 if property_value else 1, 1)
+				property_value = Vector2(-1 if property_value == 0 else 1, 1)
 			
 			object_data.properties.set(property_name, property_value)
 		
