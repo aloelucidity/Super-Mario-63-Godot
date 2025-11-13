@@ -70,7 +70,12 @@ func check_startups(cur_state: CharacterState, container: Node) -> CharacterStat
 			var link: StateLink = check_state
 			char_state = link.link_to
 		
-		if char_state.priority > cur_priority:
+		if (
+			char_state.priority > cur_priority
+		) or (
+			char_state.priority >= cur_priority and 
+			cur_state.allow_priority_override
+		):
 			if char_state._startup_check():
 				return char_state
 	return null

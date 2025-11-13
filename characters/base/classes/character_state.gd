@@ -9,6 +9,7 @@ extends Node
 
 @export_group("State Info")
 @export var priority: int = 0 ## note that states won't override others with the same priority
+@export var allow_priority_override: bool ## ...unless this is set to true
 @export var gravity_factor: float = 1
 @export var override_size: bool
 @export var custom_size: Vector2
