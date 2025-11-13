@@ -1,24 +1,17 @@
-class_name RotationCollider
-extends Node2D
+extends Rotator
 
 
-@onready var character: Character = get_owner()
-@onready var animator: CharacterAnimator = %Animator
-@onready var collider: ColliderBase = %Collider
-
-
+## returned in degrees
 func update_rotation() -> float:
-	if not character.on_ground:
-		return MathFuncs.ground_friction(character.rotation_degrees, 3, 1.3)
-	else:
-		var front_point: Vector2 = test_front_point()
-		var back_point: Vector2 = test_back_point()
-		return rad_to_deg(atan2(back_point.y - front_point.y, back_point.x - front_point.x))
+	var front_point: Vector2 = test_front_point()
+	var back_point: Vector2 = test_back_point()
+	var calculated_rotation: float = rad_to_deg(atan2(back_point.y - front_point.y, back_point.x - front_point.x))
+	return animator.rotation_degrees + ((calculated_rotation / 2) - animator.rotation_degrees) / 2
 
 
 func test_front_point() -> Vector2:
 	var char_pos: Vector2 = character.global_position
-	var char_rot: float = character.rotation_degrees
+	var char_rot: float = animator.rotation_degrees
 	
 	var distance: float = 5
 	var front_point := Vector2(
@@ -60,7 +53,7 @@ func test_front_point() -> Vector2:
 
 func test_back_point() -> Vector2:
 	var char_pos: Vector2 = character.global_position
-	var char_rot: float = character.rotation_degrees
+	var char_rot: float = animator.rotation_degrees
 	
 	var distance: float = 5
 	var back_point := Vector2(

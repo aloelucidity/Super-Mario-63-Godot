@@ -4,7 +4,6 @@ extends Node2D
 
 @onready var character: Character = get_owner()
 @onready var movie_clip: MovieClip = $MovieClip
-@onready var rotation_collider: RotationCollider = %RotationCollider
 
 var cur_anim: String
 
@@ -16,8 +15,8 @@ func _update() -> void:
 	var sprite_rot: float
 	var sprite_skew: float
 	var sprite_scale := Vector2.ONE
-	var disable_auto_rotation: bool
 	var animator: Animator
+	var rotator: Rotator
 	
 	if is_instance_valid(character.action):
 		new_anim = character.action.animation
@@ -26,8 +25,7 @@ func _update() -> void:
 		sprite_skew = character.action.sprite_skew
 		sprite_scale = character.action.sprite_scale
 		animator = character.action.animator
-		if character.action.disable_auto_rotation:
-			disable_auto_rotation = true
+		rotator = character.action.rotator
 	
 	if is_instance_valid(character.physics):
 		if new_anim == "":
@@ -39,17 +37,15 @@ func _update() -> void:
 		sprite_scale *= character.physics.sprite_scale
 		if not is_instance_valid(character.action):
 			animator = character.physics.animator
-		if character.physics.disable_auto_rotation:
-			disable_auto_rotation = true
+			rotator = character.physics.rotator
 	
 	position = sprite_offset
 	rotation = sprite_rot * character.facing_dir
 	skew = sprite_skew
 	scale = sprite_scale * Vector2(character.facing_dir, 1)
 	
-	if not disable_auto_rotation:
-		var calculated_rotation: float = rotation_collider.update_rotation()
-		rotation_degrees += ((calculated_rotation / 2) - rotation_degrees) / 2
+	if is_instance_valid(rotator):
+		rotation_degrees = rotator.update_rotation()
 	
 	if new_anim == "":
 		if movie_clip.is_playing(): 

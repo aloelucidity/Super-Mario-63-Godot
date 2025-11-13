@@ -9,6 +9,7 @@ func _update() -> void:
 	char_pos = character.global_position
 	char_vel = character.velocity
 	
+	floor_snap = false
 	if char_vel.y > -3:
 		var physics_snap: bool
 		var action_snap: bool
@@ -17,8 +18,6 @@ func _update() -> void:
 		if is_instance_valid(character.action):
 			action_snap = character.action.enable_snap
 		floor_snap = physics_snap and action_snap
-	else:
-		floor_snap = false
 
 	character.wall_dir = 0
 	character.wall_vel = Vector2.ZERO

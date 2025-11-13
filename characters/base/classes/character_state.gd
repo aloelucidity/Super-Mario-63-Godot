@@ -19,8 +19,8 @@ extends Node
 @export_range(-360, 360, 0.1, "radians_as_degrees") var sprite_rot: float
 @export_range(-89.9, 89.9, 0.1, "radians_as_degrees") var sprite_skew: float
 @export var sprite_scale := Vector2.ONE
-@export var disable_auto_rotation: bool
 @export var animator: Animator
+@export var rotator: Rotator
 
 @export_group("Collision")
 @export var enable_snap: bool = true ## floor snapping
