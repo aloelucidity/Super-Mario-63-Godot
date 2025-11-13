@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://hw2njr4cic5e"]
+[gd_scene load_steps=44 format=3 uid="uid://hw2njr4cic5e"]
 
 [ext_resource type="PackedScene" uid="uid://r07km72x7up8" path="res://characters/base/character.tscn" id="1_kpos5"]
 [ext_resource type="PackedScene" uid="uid://dis0e3y2r7a3a" path="res://characters/mario/movie_clip.tscn" id="2_7frya"]
@@ -30,6 +30,7 @@
 [ext_resource type="Script" uid="uid://ddorebuj6vyp7" path="res://characters/base/states/action/run_windup.gd" id="10_yg7sm"]
 [ext_resource type="Script" uid="uid://64e26a6bvbu7" path="res://characters/base/classes/state_link.gd" id="12_gwiit"]
 [ext_resource type="Script" uid="uid://yvgiku3jqtf0" path="res://characters/base/states/physics/land.gd" id="13_xadud"]
+[ext_resource type="AudioStream" uid="uid://b5uhci3khmb24" path="res://characters/mario/sounds/squish.mp3" id="14_8y3xe"]
 [ext_resource type="Script" uid="uid://bsvg35d0nlsro" path="res://characters/base/states/physics/pause.gd" id="14_shhwh"]
 [ext_resource type="Script" uid="uid://by0bfc2agxghc" path="res://characters/base/debug/property_watcher.gd" id="14_wd8sn"]
 [ext_resource type="Script" uid="uid://bsjya2eg3bgsg" path="res://characters/base/states/physics/ground_pound.gd" id="15_bek3b"]
@@ -97,6 +98,10 @@ bus = &"Voices"
 stream = ExtResource("7_65abn")
 bus = &"Voices"
 
+[node name="Squish" type="AudioStreamPlayer" parent="Audio" index="4"]
+stream = ExtResource("14_8y3xe")
+bus = &"Voices"
+
 [node name="Debug" type="VBoxContainer" parent="." index="4"]
 texture_filter = 2
 offset_top = -58.0
@@ -135,10 +140,11 @@ gravity_factor = 0.0
 animation = "ground_pound_start"
 metadata/_custom_type_script = "uid://bc67srtimsan0"
 
-[node name="DefaultBonkAction" type="Node" parent="PhysicsStates/Air" index="2" node_paths=PackedStringArray("bonk_physics", "bonk_move_physics")]
+[node name="DefaultBonkAction" type="Node" parent="PhysicsStates/Air" index="2" node_paths=PackedStringArray("bonk_physics", "bonk_move_physics", "bonk_sound")]
 script = ExtResource("8_du5pi")
 bonk_physics = NodePath("../../BonkPause")
 bonk_move_physics = NodePath("../../BonkMove")
+bonk_sound = NodePath("../../../Audio/Squish")
 bonk_threshold = 11.0
 pause_frames = 10
 priority = 1
@@ -154,10 +160,11 @@ animation = "spin"
 animator = NodePath("../../../Animator/MovieClip/SpinAnimator")
 metadata/_custom_type_script = "uid://ccuivp5tvyyxj"
 
-[node name="DiveAction" type="Node" parent="PhysicsStates/Air" index="4" node_paths=PackedStringArray("dive_air_physics")]
+[node name="DiveAction" type="Node" parent="PhysicsStates/Air" index="4" node_paths=PackedStringArray("dive_air_physics", "dive_sound")]
 script = ExtResource("17_vsr5q")
 dive_air_physics = NodePath("../../DiveAir")
 dive_speed = 35.0
+dive_sound = NodePath("../../../Audio/Dive")
 metadata/_custom_type_script = "uid://b474m0g4lr1ti"
 
 [node name="Ground" type="Node" parent="PhysicsStates" index="1" node_paths=PackedStringArray("animator", "rotator")]
@@ -370,10 +377,11 @@ script = ExtResource("12_gwiit")
 link_to = NodePath("../../Ground/JumpAction")
 metadata/_custom_type_script = "uid://64e26a6bvbu7"
 
-[node name="RunBonkAction" type="Node" parent="PhysicsStates/Run" index="1" node_paths=PackedStringArray("bonk_physics", "bonk_move_physics")]
+[node name="RunBonkAction" type="Node" parent="PhysicsStates/Run" index="1" node_paths=PackedStringArray("bonk_physics", "bonk_move_physics", "bonk_sound")]
 script = ExtResource("8_du5pi")
 bonk_physics = NodePath("../../BonkPause")
 bonk_move_physics = NodePath("../../BonkMove")
+bonk_sound = NodePath("../../../Audio/Squish")
 bonk_threshold = 5.0
 pause_frames = 10
 priority = 1

@@ -4,6 +4,7 @@ extends ActionState
 
 @export var bonk_physics: PhysicsState
 @export var bonk_move_physics: PhysicsState
+@export var bonk_sound: AudioStreamPlayer
 
 @export var bonk_threshold: float
 @export var pause_frames: int
@@ -32,6 +33,7 @@ func _on_enter() -> void:
 	character.velocity = Vector2.ZERO
 	character.set_state("physics", bonk_physics)
 	pause_timer = pause_frames
+	bonk_sound.play()
 
 
 ## runs every frame while active
