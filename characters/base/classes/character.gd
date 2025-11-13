@@ -17,7 +17,7 @@ var facing_dir: int = 1 :
 @export var gravity_factor: float = 1 ## for levels with lower/higher gravity
 ## wide/tall but in one variable. 
 ## X is from middle to edge, Y is from bottom to top
-@export var size: Vector2i 
+@export var base_size: Vector2i 
 @export var bounce: float ## special variable to control how much you bounce against walls
 @export var on_ground: bool
 @export var wall_dir: int
@@ -154,6 +154,14 @@ func get_gravity_sum() -> float:
 	if is_instance_valid(action):
 		total_factor *= action.gravity_factor
 	return total_factor
+
+
+func get_size() -> Vector2:
+	if is_instance_valid(action) and action.override_size:
+		return action.custom_size
+	if is_instance_valid(physics) and physics.override_size:
+		return physics.custom_size
+	return base_size
 
 
 ### Input

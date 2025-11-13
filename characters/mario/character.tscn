@@ -52,7 +52,7 @@ stream_0/stream = ExtResource("5_ia4gy")
 stream_1/stream = ExtResource("6_p82em")
 
 [node name="Character" instance=ExtResource("1_kpos5")]
-size = Vector2i(10, 35)
+base_size = Vector2i(10, 35)
 bounce = 0.5
 on_ground = true
 
@@ -275,6 +275,8 @@ metadata/_custom_type_script = "uid://64e26a6bvbu7"
 script = ExtResource("8_sy58n")
 ground_name = "DiveGround"
 ground_resolve_mult = 0.9970000000030268
+override_size = true
+custom_size = Vector2(8, 25)
 animation = "dive"
 rotator = NodePath("../../Rotators/DiveAirRotator")
 
@@ -289,6 +291,8 @@ speed_divider = 8.0
 set_facing = false
 rise_speed = 0.0
 ground_resolve_mult = 0.9970000000030268
+override_size = true
+custom_size = Vector2(8, 25)
 animation = "dive"
 rotator = NodePath("../../Rotators/DiveGroundRotator")
 

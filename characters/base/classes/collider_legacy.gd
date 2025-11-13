@@ -81,9 +81,9 @@ func _floor_collision() -> void:
 
 func _wall_collision() -> void:
 	## WALL DETECTION AND RESOLUTION
-	var half_height: float = char_pos.y - float(character.size.y)/2
-	var check_right: Vector2 = Vector2(char_pos.x + character.size.x - 1, half_height)
-	var check_left: Vector2 = Vector2(char_pos.x - character.size.x + 1, half_height)
+	var half_height: float = char_pos.y - float(character.get_size().y)/2
+	var check_right: Vector2 = Vector2(char_pos.x + character.get_size().x - 1, half_height)
+	var check_left: Vector2 = Vector2(char_pos.x - character.get_size().x + 1, half_height)
 	
 	#if not is_squished():
 	while hit_test(CollisionType.Default, check_right):
@@ -95,8 +95,8 @@ func _wall_collision() -> void:
 		char_pos.x += 1
 	
 	## WALL BONKING
-	check_right = Vector2(char_pos.x + character.size.x, half_height)
-	check_left = Vector2(char_pos.x - character.size.x, half_height)
+	check_right = Vector2(char_pos.x + character.get_size().x, half_height)
+	check_left = Vector2(char_pos.x - character.get_size().x, half_height)
 	
 	if hit_test(CollisionType.Default, check_right):
 		character.wall_dir = 1
@@ -121,15 +121,15 @@ func _wall_collision() -> void:
 
 func _ceiling_collision() -> void:
 	## CEILING DETECTION AND RESOLUTION
-	var head_height: float = char_pos.y - character.size.y + 1
+	var head_height: float = char_pos.y - character.get_size().y + 1
 	if hit_test(CollisionType.Default, Vector2(char_pos.x, head_height)):
 		#fall_squish()
 		char_vel.y = max(char_vel.y, -3)
 	
 	if true:# not character.squish or char_vel.y < -1:
 		## supposed to take squish into account but ill do that Later (tm)
-		var scaled_head_height: float = char_pos.y - character.size.y
-		head_height = char_pos.y - character.size.y
+		var scaled_head_height: float = char_pos.y - character.get_size().y
+		head_height = char_pos.y - character.get_size().y
 		while hit_test(CollisionType.Default, Vector2(char_pos.x, scaled_head_height)):
 			scaled_head_height += 1
 			head_height += 1
