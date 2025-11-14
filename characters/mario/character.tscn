@@ -128,11 +128,20 @@ object_to_watch = NodePath("../..")
 property_to_watch = "velocity"
 
 [node name="Label2" type="Label" parent="Debug" index="1" node_paths=PackedStringArray("object_to_watch")]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 script = ExtResource("14_wd8sn")
 object_to_watch = NodePath("../..")
 property_to_watch = "physics"
+
+[node name="Label3" type="Label" parent="Debug" index="2" node_paths=PackedStringArray("object_to_watch")]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+script = ExtResource("14_wd8sn")
+object_to_watch = NodePath("../..")
+property_to_watch = "action"
 
 [node name="Air" type="Node" parent="PhysicsStates" index="0" node_paths=PackedStringArray("rotator")]
 script = ExtResource("4_dw1q7")
@@ -195,7 +204,15 @@ animation = "walk"
 animator = NodePath("../../Animator/MovieClip/WalkAnimator")
 rotator = NodePath("../../Rotators/GroundRotator")
 
-[node name="JumpAction" type="Node" parent="PhysicsStates/Ground" index="0" node_paths=PackedStringArray("jump_sounds", "triple_jump_action", "air_physics")]
+[node name="CrouchAction" type="Node" parent="PhysicsStates/Ground" index="0" node_paths=PackedStringArray("dive_ground_physics")]
+script = ExtResource("29_vx2i4")
+dive_ground_physics = NodePath("../../DiveGround")
+crouch_frames = 3
+priority = 1
+animation = "dive"
+metadata/_custom_type_script = "uid://dp16au18a0j2r"
+
+[node name="JumpAction" type="Node" parent="PhysicsStates/Ground" index="1" node_paths=PackedStringArray("jump_sounds", "triple_jump_action", "air_physics")]
 script = ExtResource("5_sy58n")
 jump_speeds = Array[float]([10.0, 12.5])
 jump_sounds = [NodePath("../../../Audio/Jump"), NodePath("../../../Audio/DoubleJump")]
@@ -207,7 +224,7 @@ check_grounded = true
 allow_priority_override = true
 metadata/_custom_type_script = "uid://c7a8bmoye1aui"
 
-[node name="TripleJumpAction" type="Node" parent="PhysicsStates/Ground" index="1" node_paths=PackedStringArray("jump_sound", "somersault_physics")]
+[node name="TripleJumpAction" type="Node" parent="PhysicsStates/Ground" index="2" node_paths=PackedStringArray("jump_sound", "somersault_physics")]
 script = ExtResource("6_sie2w")
 jump_sound = NodePath("../../../Audio/TripleJump")
 somersault_physics = NodePath("../../Somersault")
@@ -217,14 +234,14 @@ flip_frames = 28
 allow_priority_override = true
 metadata/_custom_type_script = "uid://2p0invmopbc"
 
-[node name="LandAction" type="Node" parent="PhysicsStates/Ground" index="2" node_paths=PackedStringArray("fall_damage_action", "land_physics")]
+[node name="LandAction" type="Node" parent="PhysicsStates/Ground" index="3" node_paths=PackedStringArray("fall_damage_action", "land_physics")]
 script = ExtResource("8_8m3kx")
 fall_damage_action = NodePath("../../Air/FallDamageAction")
 land_physics = NodePath("../../Land")
 animation = "land"
 metadata/_custom_type_script = "uid://b1wxqplipbqqf"
 
-[node name="RunWindupAction" type="Node" parent="PhysicsStates/Ground" index="3" node_paths=PackedStringArray("run_physics", "windup_physics", "spin_action")]
+[node name="RunWindupAction" type="Node" parent="PhysicsStates/Ground" index="4" node_paths=PackedStringArray("run_physics", "windup_physics", "spin_action")]
 script = ExtResource("10_yg7sm")
 run_physics = NodePath("../../Run")
 windup_physics = NodePath("../../RunWindup")
@@ -235,23 +252,15 @@ allow_priority_override = true
 animation = "run_windup"
 metadata/_custom_type_script = "uid://ddorebuj6vyp7"
 
-[node name="DefaultBonkLink" type="Node" parent="PhysicsStates/Ground" index="4" node_paths=PackedStringArray("link_to")]
+[node name="DefaultBonkLink" type="Node" parent="PhysicsStates/Ground" index="5" node_paths=PackedStringArray("link_to")]
 script = ExtResource("12_gwiit")
 link_to = NodePath("../../Air/DefaultBonkAction")
 metadata/_custom_type_script = "uid://64e26a6bvbu7"
 
-[node name="SpinLink" type="Node" parent="PhysicsStates/Ground" index="5" node_paths=PackedStringArray("link_to")]
+[node name="SpinLink" type="Node" parent="PhysicsStates/Ground" index="6" node_paths=PackedStringArray("link_to")]
 script = ExtResource("12_gwiit")
 link_to = NodePath("../../Air/SpinAction")
 metadata/_custom_type_script = "uid://64e26a6bvbu7"
-
-[node name="CrouchAction" type="Node" parent="PhysicsStates/Ground" index="6" node_paths=PackedStringArray("dive_ground_physics")]
-script = ExtResource("29_vx2i4")
-dive_ground_physics = NodePath("../../DiveGround")
-crouch_frames = 3
-priority = 1
-animation = "dive"
-metadata/_custom_type_script = "uid://dp16au18a0j2r"
 
 [node name="Somersault" type="Node" parent="PhysicsStates" index="2" node_paths=PackedStringArray("action_states", "rotator")]
 script = ExtResource("6_vtspf")

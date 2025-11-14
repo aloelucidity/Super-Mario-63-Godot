@@ -6,6 +6,7 @@ extends Node2D
 @onready var movie_clip: MovieClip = $MovieClip
 
 var cur_anim: String
+var last_rotator: Rotator
 
 
 func _update() -> void:
@@ -45,6 +46,8 @@ func _update() -> void:
 	scale = sprite_scale * Vector2(character.facing_dir, 1)
 	
 	if is_instance_valid(rotator):
+		if rotator != last_rotator:
+			rotator.on_enter()
 		rotation_degrees = rotator.update_rotation()
 	
 	if new_anim == "":
@@ -62,3 +65,5 @@ func _update() -> void:
 		animator._update()
 	else:
 		movie_clip.speed_scale = 1
+	
+	last_rotator = rotator

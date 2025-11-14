@@ -28,6 +28,7 @@ func _startup_check() -> bool:
 ## return self.name for no change!
 func _transition_check() -> String:
 	if character.velocity.y > 2 or character.physics is GroundPhysics:
+		print("jump stop")
 		return ""
 	return name
 
@@ -61,7 +62,7 @@ func _update() -> void:
 	if snap_buffer > 0:
 		snap_buffer -= 1
 	else:
-		enable_snap = false
+		enable_snap = true
 
 
 ## always runs no matter what, before any of the other functions

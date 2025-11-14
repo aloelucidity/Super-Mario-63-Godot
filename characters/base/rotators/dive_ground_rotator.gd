@@ -6,9 +6,12 @@ extends Rotator
 var count: int = 0
 
 
+func on_enter() -> void:
+	count = 0
+
+
 ## returned in degrees
 func update_rotation() -> float:
-	count = 0
 	var front_point: Vector2 = test_front_point()
 	var back_point: Vector2 = test_back_point()
 	var calculated_rotation: float = rad_to_deg(atan2(back_point.y - front_point.y, back_point.x - front_point.x))

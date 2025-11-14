@@ -16,6 +16,9 @@ func _startup_check() -> bool:
 ## the string returned is the name of the state to change to
 ## return self.name for no change!
 func _transition_check() -> String:
+	## bit of a hack but ill maybe change this later
+	if character.velocity.y <= -3 and (is_instance_valid(character.action) and not character.action.enable_snap):
+		return name
 	if character.on_ground:
 		return ground_name
 	return name

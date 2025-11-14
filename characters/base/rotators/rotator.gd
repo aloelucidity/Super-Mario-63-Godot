@@ -7,6 +7,10 @@ extends Node2D
 @onready var collider: ColliderBase = %Collider
 
 
+func on_enter() -> void:
+	pass
+
+
 ## returned in degrees
 func update_rotation() -> float:
 	return animator.rotation_degrees
