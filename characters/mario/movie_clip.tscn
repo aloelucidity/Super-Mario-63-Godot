@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cvfgl33m75i7p" path="res://characters/mario/animations/air/fall.png" id="11_rbkyx"]
 [ext_resource type="Texture2D" uid="uid://0331prfwb6ro" path="res://characters/mario/animations/air/jump.png" id="12_4vkiu"]
 [ext_resource type="Texture2D" uid="uid://dnvtjekrbhiu7" path="res://characters/mario/animations/misc/somersault.png" id="14_lyrnu"]
-[ext_resource type="Texture2D" uid="uid://dnxag7ksiu0n8" path="res://characters/old/animations/misc/Mario (none) Spinning - 1.png" id="15_vdtnv"]
+[ext_resource type="Texture2D" uid="uid://dax825ayyyo5a" path="res://characters/mario/animations/spin/Mario (None) - Spin - 1.png" id="15_vdtnv"]
 [ext_resource type="Texture2D" uid="uid://kmobsy1tbufn" path="res://characters/mario/animations/misc/dive.png" id="16_vdtnv"]
 [ext_resource type="Texture2D" uid="uid://ja13glnf38dp" path="res://characters/mario/animations/misc/land.png" id="17_2x1jy"]
 [ext_resource type="Texture2D" uid="uid://b06nrmrxclvre" path="res://characters/mario/animations/ground_pound/ground_pound0.png" id="18_0frbe"]
