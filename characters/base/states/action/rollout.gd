@@ -13,7 +13,13 @@ var rollout_timer: int
 ## runs this check every frame while inactive and 
 ## in the character's current pool of states
 func _startup_check() -> bool:
-	return character.input["jump"][0] and abs(character.velocity.x) > 3
+	var opposite_dir: bool = false
+	if character.input["left"][0] and character.facing_dir > 0: 
+		opposite_dir = true
+	elif character.input["right"][0] and character.facing_dir < 0: 
+		opposite_dir = true
+	
+	return character.input["jump"][0] and abs(character.velocity.x) > 3 and not opposite_dir
 
 
 ## runs this check every frame while active
