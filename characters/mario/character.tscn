@@ -26,7 +26,7 @@
 [ext_resource type="Script" uid="uid://bxlrep6cyovcy" path="res://characters/base/states/physics/dive_air.gd" id="8_sy58n"]
 [ext_resource type="AudioStream" uid="uid://d1gq0p12y8qm0" path="res://characters/mario/sounds/triple_jump.mp3" id="8_wpyed"]
 [ext_resource type="Script" uid="uid://byitrk7cim4gv" path="res://characters/base/rotators/dive_air_rotator.gd" id="9_mglhs"]
-[ext_resource type="Script" path="res://characters/base/rotators/dive_ground_rotator.gd" id="9_qoxg7"]
+[ext_resource type="Script" uid="uid://beieapgbjp6fy" path="res://characters/base/rotators/dive_ground_rotator.gd" id="9_qoxg7"]
 [ext_resource type="Script" uid="uid://cj7ec5mm7al72" path="res://characters/base/states/physics/dive_ground.gd" id="9_sie2w"]
 [ext_resource type="Script" uid="uid://ddorebuj6vyp7" path="res://characters/base/states/action/run_windup.gd" id="10_yg7sm"]
 [ext_resource type="Script" uid="uid://64e26a6bvbu7" path="res://characters/base/classes/state_link.gd" id="12_gwiit"]

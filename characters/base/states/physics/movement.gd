@@ -30,7 +30,7 @@ func do_friction() -> void:
 
 @export_group("Air Movement")
 @export var air_move_speed: float
-@export var max_air_move_speed: float
+@export var max_air_move_speed: float = 1
 @export var speed_divider: float = 1 ## used by some states to slow movement instead of changing move speed vars
 @export var max_speed_divider: float = 3 ## same as above
 
