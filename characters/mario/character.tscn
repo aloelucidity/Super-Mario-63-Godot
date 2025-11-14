@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://hw2njr4cic5e"]
+[gd_scene load_steps=48 format=3 uid="uid://hw2njr4cic5e"]
 
 [ext_resource type="PackedScene" uid="uid://r07km72x7up8" path="res://characters/base/character.tscn" id="1_kpos5"]
 [ext_resource type="PackedScene" uid="uid://dis0e3y2r7a3a" path="res://characters/mario/movie_clip.tscn" id="2_7frya"]
@@ -45,6 +45,7 @@
 [ext_resource type="Script" uid="uid://7vekxa68egml" path="res://characters/base/states/action/rollout.gd" id="33_qoxg7"]
 [ext_resource type="Script" uid="uid://dwn1lie5jkw1c" path="res://characters/base/states/action/getup.gd" id="33_ywpfx"]
 [ext_resource type="Script" uid="uid://bdhw4wtd8l8ff" path="res://characters/base/states/action/backflip.gd" id="34_ofcqk"]
+[ext_resource type="Script" uid="uid://bbbsmf1lcvsog" path="res://characters/base/states/action/dive_getup.gd" id="35_n1o2r"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1bk12"]
 playback_mode = 1
@@ -343,6 +344,14 @@ rollout_frames = 7
 animation = "rollout"
 rotator = NodePath("../../../Rotators/AirRotator")
 metadata/_custom_type_script = "uid://7vekxa68egml"
+
+[node name="DiveGetupAction" type="Node" parent="PhysicsStates/DiveGround" index="2" node_paths=PackedStringArray("ground_physics")]
+script = ExtResource("35_n1o2r")
+ground_physics = NodePath("../../Ground")
+getup_frames = 1
+priority = 1
+animation = "dive_getup"
+metadata/_custom_type_script = "uid://bbbsmf1lcvsog"
 
 [node name="Land" type="Node" parent="PhysicsStates" index="7" node_paths=PackedStringArray("action_states", "rotator")]
 script = ExtResource("13_xadud")
