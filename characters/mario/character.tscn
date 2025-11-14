@@ -128,6 +128,13 @@ script = ExtResource("14_wd8sn")
 object_to_watch = NodePath("../..")
 property_to_watch = "velocity"
 
+[node name="Label2" type="Label" parent="Debug" index="1" node_paths=PackedStringArray("object_to_watch")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+script = ExtResource("14_wd8sn")
+object_to_watch = NodePath("../..")
+property_to_watch = "physics"
+
 [node name="Air" type="Node" parent="PhysicsStates" index="0" node_paths=PackedStringArray("rotator")]
 script = ExtResource("4_dw1q7")
 ground_name = "Ground"
@@ -263,7 +270,7 @@ metadata/_custom_type_script = "uid://64e26a6bvbu7"
 
 [node name="Backflip" type="Node" parent="PhysicsStates" index="3" node_paths=PackedStringArray("action_states", "rotator")]
 script = ExtResource("6_vtspf")
-action_states = [NodePath("../Ground/TripleJumpAction")]
+action_states = [NodePath("../DiveGround/BackflipAction")]
 air_name = "Air"
 ground_name = "Ground"
 air_move_speed = 5.0
