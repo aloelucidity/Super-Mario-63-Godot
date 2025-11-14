@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://hw2njr4cic5e"]
+[gd_scene load_steps=49 format=3 uid="uid://hw2njr4cic5e"]
 
 [ext_resource type="PackedScene" uid="uid://r07km72x7up8" path="res://characters/base/character.tscn" id="1_kpos5"]
 [ext_resource type="PackedScene" uid="uid://dis0e3y2r7a3a" path="res://characters/mario/movie_clip.tscn" id="2_7frya"]
@@ -38,6 +38,7 @@
 [ext_resource type="Script" uid="uid://ccuivp5tvyyxj" path="res://characters/base/states/action/spin.gd" id="15_n0gxl"]
 [ext_resource type="Script" uid="uid://b474m0g4lr1ti" path="res://characters/base/states/action/dive.gd" id="17_vsr5q"]
 [ext_resource type="Script" uid="uid://baiis28bv2enj" path="res://characters/base/states/physics/run.gd" id="20_mgwxa"]
+[ext_resource type="Script" uid="uid://dp16au18a0j2r" path="res://characters/base/states/action/crouch.gd" id="29_vx2i4"]
 [ext_resource type="Script" uid="uid://dlqubwftvple" path="res://characters/base/states/physics/spin_air.gd" id="30_kadj1"]
 [ext_resource type="Script" uid="uid://b8hay3lerjlp3" path="res://characters/base/states/physics/bonk_move.gd" id="31_1bk12"]
 [ext_resource type="Script" uid="uid://cm4pyu3dq18bs" path="res://characters/base/states/physics/spin_ground.gd" id="31_n0gxl"]
@@ -57,9 +58,6 @@ stream_1/stream = ExtResource("6_p82em")
 base_size = Vector2i(10, 35)
 bounce = 0.5
 on_ground = true
-
-[node name="Animator" parent="." index="0"]
-physics_interpolation_mode = 2
 
 [node name="MovieClip" parent="Animator" index="0" instance=ExtResource("2_7frya")]
 
@@ -247,6 +245,14 @@ script = ExtResource("12_gwiit")
 link_to = NodePath("../../Air/SpinAction")
 metadata/_custom_type_script = "uid://64e26a6bvbu7"
 
+[node name="CrouchAction" type="Node" parent="PhysicsStates/Ground" index="6" node_paths=PackedStringArray("dive_ground_physics")]
+script = ExtResource("29_vx2i4")
+dive_ground_physics = NodePath("../../DiveGround")
+crouch_frames = 3
+priority = 1
+animation = "dive"
+metadata/_custom_type_script = "uid://dp16au18a0j2r"
+
 [node name="Somersault" type="Node" parent="PhysicsStates" index="2" node_paths=PackedStringArray("action_states", "rotator")]
 script = ExtResource("6_vtspf")
 action_states = [NodePath("../Ground/TripleJumpAction")]
@@ -348,7 +354,7 @@ metadata/_custom_type_script = "uid://7vekxa68egml"
 [node name="DiveGetupAction" type="Node" parent="PhysicsStates/DiveGround" index="2" node_paths=PackedStringArray("ground_physics")]
 script = ExtResource("35_n1o2r")
 ground_physics = NodePath("../../Ground")
-getup_frames = 1
+getup_frames = 2
 priority = 1
 animation = "dive_getup"
 metadata/_custom_type_script = "uid://bbbsmf1lcvsog"
@@ -473,6 +479,11 @@ pause_frames = 10
 priority = 1
 animation = "bonk_start"
 metadata/_custom_type_script = "uid://dwknux1y8uk1f"
+
+[node name="CrouchLink" type="Node" parent="PhysicsStates/Run" index="2" node_paths=PackedStringArray("link_to")]
+script = ExtResource("12_gwiit")
+link_to = NodePath("../../Ground/CrouchAction")
+metadata/_custom_type_script = "uid://64e26a6bvbu7"
 
 [node name="BonkPause" type="Node" parent="PhysicsStates" index="15" node_paths=PackedStringArray("action_states", "rotator")]
 script = ExtResource("14_shhwh")
