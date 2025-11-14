@@ -293,6 +293,9 @@ metadata/_custom_type_script = "uid://64e26a6bvbu7"
 [node name="DiveAir" type="Node" parent="PhysicsStates" index="5" node_paths=PackedStringArray("rotator")]
 script = ExtResource("8_sy58n")
 ground_name = "DiveGround"
+air_move_speed = 5.0
+max_air_move_speed = 20.0
+speed_divider = 8.0
 set_facing = false
 ground_resolve_mult = 0.9970000000030268
 override_size = true
