@@ -5,7 +5,9 @@ extends ActionState
 @export var backflip_physics: SomersaultPhysics
 @export var backflip_speed: Vector2
 @export var backflip_frames: int
+@export var priority_frames: int
 var backflip_timer: int
+var priority_timer: int
 
 
 ## runs this check every frame while inactive and 
@@ -38,8 +40,13 @@ func _on_enter() -> void:
 	character.velocity.y = min(backflip_speed.y, character.velocity.y)
 	character.set_state("physics", backflip_physics)
 	backflip_timer = backflip_frames
+	priority_timer = priority_frames
+	allow_priority_override = false
 
 
 ## runs every frame while active
 func _update() -> void:
 	backflip_timer -= 1
+	priority_timer -= 1
+	if priority_timer <= 0:
+		allow_priority_override = true

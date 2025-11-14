@@ -28,7 +28,6 @@ func _startup_check() -> bool:
 ## return self.name for no change!
 func _transition_check() -> String:
 	if character.velocity.y > 2 or character.physics is GroundPhysics:
-		print("jump stop")
 		return ""
 	return name
 
