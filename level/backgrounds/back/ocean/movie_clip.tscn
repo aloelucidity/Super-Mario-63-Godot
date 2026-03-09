@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://d1ymaov5k5neh"]
+
+[ext_resource type="PackedScene" uid="uid://cixl2png6mm13" path="res://level/objects/base/movie_clip.tscn" id="1_g46os"]
+[ext_resource type="Script" uid="uid://bo8o6mfmhqyoa" path="res://level/backgrounds/back/back_bg.gd" id="2_4i0fp"]
+[ext_resource type="Texture2D" uid="uid://ba66mwk5md1to" path="res://level/backgrounds/back/ocean/Bomb-Omb Battlefield Background copy.png" id="2_bqxk5"]
+
+[node name="MovieClip" unique_id=911006673 instance=ExtResource("1_g46os")]
+script = ExtResource("2_4i0fp")
+
+[node name="BombOmbBattlefieldBackgroundCopy" type="Sprite2D" parent="." index="1" unique_id=1026164492]
+position = Vector2(0, -144)
+scale = Vector2(2, 2)
+texture = ExtResource("2_bqxk5")
+centered = false

@@ -4,6 +4,7 @@ extends Node2D
 ## Constants
 const GENERATED_TILESET: TileSet = preload("res://level/compatibility/tiles/generated_tileset.tres")
 const CHARACTER_SCENE: PackedScene = preload("res://characters/mario/character.tscn")
+const UI_SCENE: PackedScene = preload("res://level/gameplay/ui/ui.tscn")
 const OBJECT_SCENE_PATH: String = "res://level/objects/%s/gameplay.tscn"
 
 ## Parameters
@@ -32,8 +33,16 @@ func _physics_process(_delta: float) -> void:
 
 ## Loading
 func load_level() -> void:
-	load_character(level.rooms[cur_room].spawn_info)
+	var char_results: Array = load_character(level.rooms[cur_room].spawn_info)
 	load_room(level.rooms[cur_room])
+	load_ui(char_results[0], char_results[1])
+
+
+func load_ui(_character: Character, camera: CharacterCamera) -> void:
+	var ui: CanvasLayer = UI_SCENE.instantiate()
+	@warning_ignore("unsafe_property_access")
+	ui.get_node("BG/FrontBG").camera = camera
+	add_child(ui)
 
 
 func load_room(room: Room) -> void:
@@ -83,7 +92,7 @@ func load_room(room: Room) -> void:
 		i += 1
 
 
-func load_character(spawn_info: CharacterSpawnInfo) -> void:
+func load_character(spawn_info: CharacterSpawnInfo) -> Array:
 	var character: Character = CHARACTER_SCENE.instantiate()
 	character.position = spawn_info.spawn_pos
 	character.velocity = spawn_info.spawn_velocity
@@ -92,3 +101,5 @@ func load_character(spawn_info: CharacterSpawnInfo) -> void:
 	
 	var camera := CharacterCamera.new(character)
 	add_child(camera)
+	
+	return [character, camera]

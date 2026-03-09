@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://b81v7vs0eeo8s"]
+
+[ext_resource type="PackedScene" uid="uid://cixl2png6mm13" path="res://level/objects/base/movie_clip.tscn" id="1_mypv5"]
+[ext_resource type="Script" uid="uid://bo8o6mfmhqyoa" path="res://level/backgrounds/back/back_bg.gd" id="2_mx7ub"]
+[ext_resource type="Script" uid="uid://br1uxy43wwbki" path="res://level/backgrounds/back/cloud_move/looper.gd" id="3_27pa3"]
+[ext_resource type="Texture2D" uid="uid://cricliy5sc1iv" path="res://level/backgrounds/back/cloud_move/Cloud BG Bottom Half.png" id="3_prsmx"]
+[ext_resource type="Texture2D" uid="uid://dl3po776mi70m" path="res://level/backgrounds/back/cloud_move/Cloud BG Top Half.png" id="4_ylghp"]
+[ext_resource type="Texture2D" uid="uid://krb1hbrit1fk" path="res://level/backgrounds/back/cloud_move/Cloud BG Bottom Half 2.png" id="5_i1omt"]
+
+[node name="MovieClip" unique_id=911006673 instance=ExtResource("1_mypv5")]
+script = ExtResource("2_mx7ub")
+
+[node name="Looper" type="Node2D" parent="." index="1" unique_id=1021822522]
+script = ExtResource("3_27pa3")
+
+[node name="Left" type="Node2D" parent="Looper" index="0" unique_id=1419756671]
+
+[node name="BG" type="Polygon2D" parent="Looper/Left" index="0" unique_id=647390409]
+texture_filter = 2
+position = Vector2(-49, -50)
+color = Color(0.7764706, 0.80784315, 0.972549, 1)
+polygon = PackedVector2Array(49.975, 50, 499.975, 50, 499.975, 350, 49.975, 350)
+uv = PackedVector2Array(0, 0, 64, 0, 64.00001, 64, 0, 64)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="LeftMiddle" type="Polygon2D" parent="Looper/Left" index="1" unique_id=561493363]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(226, 150)
+texture = ExtResource("3_prsmx")
+polygon = PackedVector2Array(-225, 26.3, 1, 26.3, 1, 96.3, -225, 96.3)
+uv = PackedVector2Array(224, 0, 450, 0, 450, 70, 224, 70)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="LeftTop" type="Polygon2D" parent="Looper/Left" index="2" unique_id=957431602]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(226, 150)
+texture = ExtResource("4_ylghp")
+polygon = PackedVector2Array(-225, -41.65, 1, -41.65, 1, 27, -225, 27)
+uv = PackedVector2Array(224, 0.349998, 450, 0.349998, 450, 69, 224, 69)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="LeftBottom" type="Polygon2D" parent="Looper/Left" index="3" unique_id=861657855]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(226, 150)
+texture = ExtResource("5_i1omt")
+polygon = PackedVector2Array(-226, 77, 0.975, 77, 0.975, 140, -226, 140)
+uv = PackedVector2Array(4, 0, 230.975, 0, 230.975, 63, 4, 63)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="RightMiddle" type="Polygon2D" parent="Looper/Left" index="4" unique_id=932973856]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(226, 150)
+texture = ExtResource("3_prsmx")
+polygon = PackedVector2Array(0, 26.3, 226, 26.3, 226, 96.3, 0, 96.3)
+uv = PackedVector2Array(450, 0, 224, 0, 224, 70, 450, 70)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="RightTop" type="Polygon2D" parent="Looper/Left" index="5" unique_id=1211334816]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(226, 150)
+texture = ExtResource("4_ylghp")
+polygon = PackedVector2Array(0, -41.65, 226, -41.65, 226, 27, 0, 27)
+uv = PackedVector2Array(450, 0.349998, 224, 0.349998, 224, 69, 450, 69)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="RightBottom" type="Polygon2D" parent="Looper/Left" index="6" unique_id=1241289387]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(226, 150)
+texture = ExtResource("5_i1omt")
+polygon = PackedVector2Array(0.025, 77, 227, 77, 227, 140, 0.025, 140)
+uv = PackedVector2Array(230.975, 0, 4, 0, 4, 63, 230.975, 63)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Right" type="Node2D" parent="Looper" index="1" unique_id=1141316884]
+position = Vector2(450, 0)
+
+[node name="BG" type="Polygon2D" parent="Looper/Right" index="0" unique_id=876614578]
+texture_filter = 2
+position = Vector2(-49, -50)
+color = Color(0.7764706, 0.80784315, 0.972549, 1)
+polygon = PackedVector2Array(49.975, 50, 499.975, 50, 499.975, 350, 49.975, 350)
+uv = PackedVector2Array(0, 0, 64, 0, 64.00001, 64, 0, 64)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="LeftMiddle" type="Polygon2D" parent="Looper/Right" index="1" unique_id=1539118330]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(226, 150)
+texture = ExtResource("3_prsmx")
+polygon = PackedVector2Array(-225, 26.3, 1, 26.3, 1, 96.3, -225, 96.3)
+uv = PackedVector2Array(224, 0, 450, 0, 450, 70, 224, 70)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="LeftTop" type="Polygon2D" parent="Looper/Right" index="2" unique_id=1123223075]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(226, 150)
+texture = ExtResource("4_ylghp")
+polygon = PackedVector2Array(-225, -41.65, 1, -41.65, 1, 27, -225, 27)
+uv = PackedVector2Array(224, 0.349998, 450, 0.349998, 450, 69, 224, 69)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="LeftBottom" type="Polygon2D" parent="Looper/Right" index="3" unique_id=170963560]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(226, 150)
+texture = ExtResource("5_i1omt")
+polygon = PackedVector2Array(-226, 77, 0.975, 77, 0.975, 140, -226, 140)
+uv = PackedVector2Array(4, 0, 230.975, 0, 230.975, 63, 4, 63)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="RightMiddle" type="Polygon2D" parent="Looper/Right" index="4" unique_id=266443602]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(226, 150)
+texture = ExtResource("3_prsmx")
+polygon = PackedVector2Array(0, 26.3, 226, 26.3, 226, 96.3, 0, 96.3)
+uv = PackedVector2Array(450, 0, 224, 0, 224, 70, 450, 70)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="RightTop" type="Polygon2D" parent="Looper/Right" index="5" unique_id=121339401]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(226, 150)
+texture = ExtResource("4_ylghp")
+polygon = PackedVector2Array(0, -41.65, 226, -41.65, 226, 27, 0, 27)
+uv = PackedVector2Array(450, 0.349998, 224, 0.349998, 224, 69, 450, 69)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="RightBottom" type="Polygon2D" parent="Looper/Right" index="6" unique_id=472293073]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(226, 150)
+texture = ExtResource("5_i1omt")
+polygon = PackedVector2Array(0.025, 77, 227, 77, 227, 140, 0.025, 140)
+uv = PackedVector2Array(230.975, 0, 4, 0, 4, 63, 230.975, 63)
+polygons = [PackedInt32Array(0, 1, 2, 3)]

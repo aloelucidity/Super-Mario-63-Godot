@@ -1,0 +1,229 @@
+[gd_scene format=3 uid="uid://d05im7h8n0y1s"]
+
+[ext_resource type="Texture2D" uid="uid://b6fx6suouvlqr" path="res://screenshot.png" id="1_hyx4h"]
+[ext_resource type="Theme" uid="uid://lj2n26ord4h5" path="res://level/gameplay/ui/hud.tres" id="1_o802p"]
+[ext_resource type="PackedScene" uid="uid://c5160qskmkdtn" path="res://level/backgrounds/back/cloud/movie_clip.tscn" id="1_te1un"]
+[ext_resource type="Script" uid="uid://fdb1yyk73qag" path="res://level/designer/hud_scaling.gd" id="2_yji5c"]
+[ext_resource type="PackedScene" uid="uid://dwwsq2n0yspi6" path="res://level/backgrounds/front/hills/movie_clip.tscn" id="2_yx6vv"]
+[ext_resource type="PackedScene" uid="uid://cq65rwkgc8715" path="res://level/objects/collectibles/coin/movie_clip.tscn" id="3_hule5"]
+[ext_resource type="PackedScene" uid="uid://dis0e3y2r7a3a" path="res://characters/mario/movie_clip.tscn" id="3_x2ivd"]
+[ext_resource type="Script" uid="uid://cc666hteawfuk" path="res://level/gameplay/ui/framerate_monitor.gd" id="6_ao7b6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ao7b6"]
+bg_color = Color(1, 0, 0, 1)
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_te1un"]
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0, 0, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[node name="UI" type="CanvasLayer" unique_id=1818608223]
+layer = 128
+
+[node name="BG" type="CanvasLayer" parent="." unique_id=2112018318]
+layer = -256
+
+[node name="BackBG" parent="BG" unique_id=911006673 instance=ExtResource("1_te1un")]
+
+[node name="FrontBG" parent="BG" unique_id=91247448 instance=ExtResource("2_yx6vv")]
+
+[node name="Reference" type="Sprite2D" parent="." unique_id=453201496]
+visible = false
+position = Vector2(-6, -7)
+scale = Vector2(0.667, 0.667)
+texture = ExtResource("1_hyx4h")
+centered = false
+
+[node name="Collectibles" type="MarginContainer" parent="." unique_id=1550727115]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_o802p")
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 0
+script = ExtResource("2_yji5c")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Collectibles" unique_id=910023926]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Left" type="HBoxContainer" parent="Collectibles/HBoxContainer" unique_id=1471935149]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="Shines" type="HBoxContainer" parent="Collectibles/HBoxContainer/Left" unique_id=360982949]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Icon" type="Control" parent="Collectibles/HBoxContainer/Left/Shines" unique_id=498459012]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="MovieClip" parent="Collectibles/HBoxContainer/Left/Shines/Icon" unique_id=942064022 instance=ExtResource("3_hule5")]
+position = Vector2(13, 11)
+autostart = true
+start_animation = &"spin"
+
+[node name="Label" type="Label" parent="Collectibles/HBoxContainer/Left/Shines" unique_id=1730436411]
+layout_mode = 2
+text = "= 0"
+
+[node name="StarCoins" type="HBoxContainer" parent="Collectibles/HBoxContainer/Left" unique_id=882683779]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Icon" type="Control" parent="Collectibles/HBoxContainer/Left/StarCoins" unique_id=1612419987]
+custom_minimum_size = Vector2(27, 26)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="MovieClip" parent="Collectibles/HBoxContainer/Left/StarCoins/Icon" unique_id=1898988476 instance=ExtResource("3_hule5")]
+position = Vector2(13, 11)
+autostart = true
+start_animation = &"spin"
+
+[node name="Label" type="Label" parent="Collectibles/HBoxContainer/Left/StarCoins" unique_id=205415992]
+layout_mode = 2
+text = "= 0"
+
+[node name="Right" type="HBoxContainer" parent="Collectibles/HBoxContainer" unique_id=12801119]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="Lives" type="HBoxContainer" parent="Collectibles/HBoxContainer/Right" unique_id=1297294525]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Icon" type="Control" parent="Collectibles/HBoxContainer/Right/Lives" unique_id=689540182]
+custom_minimum_size = Vector2(20, 26)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="MovieClip" parent="Collectibles/HBoxContainer/Right/Lives/Icon" unique_id=612728849 instance=ExtResource("3_x2ivd")]
+texture_filter = 2
+position = Vector2(12, 13)
+autostart = true
+start_animation = &"life_icon"
+
+[node name="Label" type="Label" parent="Collectibles/HBoxContainer/Right/Lives" unique_id=2074877327]
+layout_mode = 2
+text = "= 0"
+
+[node name="Coins" type="HBoxContainer" parent="Collectibles/HBoxContainer/Right" unique_id=62147152]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Icon" type="Control" parent="Collectibles/HBoxContainer/Right/Coins" unique_id=898127823]
+custom_minimum_size = Vector2(16, 26)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="MovieClip" parent="Collectibles/HBoxContainer/Right/Coins/Icon" unique_id=1327191452 instance=ExtResource("3_hule5")]
+position = Vector2(10, 11)
+autostart = true
+start_animation = &"spin"
+
+[node name="Label" type="Label" parent="Collectibles/HBoxContainer/Right/Coins" unique_id=75582875]
+layout_mode = 2
+text = "= 0"
+
+[node name="Quality" type="MarginContainer" parent="." unique_id=842700330]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_o802p")
+theme_override_constants/margin_right = 0
+script = ExtResource("2_yji5c")
+
+[node name="Panel" type="PanelContainer" parent="Quality" unique_id=1682002078]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ao7b6")
+
+[node name="Panel" type="Panel" parent="Quality/Panel" unique_id=1929137716]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_te1un")
+
+[node name="MarginContainer" type="MarginContainer" parent="Quality/Panel" unique_id=2021394918]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Quality/Panel/MarginContainer" unique_id=1771357791]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="Quality/Panel/MarginContainer/VBoxContainer" unique_id=223595929]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Quality/Panel/MarginContainer/VBoxContainer/Control" unique_id=1748602886]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.767
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.3, 1)
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 12
+text = "framerate"
+horizontal_alignment = 1
+
+[node name="Padding" type="Control" parent="Quality/Panel/MarginContainer/VBoxContainer" unique_id=790231974]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+
+[node name="PhysicsFPS" type="Label" parent="Quality/Panel/MarginContainer/VBoxContainer" unique_id=754013606]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 11
+text = "physics: %s"
+script = ExtResource("6_ao7b6")
+monitor = 2
+
+[node name="RenderFPS" type="Label" parent="Quality/Panel/MarginContainer/VBoxContainer" unique_id=820206570]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 11
+text = "fps: %s"
+script = ExtResource("6_ao7b6")

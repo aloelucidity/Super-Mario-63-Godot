@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bxmj7qip5ja5r"]
+
+[ext_resource type="PackedScene" uid="uid://cixl2png6mm13" path="res://level/objects/base/movie_clip.tscn" id="1_6fb7n"]
+[ext_resource type="Texture2D" uid="uid://dhkbw610rwyxu" path="res://level/backgrounds/back/ice/Cool Cool mountain Background.png" id="2_j0g6k"]
+[ext_resource type="Script" uid="uid://bo8o6mfmhqyoa" path="res://level/backgrounds/back/back_bg.gd" id="2_qkrw4"]
+
+[node name="MovieClip" unique_id=911006673 instance=ExtResource("1_6fb7n")]
+script = ExtResource("2_qkrw4")
+
+[node name="TextureRect" type="TextureRect" parent="." index="1" unique_id=1838369694]
+offset_right = 450.0
+offset_bottom = 256.0
+scale = Vector2(1, 1.2)
+texture = ExtResource("2_j0g6k")
+stretch_mode = 1

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b140q67cyolhw"]
+
+[ext_resource type="PackedScene" uid="uid://cixl2png6mm13" path="res://level/objects/base/movie_clip.tscn" id="1_s284t"]
+[ext_resource type="Script" uid="uid://bo8o6mfmhqyoa" path="res://level/backgrounds/back/back_bg.gd" id="2_1i04h"]
+[ext_resource type="Texture2D" uid="uid://ddsx8gikfbqq3" path="res://level/backgrounds/back/cave/NSMB Cave BG (Back).png" id="2_df5ca"]
+
+[node name="MovieClip" unique_id=911006673 instance=ExtResource("1_s284t")]
+script = ExtResource("2_1i04h")
+
+[node name="TextureRect" type="TextureRect" parent="." index="1" unique_id=1788911222]
+offset_right = 300.0
+offset_bottom = 200.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_df5ca")
+stretch_mode = 1

@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://dwwsq2n0yspi6"]
+
+[ext_resource type="PackedScene" uid="uid://cixl2png6mm13" path="res://level/objects/base/movie_clip.tscn" id="1_l03yy"]
+[ext_resource type="PackedScene" uid="uid://bfcfpf6ytsyu3" path="res://level/backgrounds/front/hills/vector_hills.tscn" id="2_826hr"]
+[ext_resource type="Script" uid="uid://xgfwf2sfstwq" path="res://level/backgrounds/front/front_bg.gd" id="2_u3eve"]
+[ext_resource type="Texture2D" uid="uid://cs6eknyrjwyid" path="res://level/backgrounds/front/hills/BG Hills Tree Repeat.png" id="3_u3eve"]
+
+[node name="MovieClip" unique_id=911006673 instance=ExtResource("1_l03yy")]
+physics_interpolation_mode = 2
+script = ExtResource("2_u3eve")
+move_scale = Vector2(0.1, 0.1)
+y_offset = 150.0
+
+[node name="BGParent" type="Node2D" parent="." index="1" unique_id=1334054576]
+
+[node name="BGLeft" type="Node2D" parent="BGParent" index="0" unique_id=1130732802]
+
+[node name="Hills" parent="BGParent/BGLeft" index="0" unique_id=527763125 instance=ExtResource("2_826hr")]
+position = Vector2(-323.25, 72)
+
+[node name="Hills2" parent="BGParent/BGLeft" index="1" unique_id=132241933 instance=ExtResource("2_826hr")]
+position = Vector2(-13.25, 72)
+
+[node name="Hills3" parent="BGParent/BGLeft" index="2" unique_id=220562033 instance=ExtResource("2_826hr")]
+position = Vector2(306.75, 82)
+scale = Vector2(0.859, 0.859)
+
+[node name="Shape" type="Node2D" parent="BGParent/BGLeft" index="3" unique_id=565877754]
+
+[node name="__50158" type="Polygon2D" parent="BGParent/BGLeft/Shape" index="0" unique_id=1896061866]
+color = Color(0, 0.32549, 0, 1)
+polygon = PackedVector2Array(-564, 246.725, 563.975, 246.725, 563.975, 283.025, -564, 283.025)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="__50160" type="Polygon2D" parent="BGParent/BGLeft/Shape" index="1" unique_id=181258906]
+color = Color(0.1882353, 0.34509805, 0.1254902, 1)
+polygon = PackedVector2Array(-402.5, 171.625, 563.975, 171.625, 563.975, 246.725, -402.5, 246.725, -402.5, 216.2)
+polygons = [PackedInt32Array(0, 1, 2, 3, 4)]
+
+[node name="__50162" type="Polygon2D" parent="BGParent/BGLeft/Shape" index="2" unique_id=784019567]
+color = Color(0.1882353, 0.34509805, 0.1254902, 1)
+polygon = PackedVector2Array(-564, 171.625, -402.5, 171.625, -402.5, 246.725, -564, 246.725, -564, 216.2)
+polygons = [PackedInt32Array(0, 1, 2, 3, 4)]
+
+[node name="Shape2" type="Node2D" parent="BGParent/BGLeft" index="4" unique_id=432867275]
+position = Vector2(-18.7, 104)
+
+[node name="__50157" type="Polygon2D" parent="BGParent/BGLeft/Shape2" index="0" unique_id=1779049037]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("3_u3eve")
+polygon = PackedVector2Array(-544.975, 31.95, 582.35, 31.95, 582.35, 69.95, -544.975, 69.95)
+uv = PackedVector2Array(-540.925, 0, 586.4, 0, 586.4, 38, -540.925, 38)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="BGRight" type="Node2D" parent="BGParent" index="1" unique_id=55446659]
+position = Vector2(1120, 0)
+
+[node name="Hills" parent="BGParent/BGRight" index="0" unique_id=1962366482 instance=ExtResource("2_826hr")]
+position = Vector2(-323.25, 72)
+
+[node name="Hills2" parent="BGParent/BGRight" index="1" unique_id=2087056695 instance=ExtResource("2_826hr")]
+position = Vector2(-13.25, 72)
+
+[node name="Hills3" parent="BGParent/BGRight" index="2" unique_id=1707513375 instance=ExtResource("2_826hr")]
+position = Vector2(306.75, 82)
+scale = Vector2(0.859, 0.859)
+
+[node name="Shape" type="Node2D" parent="BGParent/BGRight" index="3" unique_id=1926344398]
+
+[node name="__50158" type="Polygon2D" parent="BGParent/BGRight/Shape" index="0" unique_id=1482983973]
+color = Color(0, 0.32549, 0, 1)
+polygon = PackedVector2Array(-564, 246.725, 563.975, 246.725, 563.975, 283.025, -564, 283.025)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="__50160" type="Polygon2D" parent="BGParent/BGRight/Shape" index="1" unique_id=988180087]
+color = Color(0.1882353, 0.34509805, 0.1254902, 1)
+polygon = PackedVector2Array(-402.5, 171.625, 563.975, 171.625, 563.975, 246.725, -402.5, 246.725, -402.5, 216.2)
+polygons = [PackedInt32Array(0, 1, 2, 3, 4)]
+
+[node name="__50162" type="Polygon2D" parent="BGParent/BGRight/Shape" index="2" unique_id=897776025]
+color = Color(0.1882353, 0.34509805, 0.1254902, 1)
+polygon = PackedVector2Array(-564, 171.625, -402.5, 171.625, -402.5, 246.725, -564, 246.725, -564, 216.2)
+polygons = [PackedInt32Array(0, 1, 2, 3, 4)]
+
+[node name="Shape2" type="Node2D" parent="BGParent/BGRight" index="4" unique_id=111446047]
+position = Vector2(-18.7, 104)
+
+[node name="__50157" type="Polygon2D" parent="BGParent/BGRight/Shape2" index="0" unique_id=675112994]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("3_u3eve")
+polygon = PackedVector2Array(-544.975, 31.95, 582.35, 31.95, 582.35, 69.95, -544.975, 69.95)
+uv = PackedVector2Array(-540.925, 0, 586.4, 0, 586.4, 38, -540.925, 38)
+polygons = [PackedInt32Array(0, 1, 2, 3)]

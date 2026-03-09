@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://dis0e3y2r7a3a"]
+[gd_scene format=3 uid="uid://dis0e3y2r7a3a"]
 
 [ext_resource type="PackedScene" uid="uid://cixl2png6mm13" path="res://level/objects/base/movie_clip.tscn" id="1_64ohs"]
 [ext_resource type="Texture2D" uid="uid://d1sjcm8co14pr" path="res://characters/mario/animations/walk/walk0.png" id="2_rh53n"]
@@ -98,6 +98,30 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Offsetter/Sprite:region_enabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Offsetter/Sprite:region_rect")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_be4cq"]
@@ -304,6 +328,47 @@ tracks/2/keys = {
 "values": [Vector2(-0.5, -4), Vector2(-1.25, 1), Vector2(-0.5, 4)]
 }
 
+[sub_resource type="Animation" id="Animation_nywix"]
+resource_name = "dive_getup"
+length = 0.15625313
+step = 0.03125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Offsetter/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0625),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("16_vdtnv"), ExtResource("12_4vkiu")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Offsetter/Sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.062017627, 0.0625584, 0.12545513, 0.15625),
+"transitions": PackedFloat32Array(1, 0, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.2617994, 1.7016960206944711, 0.5235988, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Offsetter/Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.062017627, 0.12545513, 0.15625),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-0.5, 4), Vector2(-1.25, 1), Vector2(-0.5, -4), Vector2(-0.5, -2)]
+}
+
 [sub_resource type="Animation" id="Animation_rh53n"]
 resource_name = "fall"
 step = 0.03125
@@ -495,6 +560,45 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("17_2x1jy")]
+}
+
+[sub_resource type="Animation" id="Animation_1nm4k"]
+resource_name = "life_icon"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Offsetter/Sprite:region_enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Offsetter/Sprite:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 16, 16)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Offsetter/Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0.35, 16.15)]
 }
 
 [sub_resource type="Animation" id="Animation_u63he"]
@@ -817,47 +921,6 @@ tracks/1/keys = {
 "values": [Vector2(0, 0.5), Vector2(0, 0), Vector2(0, 0.5), Vector2(0, 1), Vector2(0, 0.5), Vector2(0, 0), Vector2(0, 0.5), Vector2(0, 1), Vector2(0, 0.5)]
 }
 
-[sub_resource type="Animation" id="Animation_nywix"]
-resource_name = "dive_getup"
-length = 0.15625313
-step = 0.03125
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Offsetter/Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0625),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("16_vdtnv"), ExtResource("12_4vkiu")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Offsetter/Sprite:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.062017627, 0.0625584, 0.12545513, 0.15625),
-"transitions": PackedFloat32Array(1, 0, 1, 1, 1),
-"update": 0,
-"values": [0.0, -0.2617994, 1.7016960206944711, 0.5235988, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Offsetter/Sprite:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.062017627, 0.12545513, 0.15625),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-0.5, 4), Vector2(-1.25, 1), Vector2(-0.5, -4), Vector2(-0.5, -2)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rh53n"]
 _data = {
 &"RESET": SubResource("Animation_0frbe"),
@@ -873,6 +936,7 @@ _data = {
 &"ground_pound_start": SubResource("Animation_gera8"),
 &"jump": SubResource("Animation_nviwq"),
 &"land": SubResource("Animation_ckkhp"),
+&"life_icon": SubResource("Animation_1nm4k"),
 &"rollout": SubResource("Animation_u63he"),
 &"run": SubResource("Animation_3g1ft"),
 &"run_windup": SubResource("Animation_6vi7d"),
@@ -884,16 +948,14 @@ _data = {
 &"walk": SubResource("Animation_2vady")
 }
 
-[node name="MovieClip" instance=ExtResource("1_64ohs")]
+[node name="MovieClip" unique_id=612728849 instance=ExtResource("1_64ohs")]
 physics_interpolation_mode = 2
 
 [node name="AnimationPlayer" parent="." index="0"]
-libraries = {
-&"": SubResource("AnimationLibrary_rh53n")
-}
+libraries/ = SubResource("AnimationLibrary_rh53n")
 
-[node name="Offsetter" type="Node2D" parent="." index="1"]
+[node name="Offsetter" type="Node2D" parent="." index="1" unique_id=636417895]
 position = Vector2(-0.35, -16.15)
 
-[node name="Sprite" type="Sprite2D" parent="Offsetter" index="0"]
+[node name="Sprite" type="Sprite2D" parent="Offsetter" index="0" unique_id=1153638965]
 texture = ExtResource("3_nviwq")

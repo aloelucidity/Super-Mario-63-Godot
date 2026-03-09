@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://ba8yi66ght3ym"]
+
+[ext_resource type="PackedScene" uid="uid://cixl2png6mm13" path="res://level/objects/base/movie_clip.tscn" id="1_bun3q"]
+[ext_resource type="Script" uid="uid://bo8o6mfmhqyoa" path="res://level/backgrounds/back/back_bg.gd" id="2_qpfqk"]
+[ext_resource type="Texture2D" uid="uid://yfqrfvyqrkw1" path="res://level/backgrounds/back/desert/Desert Background.png" id="3_0w3ms"]
+
+[sub_resource type="Gradient" id="Gradient_vcd0n"]
+offsets = PackedFloat32Array(0, 0.3, 0.5, 0.7, 1)
+colors = PackedColorArray(0.9411765, 0.53333336, 0.34509805, 1, 0.9411765, 0.84705883, 0.627451, 1, 0.9411765, 0.84705883, 0.627451, 1, 0.59607846, 0.53333336, 0.3137255, 1, 0.59607846, 0.53333336, 0.3137255, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ta1l5"]
+gradient = SubResource("Gradient_vcd0n")
+fill_to = Vector2(0, 1)
+metadata/_snap_enabled = true
+
+[node name="MovieClip" unique_id=911006673 instance=ExtResource("1_bun3q")]
+script = ExtResource("2_qpfqk")
+
+[node name="TextureRect2" type="TextureRect" parent="." index="1" unique_id=496151066]
+texture_filter = 2
+offset_right = 450.0
+offset_bottom = 300.0
+texture = SubResource("GradientTexture2D_ta1l5")
+
+[node name="TextureRect" type="TextureRect" parent="." index="2" unique_id=722620209]
+offset_left = -32.0
+offset_top = 120.0
+offset_right = 480.0
+offset_bottom = 244.0
+texture = ExtResource("3_0w3ms")

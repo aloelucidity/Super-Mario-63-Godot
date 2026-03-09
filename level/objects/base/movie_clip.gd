@@ -2,6 +2,9 @@ class_name MovieClip
 extends Node2D
 
 
+@export var autostart: bool
+@export var start_animation: StringName
+
 var animation_player: AnimationPlayer
 var speed_scale: float :
 	set(value):
@@ -17,6 +20,11 @@ var frame: int :
 
 func _enter_tree() -> void:
 	animation_player = $AnimationPlayer
+
+
+func _ready() -> void:
+	if autostart:
+		play(start_animation)
 
 
 func _update() -> void:
