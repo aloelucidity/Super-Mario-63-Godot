@@ -21,12 +21,7 @@ func _ready() -> void:
 
 func convert_legacy_level(level_code: String) -> Level:
 	var level := Level.new()
-	var room := Room.new()
-	
-	var back_layer := Layer.new()
-	var front_layer := Layer.new()
-	var very_front_layer := Layer.new() # lol, this is just for arrows
-	back_layer.objects_over_terrain = true
+	var rooms: Array[Room]
 	
 	var code: PackedStringArray = level_code.split("~")
 	var grid_x_size: int = int(code[0].split("x")[0])
@@ -37,8 +32,6 @@ func convert_legacy_level(level_code: String) -> Level:
 	#var ld_course_name := code[5].uri_decode()
 	
 	var tile_layers: Array[Dictionary] = decode_legacy_tiles(code[1], Vector2i(grid_x_size, grid_y_size))
-	back_layer.tiles = tile_layers[0]
-	front_layer.tiles = tile_layers[1]
 	
 	# Split items into their own array
 	var split_item_array: PackedStringArray = code[2].split("|")
@@ -46,34 +39,84 @@ func convert_legacy_level(level_code: String) -> Level:
 	for i in range(split_item_array.size()):
 		ld_item_array.append(split_item_array[i].split(","))
 	
+	# Get list of all transitions in the level
+	var screen_transitons: Array[PackedStringArray] = ld_item_array.filter(is_level_transition.bind())
+	var room_cutoffs: PackedInt64Array = [0]
+	for i in range(screen_transitons.size()):
+		room_cutoffs.append(int(screen_transitons[i][1]))
+	room_cutoffs.append(grid_x_size * 32)
+	print(room_cutoffs)
+	
 	# Find start position and create spawn info class
 	var start_pos_index: int = ld_item_array.find_custom(is_start_position.bind())
+	var temp_spawn_info: CharacterSpawnInfo
 	if start_pos_index > -1:
 		var start_pos: Array = ld_item_array[start_pos_index]
 		ld_item_array.remove_at(start_pos_index)
 		
-		var spawn_info := CharacterSpawnInfo.new(
+		temp_spawn_info = CharacterSpawnInfo.new(
 			Vector2(float(start_pos[1]), float(start_pos[2])), # spawn position
 			Vector2(float(start_pos[3]), float(start_pos[4])), # spawn velocity
 			1 if start_pos[4] == "Right" else -1 # spawn direction
 		)
-		room.spawn_info = spawn_info
 	else:
-		room.spawn_info = CharacterSpawnInfo.new()
+		temp_spawn_info = CharacterSpawnInfo.new()
 	
 	# Decode the rest of the objects
 	var object_layers: Array[Dictionary] = decode_legacy_objects(ld_item_array)
-	back_layer.objects = object_layers[0]
-	front_layer.objects = object_layers[1]
-	very_front_layer.objects = object_layers[2]
 	
-	# Finalize
-	room.layers.append(back_layer)
-	room.layers.append(front_layer)
-	room.layers.append(very_front_layer)
-	room.base_layer_index = 1
-	level.rooms["Room 1"] = room
+	# Split level into rooms
+	for cutoff_index: int in range(room_cutoffs.size() - 1):
+		var room := Room.new()
+		var start_x: int = room_cutoffs[cutoff_index]
+		var cutoff_x: int = room_cutoffs[cutoff_index + 1]
+		
+		var back_layer := Layer.new()
+		var front_layer := Layer.new()
+		var very_front_layer := Layer.new() # lol, this is just for arrows
+		back_layer.objects_over_terrain = true
+		
+		back_layer.objects = object_layers[0].duplicate(true)
+		front_layer.objects = object_layers[1].duplicate(true)
+		very_front_layer.objects = object_layers[2].duplicate(true)
+		cull_oob_objects(back_layer.objects, start_x, cutoff_x)
+		cull_oob_objects(front_layer.objects, start_x, cutoff_x)
+		cull_oob_objects(very_front_layer.objects, start_x, cutoff_x)
+		
+		back_layer.tiles = tile_layers[0].duplicate()
+		front_layer.tiles = tile_layers[1].duplicate()
+		cull_oob_tiles(back_layer.tiles, start_x, cutoff_x)
+		cull_oob_tiles(front_layer.tiles, start_x, cutoff_x)
+		
+		if (is_instance_valid(temp_spawn_info) 
+		and temp_spawn_info.spawn_pos.x > start_x
+		and temp_spawn_info.spawn_pos.x < cutoff_x):
+			room.spawn_info = temp_spawn_info
+			temp_spawn_info = null
+	
+		# Finalize
+		room.layers.append(back_layer)
+		room.layers.append(front_layer)
+		room.layers.append(very_front_layer)
+		room.base_layer_index = 1
+		level.rooms["Room " + str(cutoff_index + 1)] = room
+		
 	return level
+
+
+func cull_oob_tiles(tile_dictionary: Dictionary, start_bounds: int, end_bounds: int) -> void:
+	for tile_pos: Vector2i in tile_dictionary.keys():
+		if tile_pos.x * 32 < start_bounds or tile_pos.x * 32 >= end_bounds:
+			tile_dictionary.erase(tile_pos)
+
+
+func cull_oob_objects(obj_dictionary: Dictionary, start_bounds: int, end_bounds: int) -> void:
+	for object_id: int in obj_dictionary.keys():
+		var object_data: ObjectData = obj_dictionary[object_id]
+		var obj_pos: Vector2i = object_data.properties.get("position", Vector2i.ZERO)
+		if obj_pos.x < start_bounds or obj_pos.x >= end_bounds + 100:
+			obj_dictionary.erase(object_id) 
+
 
 
 func decode_legacy_objects(ld_item_array: Array[PackedStringArray]) -> Array[Dictionary]:
@@ -207,6 +250,10 @@ func ascii_to_tile(ascii: String) -> int:
 
 func is_start_position(object_array: Array) -> bool:
 	return object_array[0] == "1"
+
+
+func is_level_transition(object_array: Array) -> bool:
+	return object_array[0] == "43"
 
 
 func string_to_value(string: String, type: int) -> Variant:

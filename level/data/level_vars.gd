@@ -1,2 +1,2 @@
 class_name LevelVars
-extends SerializedResource
+extends Resource

@@ -9,4 +9,4 @@ var layers: Array[Layer]
 var base_layer_index: int
 
 ## kinda unsure ab the id system for this but we'll see 
-var edges: Dictionary[int, RoomEdge]
+var edges: Array[RoomEdge]
