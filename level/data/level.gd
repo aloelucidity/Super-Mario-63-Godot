@@ -6,3 +6,4 @@ extends SerializedResource
 ## the game names them like "room 1" "room 2" by default
 ## but u can call them whatever u want
 var rooms: Dictionary[String, Room]
+var default_room: String = "Room 1"

@@ -4,3 +4,5 @@
 
 [node name="LegacyLevelLoader" type="Node2D" unique_id=1776273418]
 script = ExtResource("1_84ram")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=603920291]

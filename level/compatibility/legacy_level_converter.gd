@@ -1,6 +1,8 @@
 extends Node
 
 
+const GRACE_AMOUNT: int = 512
+
 const PROPERTY_IDS: IDMap = preload("res://level/objects/object_ids.tres")
 const PROPERTY_MAP_PATH: String = "res://level/objects/%s/property_map.tres"
 
@@ -27,6 +29,10 @@ func convert_legacy_level(level_code: String) -> Level:
 	var grid_x_size: int = int(code[0].split("x")[0])
 	var grid_y_size: int = int(code[0].split("x")[1])
 	
+	var start_y: int = -GRACE_AMOUNT
+	# Offset by 32 to fix some alignment issues
+	var cutoff_y: int = (grid_y_size * 32) + GRACE_AMOUNT
+	
 	#var ld_music := int(code[3])
 	#var ld_course_bg := int(code[4])
 	#var ld_course_name := code[5].uri_decode()
@@ -40,11 +46,12 @@ func convert_legacy_level(level_code: String) -> Level:
 		ld_item_array.append(split_item_array[i].split(","))
 	
 	# Get list of all transitions in the level
+	# Offset by 32 to fix some alignment issues
 	var screen_transitons: Array[PackedStringArray] = ld_item_array.filter(is_level_transition.bind())
-	var room_cutoffs: PackedInt64Array = [0]
+	var room_cutoffs: PackedInt64Array = [-32]
 	for i in range(screen_transitons.size()):
-		room_cutoffs.append(int(screen_transitons[i][1]))
-	room_cutoffs.append(grid_x_size * 32)
+		room_cutoffs.append(int(screen_transitons[i][1]) - 32)
+	room_cutoffs.append(grid_x_size * 32 - 32)
 	print(room_cutoffs)
 	
 	# Find start position and create spawn info class
@@ -68,6 +75,8 @@ func convert_legacy_level(level_code: String) -> Level:
 	# Split level into rooms
 	for cutoff_index: int in range(room_cutoffs.size() - 1):
 		var room := Room.new()
+		var room_name: String = "Room " + str(cutoff_index + 1)
+		
 		var start_x: int = room_cutoffs[cutoff_index]
 		var cutoff_x: int = room_cutoffs[cutoff_index + 1]
 		
@@ -76,6 +85,7 @@ func convert_legacy_level(level_code: String) -> Level:
 		var very_front_layer := Layer.new() # lol, this is just for arrows
 		back_layer.objects_over_terrain = true
 		
+		# duplicate objects and get rid of entries outside the current room
 		back_layer.objects = object_layers[0].duplicate(true)
 		front_layer.objects = object_layers[1].duplicate(true)
 		very_front_layer.objects = object_layers[2].duplicate(true)
@@ -83,23 +93,56 @@ func convert_legacy_level(level_code: String) -> Level:
 		cull_oob_objects(front_layer.objects, start_x, cutoff_x)
 		cull_oob_objects(very_front_layer.objects, start_x, cutoff_x)
 		
+		# duplicate tiles and get rid of entries outside the current room
 		back_layer.tiles = tile_layers[0].duplicate()
 		front_layer.tiles = tile_layers[1].duplicate()
 		cull_oob_tiles(back_layer.tiles, start_x, cutoff_x)
 		cull_oob_tiles(front_layer.tiles, start_x, cutoff_x)
 		
+		# check if spawn point is in this room and if so, change level's default spawn
 		if (is_instance_valid(temp_spawn_info) 
 		and temp_spawn_info.spawn_pos.x > start_x
 		and temp_spawn_info.spawn_pos.x < cutoff_x):
+			level.default_room = room_name
 			room.spawn_info = temp_spawn_info
 			temp_spawn_info = null
-	
+		
+		# generate room boundaries
+		room.edges = [
+			RoomEdge.new(
+				Vector2i(start_x, start_y + GRACE_AMOUNT), 
+				Vector2i(cutoff_x, start_y + GRACE_AMOUNT),
+				RoomEdge.EdgeDir.Up,
+				RoomEdge.EdgeType.Pass
+			),
+			# Offset by 32 to fix some alignment issues
+			RoomEdge.new(
+				Vector2i(start_x, cutoff_y - 32 - GRACE_AMOUNT),
+				Vector2i(cutoff_x, cutoff_y - 32 - GRACE_AMOUNT),
+				RoomEdge.EdgeDir.Down,
+				RoomEdge.EdgeType.Kill
+			),
+			RoomEdge.new(
+				Vector2i(start_x, start_y), 
+				Vector2i(start_x, cutoff_y),
+				RoomEdge.EdgeDir.Left,
+				RoomEdge.EdgeType.Block
+			),
+			# Offset by 32 to fix some alignment issues
+			RoomEdge.new(
+				Vector2i(cutoff_x - 32, start_y), 
+				Vector2i(cutoff_x - 32, cutoff_y),
+				RoomEdge.EdgeDir.Right,
+				RoomEdge.EdgeType.Block
+			)
+		]
+		
 		# Finalize
 		room.layers.append(back_layer)
 		room.layers.append(front_layer)
 		room.layers.append(very_front_layer)
 		room.base_layer_index = 1
-		level.rooms["Room " + str(cutoff_index + 1)] = room
+		level.rooms[room_name] = room
 		
 	return level
 

@@ -11,6 +11,8 @@ var max_camera_speed: float = 1200
 var camera_change: Vector2
 var camera_velocity: Vector2
 
+var cached_size: Vector2
+
 
 func _init(_camera_follow: Node2D) -> void:
 	camera_follow = _camera_follow
@@ -40,6 +42,13 @@ func _physics_process(_delta: float) -> void:
 	camera_velocity = camera_velocity.clamp(-max_vector, max_vector)
 	
 	position += camera_velocity
+
+
+func get_size() -> Vector2:
+	var window: Window = Window.get_focused_window()
+	if not is_instance_valid(window): return cached_size
+	cached_size = Vector2(window.size) / zoom
+	return cached_size
 
 
 # zoom testing

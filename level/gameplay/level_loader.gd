@@ -6,13 +6,14 @@ const GENERATED_TILESET: TileSet = preload("res://level/compatibility/tiles/gene
 const CHARACTER_SCENE: PackedScene = preload("res://characters/mario/character.tscn")
 const UI_SCENE: PackedScene = preload("res://level/gameplay/ui/ui.tscn")
 const OBJECT_SCENE_PATH: String = "res://level/objects/%s/gameplay.tscn"
+const EDGE_GRACE: int = 128
 
 ## Parameters
 var level: Level
 var is_demo: bool
 
 ## Variables
-var cur_room: String = "Room 1"
+var cur_room: String
 
 ## Globals
 var coin_cooldown: int = 0
@@ -21,6 +22,7 @@ var coin_cooldown: int = 0
 ## Misc functions
 func _init(_level: Level, _is_demo: bool = false) -> void:
 	level = _level
+	cur_room = _level.default_room
 	is_demo = _is_demo
 	name = "%LevelLoader"
 
@@ -36,6 +38,7 @@ func load_level() -> void:
 	var char_results: Array = load_character(level.rooms[cur_room].spawn_info)
 	load_room(level.rooms[cur_room])
 	load_ui(char_results[0], char_results[1])
+	load_edges(level.rooms[cur_room].edges, char_results[1])
 
 
 func load_ui(_character: Character, camera: CharacterCamera) -> void:
@@ -103,3 +106,36 @@ func load_character(spawn_info: CharacterSpawnInfo) -> Array:
 	add_child(camera)
 	
 	return [character, camera]
+
+
+func load_edges(edges: Array[RoomEdge], camera: CharacterCamera) -> void:
+	for edge: RoomEdge in edges:
+		var edge_node := EdgeNode.new(edge, camera)
+		
+		match edge.edge_dir:
+			RoomEdge.EdgeDir.Up:
+				edge_node.position = edge.point_1
+				edge_node.rect = Rect2(
+					Vector2.ZERO, 
+					Vector2(edge.point_2 - edge.point_1) + Vector2(0, EDGE_GRACE)
+				)
+			RoomEdge.EdgeDir.Down:
+				edge_node.position = Vector2(edge.point_1) - Vector2(0, EDGE_GRACE)
+				edge_node.rect = Rect2(
+					Vector2.ZERO, 
+					Vector2(edge.point_2 - edge.point_1) + Vector2(0, EDGE_GRACE)
+				)
+			RoomEdge.EdgeDir.Left:
+				edge_node.position = edge.point_1
+				edge_node.rect = Rect2(
+					Vector2.ZERO, 
+					Vector2(edge.point_2 - edge.point_1) + Vector2(EDGE_GRACE, 0)
+				)
+			RoomEdge.EdgeDir.Right:
+				edge_node.position = Vector2(edge.point_1) - Vector2(EDGE_GRACE, 0)
+				edge_node.rect = Rect2(
+					Vector2.ZERO, 
+					Vector2(edge.point_2 - edge.point_1) + Vector2(EDGE_GRACE, 0)
+				)
+			
+		add_child(edge_node)
