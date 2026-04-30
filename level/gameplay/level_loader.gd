@@ -6,7 +6,6 @@ const GENERATED_TILESET: TileSet = preload("res://level/compatibility/tiles/gene
 const CHARACTER_SCENE: PackedScene = preload("res://characters/mario/character.tscn")
 const UI_SCENE: PackedScene = preload("res://level/gameplay/ui/ui.tscn")
 const OBJECT_SCENE_PATH: String = "res://level/objects/%s/gameplay.tscn"
-const EDGE_GRACE: int = 128
 
 ## Parameters
 var level: Level
@@ -111,31 +110,4 @@ func load_character(spawn_info: CharacterSpawnInfo) -> Array:
 func load_edges(edges: Array[RoomEdge], camera: CharacterCamera) -> void:
 	for edge: RoomEdge in edges:
 		var edge_node := EdgeNode.new(edge, camera)
-		
-		match edge.edge_dir:
-			RoomEdge.EdgeDir.Up:
-				edge_node.position = edge.point_1
-				edge_node.rect = Rect2(
-					Vector2.ZERO, 
-					Vector2(edge.point_2 - edge.point_1) + Vector2(0, EDGE_GRACE)
-				)
-			RoomEdge.EdgeDir.Down:
-				edge_node.position = Vector2(edge.point_1) - Vector2(0, EDGE_GRACE)
-				edge_node.rect = Rect2(
-					Vector2.ZERO, 
-					Vector2(edge.point_2 - edge.point_1) + Vector2(0, EDGE_GRACE)
-				)
-			RoomEdge.EdgeDir.Left:
-				edge_node.position = edge.point_1
-				edge_node.rect = Rect2(
-					Vector2.ZERO, 
-					Vector2(edge.point_2 - edge.point_1) + Vector2(EDGE_GRACE, 0)
-				)
-			RoomEdge.EdgeDir.Right:
-				edge_node.position = Vector2(edge.point_1) - Vector2(EDGE_GRACE, 0)
-				edge_node.rect = Rect2(
-					Vector2.ZERO, 
-					Vector2(edge.point_2 - edge.point_1) + Vector2(EDGE_GRACE, 0)
-				)
-			
 		add_child(edge_node)

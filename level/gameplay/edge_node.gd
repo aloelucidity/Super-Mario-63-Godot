@@ -2,6 +2,8 @@ class_name EdgeNode
 extends VisibleOnScreenNotifier2D
 
 
+const GRACE: float = 128
+
 @export var edge: RoomEdge
 @export var camera: CharacterCamera
 
@@ -9,6 +11,47 @@ extends VisibleOnScreenNotifier2D
 func _init(_edge: RoomEdge, _camera: CharacterCamera) -> void:
 	edge = _edge
 	camera = _camera
+
+
+func _enter_tree() -> void:
+	var collision_shape := CollisionShape2D.new()
+	var rectangle_shape := RectangleShape2D.new()
+	
+	position = edge.point_1
+	rect = Rect2(Vector2.ZERO, Vector2(edge.point_2 - edge.point_1))
+	match edge.edge_dir:
+		RoomEdge.EdgeDir.Up:
+			rect.size.y += GRACE
+			rectangle_shape.size = rect.size
+			collision_shape.position.y -= GRACE/2
+		
+		RoomEdge.EdgeDir.Down:
+			position.y -= GRACE
+			rect.size.y += GRACE
+			rectangle_shape.size = rect.size
+			collision_shape.position.y += GRACE*1.5
+		
+		RoomEdge.EdgeDir.Left:
+			position = edge.point_1
+			rect.size.x += GRACE
+			rectangle_shape.size = rect.size
+			collision_shape.position.x -= GRACE/2
+		
+		RoomEdge.EdgeDir.Right:
+			position.x -= GRACE
+			rect.size.x += GRACE
+			rectangle_shape.size = rect.size
+			collision_shape.position.x += GRACE*1.5
+	
+	collision_shape.shape = rectangle_shape
+	match edge.edge_type:
+		RoomEdge.EdgeType.Block:
+			var static_body := StaticBody2D.new()
+			static_body.collision_mask = 0
+			add_child(static_body)
+			static_body.add_child(collision_shape)
+		_: # default
+			collision_shape.queue_free()
 
 
 func _physics_process(_delta: float) -> void:
