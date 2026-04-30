@@ -73,9 +73,13 @@ func convert_legacy_level(level_code: String) -> Level:
 	var object_layers: Array[Dictionary] = decode_legacy_objects(ld_item_array)
 	
 	# Split level into rooms
+	var last_room: String
 	for cutoff_index: int in range(room_cutoffs.size() - 1):
 		var room := Room.new()
 		var room_name: String = "Room " + str(cutoff_index + 1)
+		var next_room: String = ""
+		if cutoff_index + 2 < room_cutoffs.size():
+			next_room = "Room " + str(cutoff_index + 2)
 		
 		var start_x: int = room_cutoffs[cutoff_index]
 		var cutoff_x: int = room_cutoffs[cutoff_index + 1]
@@ -126,14 +130,16 @@ func convert_legacy_level(level_code: String) -> Level:
 				Vector2i(start_x, start_y), 
 				Vector2i(start_x, cutoff_y),
 				RoomEdge.EdgeDir.Left,
-				RoomEdge.EdgeType.Block
+				RoomEdge.EdgeType.Block if last_room == "" else RoomEdge.EdgeType.Warp,
+				last_room
 			),
 			# Offset by 32 to fix some alignment issues
 			RoomEdge.new(
 				Vector2i(cutoff_x - 32, start_y), 
 				Vector2i(cutoff_x - 32, cutoff_y),
 				RoomEdge.EdgeDir.Right,
-				RoomEdge.EdgeType.Block
+				RoomEdge.EdgeType.Block if next_room == "" else RoomEdge.EdgeType.Warp,
+				next_room
 			)
 		]
 		
@@ -143,6 +149,7 @@ func convert_legacy_level(level_code: String) -> Level:
 		room.layers.append(very_front_layer)
 		room.base_layer_index = 1
 		level.rooms[room_name] = room
+		last_room = room_name
 		
 	return level
 

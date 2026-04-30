@@ -50,8 +50,21 @@ func _enter_tree() -> void:
 			static_body.collision_mask = 0
 			add_child(static_body)
 			static_body.add_child(collision_shape)
+		RoomEdge.EdgeType.Warp:
+			var area := Area2D.new()
+			area.collision_layer = 0
+			area.collision_mask = 8
+			add_child(area)
+			area.add_child(collision_shape)
+			area.area_entered.connect(character_entered)
 		_: # default
 			collision_shape.queue_free()
+
+
+func character_entered(_hit_area: CollectorArea) -> void:
+	# reload level loader scene but keep the character scene 
+	# and simply change the target room var
+	print(edge.target_room)
 
 
 func _physics_process(_delta: float) -> void:
