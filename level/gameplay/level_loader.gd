@@ -6,6 +6,7 @@ const GENERATED_TILESET: TileSet = preload("res://level/compatibility/tiles/gene
 const CHARACTER_SCENE: PackedScene = preload("res://characters/mario/character.tscn")
 const UI_SCENE: PackedScene = preload("res://level/gameplay/ui/ui.tscn")
 const OBJECT_SCENE_PATH: String = "res://level/objects/%s/gameplay.tscn"
+const TRANSITION_COOLDOWN_AMOUNT: int = 12
 
 ## Parameters
 var level: Level
@@ -13,9 +14,11 @@ var is_demo: bool
 
 ## Variables
 var cur_room: String
+var char_results: Array
 
 ## Globals
 var coin_cooldown: int = 0
+var trans_cooldown: int = 0 # sorry mario you have to wait for HRT
 
 
 ## Misc functions
@@ -30,14 +33,21 @@ func _init(_level: Level, _is_demo: bool = false) -> void:
 func _physics_process(_delta: float) -> void:
 	if coin_cooldown > 0:
 		coin_cooldown -= 1
+	if trans_cooldown > 0:
+		trans_cooldown -= 1
 
 
 ## Loading
 func load_level() -> void:
-	var char_results: Array = load_character(level.rooms[cur_room].spawn_info)
+	trans_cooldown = TRANSITION_COOLDOWN_AMOUNT
+	if char_results == []:
+		char_results = load_character(level.rooms[cur_room].spawn_info)
+	else:
+		reset_physics_interpolation()
+	
 	load_room(level.rooms[cur_room])
 	load_ui(char_results[0], char_results[1])
-	load_edges(level.rooms[cur_room].edges, char_results[1])
+	load_edges(level.rooms[cur_room].edges)
 
 
 func load_ui(_character: Character, camera: CharacterCamera) -> void:
@@ -107,7 +117,28 @@ func load_character(spawn_info: CharacterSpawnInfo) -> Array:
 	return [character, camera]
 
 
-func load_edges(edges: Array[RoomEdge], camera: CharacterCamera) -> void:
+func load_edges(edges: Array[RoomEdge]) -> void:
 	for edge: RoomEdge in edges:
-		var edge_node := EdgeNode.new(edge, camera)
+		var edge_node := EdgeNode.new(edge, self)
 		add_child(edge_node)
+
+
+## Unloading
+func unload_level() -> void:
+	for child in get_children():
+		if not child in char_results:
+			child.queue_free()
+
+
+func change_room(new_room: String) -> void:
+	if trans_cooldown > 0: return
+	
+	cur_room = new_room
+	
+	unload_level()
+	hide()
+	get_tree().paused = true
+	
+	load_level.call_deferred()
+	show.call_deferred()
+	get_tree().set_deferred("paused", false)

@@ -52,7 +52,6 @@ func convert_legacy_level(level_code: String) -> Level:
 	for i in range(screen_transitons.size()):
 		room_cutoffs.append(int(screen_transitons[i][1]) - 32)
 	room_cutoffs.append(grid_x_size * 32 - 32)
-	print(room_cutoffs)
 	
 	# Find start position and create spawn info class
 	var start_pos_index: int = ld_item_array.find_custom(is_start_position.bind())
@@ -156,7 +155,8 @@ func convert_legacy_level(level_code: String) -> Level:
 
 func cull_oob_tiles(tile_dictionary: Dictionary, start_bounds: int, end_bounds: int) -> void:
 	for tile_pos: Vector2i in tile_dictionary.keys():
-		if tile_pos.x * 32 < start_bounds or tile_pos.x * 32 >= end_bounds:
+		## bit of a buffer so mario does not fall
+		if tile_pos.x * 32 < start_bounds - 64 or tile_pos.x * 32 >= end_bounds + 64:
 			tile_dictionary.erase(tile_pos)
 
 

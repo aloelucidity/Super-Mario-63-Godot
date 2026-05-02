@@ -18,5 +18,6 @@ func window_resized() -> void:
 	scale = Vector2(gui_scale, gui_scale)
 	
 	var window: Window = Window.get_focused_window()
-	size = Vector2(window.size) / scale
-	position = Vector2.ZERO
+	if is_instance_valid(window):
+		size = Vector2(window.size) / scale
+		position = Vector2.ZERO

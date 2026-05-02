@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://d05im7h8n0y1s"]
 
-[ext_resource type="Texture2D" uid="uid://b6fx6suouvlqr" path="res://screenshot.png" id="1_hyx4h"]
 [ext_resource type="Theme" uid="uid://lj2n26ord4h5" path="res://level/gameplay/ui/hud.tres" id="1_o802p"]
 [ext_resource type="PackedScene" uid="uid://c5160qskmkdtn" path="res://level/backgrounds/back/cloud/movie_clip.tscn" id="1_te1un"]
 [ext_resource type="Script" uid="uid://fdb1yyk73qag" path="res://level/designer/hud_scaling.gd" id="2_yji5c"]
@@ -39,13 +38,6 @@ layer = -256
 [node name="BackBG" parent="BG" unique_id=911006673 instance=ExtResource("1_te1un")]
 
 [node name="FrontBG" parent="BG" unique_id=91247448 instance=ExtResource("2_yx6vv")]
-
-[node name="Reference" type="Sprite2D" parent="." unique_id=453201496]
-visible = false
-position = Vector2(-6, -7)
-scale = Vector2(0.667, 0.667)
-texture = ExtResource("1_hyx4h")
-centered = false
 
 [node name="Collectibles" type="MarginContainer" parent="." unique_id=1550727115]
 anchors_preset = 15
