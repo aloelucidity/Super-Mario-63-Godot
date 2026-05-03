@@ -77,7 +77,7 @@ func convert_legacy_level(level_code: String) -> Level:
 		var room := Room.new()
 		var room_name: String = "Room " + str(cutoff_index + 1)
 		var next_room: String = ""
-		if cutoff_index + 2 < room_cutoffs.size():
+		if cutoff_index + 1 < room_cutoffs.size():
 			next_room = "Room " + str(cutoff_index + 2)
 		
 		var start_x: int = room_cutoffs[cutoff_index]
@@ -112,9 +112,10 @@ func convert_legacy_level(level_code: String) -> Level:
 		
 		# generate room boundaries
 		room.edges = [
+			# Offset by 32 to fix some alignment issues
 			RoomEdge.new(
-				Vector2i(start_x, start_y + GRACE_AMOUNT), 
-				Vector2i(cutoff_x, start_y + GRACE_AMOUNT),
+				Vector2i(start_x, start_y - 32 + GRACE_AMOUNT), 
+				Vector2i(cutoff_x, start_y - 32 + GRACE_AMOUNT),
 				RoomEdge.EdgeDir.Up,
 				RoomEdge.EdgeType.Pass
 			),

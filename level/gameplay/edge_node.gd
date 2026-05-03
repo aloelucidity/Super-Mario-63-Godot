@@ -3,7 +3,7 @@ extends VisibleOnScreenNotifier2D
 
 
 const GRACE: float = 128
-const HORIZONTAL_BUFFER: float = 32
+const HORIZONTAL_BUFFER: float = 64
 
 @export var edge: RoomEdge
 @export var level_loader: LevelLoader
@@ -26,24 +26,28 @@ func _enter_tree() -> void:
 			rect.size.y += GRACE
 			rectangle_shape.size = rect.size
 			collision_shape.position.y -= GRACE/2
+			collision_shape.position.x += rect.size.x/2
 		
 		RoomEdge.EdgeDir.Down:
 			position.y -= GRACE
 			rect.size.y += GRACE
 			rectangle_shape.size = rect.size
 			collision_shape.position.y += GRACE*1.5
+			collision_shape.position.x += rect.size.x/2
 		
 		RoomEdge.EdgeDir.Left:
 			position = edge.point_1
 			rect.size.x += GRACE
 			rectangle_shape.size = rect.size
 			collision_shape.position.x -= GRACE/2
+			collision_shape.position.y += rect.size.y/2
 		
 		RoomEdge.EdgeDir.Right:
 			position.x -= GRACE
 			rect.size.x += GRACE
 			rectangle_shape.size = rect.size
 			collision_shape.position.x += GRACE*1.5
+			collision_shape.position.y += rect.size.y/2
 	
 	collision_shape.shape = rectangle_shape
 	match edge.edge_type:
