@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://c05g6oelnpieh"]
+
+[ext_resource type="Script" uid="uid://bba0uooghko5t" path="res://level/objects/base/gameplay.gd" id="1_7dv48"]
+[ext_resource type="Texture2D" uid="uid://jr8ynjx8hjmv" path="res://level/objects/platforms/bridge/YI Bridge.png" id="2_81l6f"]
+
+[node name="Object" type="Node2D" unique_id=235066342]
+script = ExtResource("1_7dv48")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=183436924]
+texture = ExtResource("2_81l6f")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1827187508]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1096617343]
+polygon = PackedVector2Array(-31.7, -6, 31.55, -6, 31.55, 0.75, -31.7, 0.75)

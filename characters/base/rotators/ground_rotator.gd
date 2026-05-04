@@ -29,14 +29,14 @@ func test_front_point() -> Vector2:
 			front_point.y -= 5
 		
 		# add the other checks after too ,,, sigh
-		while not collider.hit_test(collider.CollisionType.Default, front_point) and collider.hit_test(collider.CollisionType.Default, front_point + Vector2(0, 7)):
+		while not hit_test(front_point) and hit_test(front_point + Vector2(0, 7)):
 			front_point.y += 1
 			hit_platform = true
 			count += 1
 			if count > 50:
 				break
 		
-		while collider.hit_test(collider.CollisionType.Default, front_point):
+		while hit_test(front_point):
 			front_point.y -= 1
 			hit_platform = true
 			count += 1
@@ -68,14 +68,14 @@ func test_back_point() -> Vector2:
 			back_point.y -= 5
 		
 		# add the other checks after too ,,, sigh
-		while not collider.hit_test(collider.CollisionType.Default, back_point) and collider.hit_test(collider.CollisionType.Default, back_point + Vector2(0, 7)):
+		while not hit_test(back_point) and hit_test(back_point + Vector2(0, 7)):
 			back_point.y += 1
 			hit_platform = true
 			count += 1
 			if count > 50:
 				break
 		
-		while collider.hit_test(collider.CollisionType.Default, back_point):
+		while hit_test(back_point):
 			back_point.y -= 1
 			hit_platform = true
 			count += 1
@@ -91,3 +91,7 @@ func test_back_point() -> Vector2:
 				char_pos.y - (sin(deg_to_rad(char_rot)) * distance))
 	
 	return back_point
+
+
+func hit_test(point: Vector2) -> bool:
+	return collider.hit_test(collider.CollisionType.Default, point) or collider.hit_test(collider.CollisionType.Background, point)
