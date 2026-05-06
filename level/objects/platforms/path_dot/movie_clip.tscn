@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://caoelwc4argew"]
+
+[ext_resource type="Script" uid="uid://bqfrscw0i4jxg" path="res://level/objects/platforms/path_dot/movie_clip.gd" id="1_sj74y"]
+[ext_resource type="Script" uid="uid://b1kcm0l5b8ji0" path="res://level/objects/platforms/path_dot/back.gd" id="2_tgmi4"]
+
+[node name="MovieClip" type="Node2D" unique_id=253794341]
+script = ExtResource("1_sj74y")
+metadata/_custom_type_script = "uid://dmxertux562r7"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1722890833]
+
+[node name="Back" type="Node2D" parent="." unique_id=2077818910]
+z_index = -10
+script = ExtResource("2_tgmi4")

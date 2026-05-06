@@ -6,5 +6,4 @@
 script = ExtResource("1_wrdh8")
 converted_properties = Array[String](["speed", "platforms", "distance", "offset", "size"])
 converted_types = Array[int]([3, 2, 3, 3, 2])
-is_foreground = true
 metadata/_custom_type_script = "uid://l7f5ytq1rpry"

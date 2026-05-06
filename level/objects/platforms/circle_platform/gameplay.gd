@@ -3,8 +3,9 @@ extends GameplayObject
 
 
 const PLATFORM_SCENE: PackedScene = preload("res://level/objects/platforms/circle_platform/platform.tscn")
-var platform_nodes: Array[CirclePlatform]
+const DOT_SCENE: PackedScene = preload("res://level/objects/platforms/path_dot/movie_clip.tscn")
 
+var platform_nodes: Array[CirclePlatform]
 var speed: float
 var platforms: int
 var distance: float
@@ -17,9 +18,17 @@ var arm_scale: float = 0
 
 func _ready() -> void:
 	if dot_distance < 360:
-		for i in range(360):
-			pass
-			#clip.attachMovie("Path dot", "dot"+clip.getNextHighestDepth(), clip.getNextHighestDepth(), {_y:Math.cos(_root.offsetToRadians(i))*distance, _x:-Math.sin(_root.offsetToRadians(i))*distance});
+		var dot_angle: float = 0
+		while dot_angle < 360:
+			var dot_node: MovieClip = DOT_SCENE.instantiate()
+			var radians: float = deg_to_rad(dot_angle)
+			dot_node.position = Vector2(
+				-sin(radians),
+				cos(radians)
+			) * distance
+			dot_node.z_index = 1
+			add_child(dot_node)
+			dot_angle += dot_distance
 	
 	if arm_scale > 0:
 		pass

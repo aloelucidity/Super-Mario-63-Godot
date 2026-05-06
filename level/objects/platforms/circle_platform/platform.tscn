@@ -2,10 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bwt1t31u13c8x" path="res://level/objects/platforms/circle_platform/platform.gd" id="1_33w73"]
 [ext_resource type="PackedScene" uid="uid://cm26075b37uon" path="res://level/objects/platforms/green_platform/movie_clip.tscn" id="2_53cfj"]
-[ext_resource type="Script" uid="uid://ccelnboyenuls" path="res://level/objects/platforms/green_platform/movie_clip.gd" id="3_47d0q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hac3l"]
-size = Vector2(32, 16)
+size = Vector2(32, 14)
 
 [node name="Platform" type="StaticBody2D" unique_id=1237019244]
 physics_interpolation_mode = 1
@@ -14,7 +13,7 @@ collision_mask = 0
 script = ExtResource("1_33w73")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=377806311]
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_hac3l")
 
 [node name="MovieClip" parent="." unique_id=329279207 instance=ExtResource("2_53cfj")]
-script = ExtResource("3_47d0q")

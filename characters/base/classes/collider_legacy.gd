@@ -3,7 +3,7 @@ extends ColliderBase
 
 
 var floor_snap: bool = false
-var last_platform: MovingPlatform
+var last_platforms: Array[MovingPlatform]
 
 
 func _update() -> void:
@@ -37,16 +37,19 @@ func _update() -> void:
 	character.global_position = char_pos
 	character.velocity = char_vel
 	
-	var platform: MovingPlatform = check_platform(char_pos + Vector2(0, 4))
+	var platforms: Array[MovingPlatform] = check_platform(char_pos + Vector2(0, 4))
 	if char_vel.y <= -3:
-		platform = null
+		platforms = []
 	
-	if platform != last_platform and is_instance_valid(last_platform):
-		last_platform.release_character(character)
+	for platform in last_platforms:
+		if not platform in platforms:
+			platform.release_character(character)
 	
-	last_platform = platform
-	if is_instance_valid(platform):
-		platform.handle_character(character)
+	last_platforms = platforms
+	
+	for platform in platforms:
+		if is_instance_valid(platform):
+			platform.handle_character(character)
 
 
 func _floor_collision() -> void:
