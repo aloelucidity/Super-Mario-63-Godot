@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ctujow031bhd"]
+
+[ext_resource type="Script" uid="uid://cvoq4lwcjgksu" path="res://level/objects/platforms/circle_platform/gameplay.gd" id="1_vxnxl"]
+
+[node name="Object" type="Node2D" unique_id=1705325409]
+script = ExtResource("1_vxnxl")
