@@ -4,6 +4,7 @@ extends VisibleOnScreenNotifier2D
 
 const GRACE: float = 128
 const HORIZONTAL_BUFFER: float = 64
+const CUTOFF_OFFSET: float = 16
 
 @export var edge: RoomEdge
 @export var level_loader: LevelLoader
@@ -81,13 +82,13 @@ func _physics_process(_delta: float) -> void:
 	
 	match edge.edge_dir:
 		RoomEdge.EdgeDir.Up:
-			camera.position.y = max(camera.position.y, edge.point_1.y + cam_size.y/2)
+			camera.position.y = max(camera.position.y, edge.point_1.y + cam_size.y/2 + CUTOFF_OFFSET)
 		RoomEdge.EdgeDir.Down:
-			camera.position.y = min(camera.position.y, edge.point_1.y - cam_size.y/2)
+			camera.position.y = min(camera.position.y, edge.point_1.y - cam_size.y/2 - CUTOFF_OFFSET)
 		RoomEdge.EdgeDir.Left:
-			camera.position.x = max(camera.position.x, edge.point_1.x + cam_size.x/2)
+			camera.position.x = max(camera.position.x, edge.point_1.x + cam_size.x/2 + CUTOFF_OFFSET)
 		RoomEdge.EdgeDir.Right:
-			camera.position.x = min(camera.position.x, edge.point_1.x - cam_size.x/2)
+			camera.position.x = min(camera.position.x, edge.point_1.x - cam_size.x/2 - CUTOFF_OFFSET)
 	
 	if last_pos.y != camera.position.y:
 		camera.camera_velocity.y = 0

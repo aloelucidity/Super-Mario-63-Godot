@@ -9,7 +9,7 @@
 physics_interpolation_mode = 2
 script = ExtResource("2_u3eve")
 move_scale = Vector2(0.1, 0.1)
-y_offset = 150.0
+y_offset = 215.0
 
 [node name="BGParent" type="Node2D" parent="." index="1" unique_id=1334054576]
 

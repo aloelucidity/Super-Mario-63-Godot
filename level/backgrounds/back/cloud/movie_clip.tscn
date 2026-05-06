@@ -6,6 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://xeua8olpsegl" path="res://level/backgrounds/back/cloud/Cloud BG Top Half.png" id="4_o13gx"]
 [ext_resource type="Texture2D" uid="uid://cm7yt237odx5h" path="res://level/backgrounds/back/cloud/Cloud BG Bottom Half 2.png" id="5_uh58u"]
 
+[sub_resource type="Gradient" id="Gradient_vyx0r"]
+offsets = PackedFloat32Array(0, 0.22, 0.659, 1)
+colors = PackedColorArray(0.3764706, 0.47058824, 0.78431374, 1, 0.72156864, 0.7529412, 0.972549, 1, 0.7764706, 0.80784315, 0.972549, 1, 0.9098039, 0.92941177, 0.99215686, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rw3k3"]
+gradient = SubResource("Gradient_vyx0r")
+fill_to = Vector2(0, 1)
+metadata/_snap_enabled = true
+
 [node name="MovieClip" unique_id=911006673 instance=ExtResource("1_kqet5")]
 script = ExtResource("2_vyx0r")
 
@@ -17,7 +26,22 @@ polygon = PackedVector2Array(49.975, 50, 499.975, 50, 499.975, 350, 49.975, 350)
 uv = PackedVector2Array(0, 0, 64, 0, 64.00001, 64, 0, 64)
 polygons = [PackedInt32Array(0, 1, 2, 3)]
 
-[node name="LeftMiddle" type="Polygon2D" parent="." index="2" unique_id=561493363]
+[node name="TextureRect" type="TextureRect" parent="." index="2" unique_id=1240326832]
+texture_filter = 2
+offset_right = 450.0
+offset_bottom = 300.0
+texture = SubResource("GradientTexture2D_rw3k3")
+
+[node name="RightBottom" type="Polygon2D" parent="." index="3" unique_id=1241289387]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(226, 150)
+texture = ExtResource("5_uh58u")
+polygon = PackedVector2Array(0.025, 77, 227, 77, 227, 140, 0.025, 140)
+uv = PackedVector2Array(230.975, 0, 4, 0, 4, 63, 230.975, 63)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="LeftMiddle" type="Polygon2D" parent="." index="4" unique_id=561493363]
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(226, 150)
@@ -26,7 +50,7 @@ polygon = PackedVector2Array(-225, 26.3, 1, 26.3, 1, 96.3, -225, 96.3)
 uv = PackedVector2Array(224, 0, 450, 0, 450, 70, 224, 70)
 polygons = [PackedInt32Array(0, 1, 2, 3)]
 
-[node name="LeftTop" type="Polygon2D" parent="." index="3" unique_id=957431602]
+[node name="LeftTop" type="Polygon2D" parent="." index="5" unique_id=957431602]
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(226, 150)
@@ -35,7 +59,7 @@ polygon = PackedVector2Array(-225, -41.65, 1, -41.65, 1, 27, -225, 27)
 uv = PackedVector2Array(224, 0.349998, 450, 0.349998, 450, 69, 224, 69)
 polygons = [PackedInt32Array(0, 1, 2, 3)]
 
-[node name="LeftBottom" type="Polygon2D" parent="." index="4" unique_id=861657855]
+[node name="LeftBottom" type="Polygon2D" parent="." index="6" unique_id=861657855]
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(226, 150)
@@ -44,7 +68,7 @@ polygon = PackedVector2Array(-226, 77, 0.975, 77, 0.975, 140, -226, 140)
 uv = PackedVector2Array(4, 0, 230.975, 0, 230.975, 63, 4, 63)
 polygons = [PackedInt32Array(0, 1, 2, 3)]
 
-[node name="RightMiddle" type="Polygon2D" parent="." index="5" unique_id=932973856]
+[node name="RightMiddle" type="Polygon2D" parent="." index="7" unique_id=932973856]
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(226, 150)
@@ -53,20 +77,11 @@ polygon = PackedVector2Array(0, 26.3, 226, 26.3, 226, 96.3, 0, 96.3)
 uv = PackedVector2Array(450, 0, 224, 0, 224, 70, 450, 70)
 polygons = [PackedInt32Array(0, 1, 2, 3)]
 
-[node name="RightTop" type="Polygon2D" parent="." index="6" unique_id=1211334816]
+[node name="RightTop" type="Polygon2D" parent="." index="8" unique_id=1211334816]
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(226, 150)
 texture = ExtResource("4_o13gx")
 polygon = PackedVector2Array(0, -41.65, 226, -41.65, 226, 27, 0, 27)
 uv = PackedVector2Array(450, 0.349998, 224, 0.349998, 224, 69, 450, 69)
-polygons = [PackedInt32Array(0, 1, 2, 3)]
-
-[node name="RightBottom" type="Polygon2D" parent="." index="7" unique_id=1241289387]
-texture_filter = 1
-texture_repeat = 2
-position = Vector2(226, 150)
-texture = ExtResource("5_uh58u")
-polygon = PackedVector2Array(0.025, 77, 227, 77, 227, 140, 0.025, 140)
-uv = PackedVector2Array(230.975, 0, 4, 0, 4, 63, 230.975, 63)
 polygons = [PackedInt32Array(0, 1, 2, 3)]
