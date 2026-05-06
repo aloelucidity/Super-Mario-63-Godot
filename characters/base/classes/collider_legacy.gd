@@ -3,6 +3,7 @@ extends ColliderBase
 
 
 var floor_snap: bool = false
+var last_platform: MovingPlatform
 
 
 func _update() -> void:
@@ -35,6 +36,17 @@ func _update() -> void:
 	
 	character.global_position = char_pos
 	character.velocity = char_vel
+	
+	var platform: MovingPlatform = check_platform(char_pos + Vector2(0, 4))
+	if char_vel.y <= -3:
+		platform = null
+	
+	if platform != last_platform and is_instance_valid(last_platform):
+		last_platform.release_character(character)
+	
+	last_platform = platform
+	if is_instance_valid(platform):
+		platform.handle_character(character)
 
 
 func _floor_collision() -> void:
@@ -42,6 +54,7 @@ func _floor_collision() -> void:
 	if hit_test(CollisionType.Default, char_pos) or hit_test(CollisionType.Background, char_pos):
 		character.on_ground = true
 		character.land_vel = char_vel
+			
 		char_vel.y = min(0, char_vel.y)
 	else:
 		character.on_ground = false

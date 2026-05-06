@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cm26075b37uon"]
+
+[ext_resource type="Script" uid="uid://ccelnboyenuls" path="res://level/objects/platforms/green_platform/movie_clip.gd" id="1_2cw17"]
+[ext_resource type="Texture2D" uid="uid://bat6d5ntfynid" path="res://level/objects/platforms/green_platform/YI Green Small PF.png" id="1_f5wpb"]
+
+[node name="MovieClip" type="Node2D" unique_id=1479774929]
+script = ExtResource("1_2cw17")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=329279207]
+physics_interpolation_mode = 0
+offset_left = -16.0
+offset_top = -8.0
+offset_right = 16.0
+offset_bottom = 8.0
+texture = ExtResource("1_f5wpb")
+patch_margin_left = 8
+patch_margin_right = 8
+axis_stretch_horizontal = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=653653161]

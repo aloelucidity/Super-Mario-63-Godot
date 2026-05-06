@@ -11,7 +11,7 @@ const CONVERSION_MAP_PATH: String = "res://level/objects/%s/conversion_map.tres"
 
 
 func _ready() -> void:
-	var level_resource: Resource = load("res://test_codes/dragon_valley.tres")
+	var level_resource: Resource = load("res://test_codes/somelevel.tres")
 	var level_code: String = level_resource.get_meta("level_code", "")
 	var converted_level: Level = convert_legacy_level(level_code)
 	
@@ -264,7 +264,7 @@ func decode_legacy_tiles(code: String, level_bounds: Vector2i) -> Array[Dictiona
 		# it will take the number afterwards (which is terminated by another asterisk)
 		# and treat it as if the tile was repeated N amount of times
 		var multiplier: int = 1
-		if code[i] == "*":
+		if i < code.length() and code[i] == "*":
 			var next_asterisk: int = code.find("*", i+1)
 			var mult_string: String = code.substr(i+1, next_asterisk - i - 1)
 			
