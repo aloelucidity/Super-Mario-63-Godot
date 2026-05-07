@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dkgmd6h5gwcw5"]
+
+[ext_resource type="PackedScene" uid="uid://dum1moe8x6ewp" path="res://level/objects/base/gameplay.tscn" id="1_52f3r"]
+[ext_resource type="Script" uid="uid://dwkhexwupwv5" path="res://level/objects/decoration/fence/gameplay.gd" id="2_7i86g"]
+[ext_resource type="Texture2D" uid="uid://cctiqkpch2cvr" path="res://level/objects/decoration/fence/repeat.png" id="3_n6ph7"]
+
+[node name="Object" unique_id=623792688 instance=ExtResource("1_52f3r")]
+script = ExtResource("2_7i86g")
+
+[node name="Sprite" type="NinePatchRect" parent="." index="0" unique_id=224594525]
+offset_top = -8.0
+offset_right = 34.0
+offset_bottom = 9.0
+texture = ExtResource("3_n6ph7")
+axis_stretch_horizontal = 1

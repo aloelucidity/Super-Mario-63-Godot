@@ -11,7 +11,7 @@ const CONVERSION_MAP_PATH: String = "res://level/objects/%s/conversion_map.tres"
 
 
 func _ready() -> void:
-	var level_resource: Resource = load("res://test_codes/somelevel.tres")
+	var level_resource: Resource = load("res://test_codes/ripple_sky.tres")
 	var level_code: String = level_resource.get_meta("level_code", "")
 	var converted_level: Level = convert_legacy_level(level_code)
 	
@@ -77,7 +77,7 @@ func convert_legacy_level(level_code: String) -> Level:
 		var room := Room.new()
 		var room_name: String = "Room " + str(cutoff_index + 1)
 		var next_room: String = ""
-		if cutoff_index + 1 < room_cutoffs.size():
+		if cutoff_index + 2 < room_cutoffs.size():
 			next_room = "Room " + str(cutoff_index + 2)
 		
 		var start_x: int = room_cutoffs[cutoff_index]
@@ -133,10 +133,9 @@ func convert_legacy_level(level_code: String) -> Level:
 				RoomEdge.EdgeType.Block if last_room == "" else RoomEdge.EdgeType.Warp,
 				last_room
 			),
-			# Offset by 32 to fix some alignment issues
 			RoomEdge.new(
-				Vector2i(cutoff_x - 32, start_y), 
-				Vector2i(cutoff_x - 32, cutoff_y),
+				Vector2i(cutoff_x, start_y), 
+				Vector2i(cutoff_x, cutoff_y),
 				RoomEdge.EdgeDir.Right,
 				RoomEdge.EdgeType.Block if next_room == "" else RoomEdge.EdgeType.Warp,
 				next_room
@@ -194,6 +193,7 @@ func decode_legacy_objects(ld_item_array: Array[PackedStringArray]) -> Array[Dic
 		
 		## Create object data
 		var object_data := ObjectData.new(key, object_path, property_map)
+		object_data.legacy_id = int(ld_item[0])
 		
 		## Set position from the second and third values, which
 		## are universally X and Y across every object in SM63

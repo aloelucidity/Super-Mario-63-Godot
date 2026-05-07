@@ -8,6 +8,8 @@ var object_key: int
 var object_path: String
 ## Tells the game which unique properties to include, and which base properties to exclude.
 var property_map: PropertyMap
+## For conversions from old levels, where several object ids are now consolidated into one
+var legacy_id: int
 
 ## Includes both base and unique properties.
 var properties: Dictionary[StringName, Variant]

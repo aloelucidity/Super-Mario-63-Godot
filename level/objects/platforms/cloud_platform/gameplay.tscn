@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://xndea0uxhexr"]
+
+[ext_resource type="Script" uid="uid://bfpi1r0wwqj0v" path="res://level/objects/platforms/cloud_platform/gameplay.gd" id="1_o3t62"]
+[ext_resource type="PackedScene" uid="uid://chx7nb7kmmdc4" path="res://level/objects/platforms/cloud_platform/movie_clip.tscn" id="2_o3t62"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o3t62"]
+size = Vector2(32, 16)
+
+[node name="Object" type="Node2D" unique_id=235066342]
+script = ExtResource("1_o3t62")
+
+[node name="MovieClip" parent="." unique_id=1479774929 instance=ExtResource("2_o3t62")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1827187508]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1137088372]
+shape = SubResource("RectangleShape2D_o3t62")
